@@ -1,13 +1,13 @@
 <div class="tw-m-5">
 	<div class="tw-mb-3">
-		<lib-button [config]="buttonConfig" (onClick)="onClicked('submit')" />
+		<lib-button [config]="buttonConfig" (onClick)="onSubmit()" />
 	</div>
 
-	<div class="tw-mb-3">
-		<div class="tw-w-full">
+	<div class="tw-mb-3" [formGroup]="form">
+		<div class="tw-w-full tw-mb-2">
 			<lib-textbox
 				[inputConfig]="textboxConfig"
-				[control]="nameValue"
+				[control]="$any(form.get('name'))"
 				(onInput)="onInputChange($event)"
 			>
 				<!-- <ng-template #matPrefixRef>
@@ -28,19 +28,35 @@
 			</lib-textbox>
 		</div>
 
-		<div class="tw-w-full">
+		<div class="tw-w-full tw-mb-2">
 			<lib-textarea
 				[inputConfig]="textareaConfig"
-				[control]="descriptionValue"
+				[control]="$any(form.get('description'))"
 				(onInput)="onInputChange($event)"
 			></lib-textarea>
 		</div>
 
-		<div class="tw-w-full">
+		<div class="tw-w-full tw-mb-2">
 			<lib-dropdown
 				[inputConfig]="dropdownConfig"
-				[control]="nameValue"
+				[control]="$any(form.get('dropdown'))"
 				(onSelection)="onInputChange($event)"
+			/>
+		</div>
+
+		<div class="tw-w-full tw-mb-2">
+			<lib-radio-button
+				[inputConfig]="radioConfig"
+				[control]="$any(form.get('radio'))"
+				(onChange)="onInputChange($event)"
+			/>
+		</div>
+
+		<div class="tw-w-full tw-mb-2">
+			<lib-checkbox
+				[inputConfig]="checkboxConfig"
+				[control]="$any(form.get('checkbox'))"
+				(onChange)="onInputChange($event)"
 			/>
 		</div>
 	</div>

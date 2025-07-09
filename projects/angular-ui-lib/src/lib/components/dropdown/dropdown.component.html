@@ -4,13 +4,13 @@
 		[formControl]="control()"
 		[placeholder]="inputConfig().placeholder"
 		[multiple]="inputConfig().isMultiple"
-		(selectionChange)="onSelectionChange($event)"
+		(selectionChange)="onSelection.emit($event.value)"
 	>
 		@if (inputConfig().isMultiple) {
 			<mat-select-trigger>
 				{{
 					control().value
-						? typeof control().value?.at(0) === 'object'
+						? typeof control().value?.at(0) === 'object' && inputConfig().keyLabel
 							? control().value.at(0)[inputConfig().keyLabel]
 							: control().value.at(0)
 						: ''

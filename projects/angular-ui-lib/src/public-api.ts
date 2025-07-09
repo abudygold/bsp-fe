@@ -8,6 +8,8 @@ export * from './lib/components/table/table.component';
 export * from './lib/components/textbox/textbox.component';
 export * from './lib/components/textarea/textarea.component';
 export * from './lib/components/dropdown/dropdown.component';
+export * from './lib/components/radio-button/radio-button.component';
+export * from './lib/components/checkbox/checkbox.component';
 
 // Services
 export * from './lib/services/index';

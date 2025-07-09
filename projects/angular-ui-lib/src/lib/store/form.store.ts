@@ -29,9 +29,8 @@ export class FormStore {
 		if (!control || !control.errors) return null;
 
 		const errors = control.errors;
-		console.log('Control errors:', errors);
+
 		if (errors['required']) {
-			console.log('Required field error:', control);
 			return 'This field is required.';
 		}
 		if (errors['email']) {
@@ -41,7 +40,6 @@ export class FormStore {
 			return `Minimum length is ${errors['minlength'].requiredLength}.`;
 		}
 		if (errors['maxlength']) {
-			console.log('Max length error:', errors['maxlength']);
 			return `Maximum length is ${errors['maxlength'].requiredLength}.`;
 		}
 		if (errors['min']) {

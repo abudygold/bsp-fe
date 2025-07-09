@@ -1,7 +1,7 @@
-import { Component, inject, input, output } from '@angular/core';
+import { ChangeDetectionStrategy, Component, inject, input, output } from '@angular/core';
 import { FormControl, FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatFormFieldModule } from '@angular/material/form-field';
-import { MatSelectChange, MatSelectModule } from '@angular/material/select';
+import { MatSelectModule } from '@angular/material/select';
 import { FormStore } from '../../store';
 import { DropdownModel } from '../../shared/model';
 
@@ -10,6 +10,7 @@ import { DropdownModel } from '../../shared/model';
 	imports: [FormsModule, ReactiveFormsModule, MatFormFieldModule, MatSelectModule],
 	templateUrl: './dropdown.component.html',
 	styleUrl: './dropdown.component.scss',
+	changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class DropdownComponent {
 	protected formStore = inject(FormStore);
@@ -18,8 +19,4 @@ export class DropdownComponent {
 
 	inputConfig = input.required<DropdownModel>();
 	control = input.required<FormControl>();
-
-	onSelectionChange(event: MatSelectChange): void {
-		this.onSelection.emit(event.value);
-	}
 }

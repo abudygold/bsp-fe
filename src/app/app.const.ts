@@ -1,4 +1,11 @@
-import { ButtonModel, DropdownModel, TableConfigModel, TextboxModel } from 'angular-ui-lib';
+import {
+	ButtonModel,
+	CheckboxModel,
+	DropdownModel,
+	RadioModel,
+	TableConfigModel,
+	TextboxModel,
+} from 'angular-ui-lib';
 
 export const DUMMY_DATA = [
 	{
@@ -126,6 +133,61 @@ export const DUMMMY_TEXTAREA_CONFIG: TextboxModel = new TextboxModel(
 export const DUMMMY_DROPDOWN_CONFIG: DropdownModel = new DropdownModel(
 	'outline',
 	'Javascript Framework',
+	[
+		{
+			label: 'React',
+			value: 'react',
+		},
+		{
+			label: 'Angular',
+			value: 'angular',
+		},
+		{
+			label: 'Vue',
+			value: 'vue',
+		},
+		{
+			label: 'Svelte',
+			value: 'svelte',
+		},
+	],
+	// ['React', 'Angular', 'Vue', 'Svelte'],
+	false,
+	'',
+	'label',
+	'Select javascript framework',
+);
+
+export const DUMMMY_RADIO_CONFIG: RadioModel = new RadioModel(
+	'Select javascript framework',
+	[
+		{
+			label: 'React',
+			value: 'react',
+		},
+		{
+			label: 'Angular',
+			value: 'angular',
+		},
+		{
+			label: 'Vue',
+			value: 'vue',
+		},
+		{
+			label: 'Svelte',
+			value: 'svelte',
+		},
+	],
+	// ['React', 'Angular', 'Vue', 'Svelte'],
+	'value',
+	'label',
+	true,
+);
+
+export const DUMMMY_CHECKBOX_CONFIG: CheckboxModel = new CheckboxModel(
+	'value',
+	'Select javascript framework',
+	// ['React', 'Angular', 'Vue', 'Svelte'],
 	/* [
 		{
 			label: 'React',
@@ -144,9 +206,19 @@ export const DUMMMY_DROPDOWN_CONFIG: DropdownModel = new DropdownModel(
 			value: 'svelte',
 		},
 	], */
-	['React', 'Angular', 'Vue', 'Svelte'],
+	{
+		name: 'Parent task',
+		completed: false,
+		children: [
+			{ name: 'Child task 1', completed: false },
+			{ name: 'Child task 2', completed: false },
+			{ name: 'Child task 3', completed: false },
+		],
+	},
+	'value',
+	'label',
+	'after',
+	false,
 	true,
-	'',
-	'',
-	'Select javascript framework',
+	'children',
 );

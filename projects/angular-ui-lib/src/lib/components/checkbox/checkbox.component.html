@@ -1,1 +1,49 @@
-<p>checkbox works!</p>
+<section
+	[class.vertical-section]="inputConfig().isVertical"
+	[class.horizontal-section]="!inputConfig().isVertical"
+>
+	@if (inputConfig().childKey) {
+		<span>
+			<mat-checkbox
+				[class.horizontal-section-margin]="!inputConfig().isVertical"
+				[checked]="inputConfig().options.completed"
+				[indeterminate]="partiallyComplete"
+				(change)="onUpdate($event.checked)"
+			>
+				{{ inputConfig().options.name }}
+			</mat-checkbox>
+		</span>
+		<span>
+			<ul>
+				@for (
+					option of inputConfig().options[inputConfig().childKey];
+					track option;
+					let i = $index
+				) {
+					<li class="child-section">
+						<mat-checkbox [checked]="option.completed" (change)="onUpdate($event.checked, i)">
+							{{ option.name }}
+						</mat-checkbox>
+					</li>
+				}
+			</ul>
+		</span>
+	} @else {
+		<label>{{ inputConfig().label }}</label>
+		@for (option of inputConfig().options; track $index) {
+			<p>
+				<mat-checkbox
+					[class.horizontal-section-margin]="!inputConfig().isVertical"
+					[value]="inputConfig().keyValue ? option[inputConfig().keyValue] : option"
+					(change)="onChecked($event, option)"
+				>
+					{{ inputConfig().keyLabel ? option[inputConfig().keyLabel] : option }}
+				</mat-checkbox>
+			</p>
+		}
+	}
+</section>
+
+@if (formStore.isValid(control())) {
+	<mat-error align="end">{{ formStore.getErrorMessage(control()) }}</mat-error>
+}

@@ -1,1 +1,16 @@
-<p>radio-button works!</p>
+<label>{{ inputConfig().label }}</label>
+<mat-radio-group
+	[class.vertical]="inputConfig().isVertical"
+	[formControl]="control()"
+	(change)="onChange.emit($event.value)"
+>
+	@for (option of inputConfig().options; track $index) {
+		<mat-radio-button [value]="inputConfig().keyValue ? option[inputConfig().keyValue] : option">
+			{{ inputConfig().keyLabel ? option[inputConfig().keyLabel] : option }}
+		</mat-radio-button>
+	}
+</mat-radio-group>
+
+@if (formStore.isValid(control())) {
+	<mat-error align="end">{{ formStore.getErrorMessage(control()) }}</mat-error>
+}
