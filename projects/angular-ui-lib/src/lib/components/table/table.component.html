@@ -1,0 +1,143 @@
+@if (tableConfig()) {
+	<div
+		class="table-container"
+		[class.table-row]="tableConfig().isEmpty()"
+		[class.table-empty]="tableConfig().isEmpty()"
+		[class.loading]="tableConfig().isLoading()"
+	>
+		<div class="table-wrapper">
+			<table
+				matSort
+				matSortDisableClear
+				mat-table
+				class="table"
+				[class]="tableConfig().tableClass"
+				[dataSource]="pagedData"
+				[matSortActive]="
+					tableConfig().isSorter() ? tableConfig().sortKey || tableConfig().dataKey[0] : ''
+				"
+				[matSortDirection]="tableConfig().sortOrder"
+				(matSortChange)="sortChange.emit($event)"
+			>
+				<tr mat-header-row class="table-header" *matHeaderRowDef="tableConfig().dataKey"></tr>
+
+				<tr
+					mat-row
+					class="table-row"
+					*matRowDef="let row; columns: tableConfig().dataKey; let rowIndex = index"
+					[class.table-row-selected]="tableConfig().isSelected(row)"
+					(click)="selectData.emit(row)"
+					(mouseleave)="mouseOverChange.emit(null)"
+					(mouseover)="mouseOverChange.emit(row)"
+				></tr>
+
+				@for (tableKey of tableConfig().dataKey; track tableKey; let index = $index) {
+					<ng-container [matColumnDef]="tableKey">
+						<th mat-header-cell *matHeaderCellDef>
+							@if (tableKey === 'selection') {
+								<ng-container [ngTemplateOutlet]="selectionTemplate"> </ng-container>
+							} @else {
+								<span
+									class="table-header"
+									mat-sort-header
+									[disableClear]="true"
+									[class.tw-font-normal]="!tableConfig().isSorter()"
+								>
+									{{ tableConfig().dataLabel[index] }}
+								</span>
+							}
+						</th>
+
+						<td
+							mat-cell
+							*matCellDef="let data; let i = index; let rowIndex = index"
+							(click)="disableClick($event, tableKey)"
+						>
+							<div class="table-row-cell">
+								@switch (tableConfig().dataType[tableKey].type) {
+									@case ('date') {
+										{{
+											getPropertyValue(data, tableKey)
+												| date: tableConfig().dataType[tableKey].format
+										}}
+									}
+									@case ('number') {
+										{{ getPropertyValue(data, tableKey) }}
+									}
+									@case ('title') {
+										{{ getPropertyValue(data, tableKey) | titlecase }}
+									}
+									@case ('currency') {
+										<!-- {{ 123456.789 | currencyIntl:'JPY':'ja-JP':0:0 }} -->
+										{{
+											getPropertyValue(data, tableKey) || 0
+												| currencyIntl
+													: tableConfig().dataType[tableKey].currency
+													: tableConfig().dataType[tableKey].locale
+													: tableConfig().dataType[tableKey].minimumFractionDigits
+													: tableConfig().dataType[tableKey].maximumFractionDigits
+										}}
+									}
+									@case ('custom') {
+										<ng-container
+											[ngTemplateOutlet]="customTemplate"
+											[ngTemplateOutletContext]="{
+												data: data,
+												key: tableKey,
+												index: rowIndex,
+											}"
+										>
+										</ng-container>
+									}
+									@default {
+										{{ displayValue(getPropertyValue(data, tableKey)) }}
+									}
+								}
+							</div>
+						</td>
+					</ng-container>
+				}
+
+				@if (tableConfig().isEmpty()) {
+					<ng-container>
+						<tr
+							mat-footer-row
+							*matFooterRowDef="['nodata']"
+							[hidden]="(tableConfig().dataSource || []).length"
+						>
+							<span> No Data Available </span>
+						</tr>
+					</ng-container>
+
+					<ng-container matColumnDef="nodata">
+						<td
+							mat-footer-row
+							*matFooterCellDef
+							class="border-empty"
+							[colSpan]="(tableConfig().dataKey || []).length"
+						>
+							No Data Available
+						</td>
+					</ng-container>
+				}
+			</table>
+		</div>
+
+		@if (!tableConfig().isEmpty() && tableConfig().isPagination()) {
+			<div class="table-pagination">
+				<lib-pagination
+					[pageIndex]="tableConfig().pageIndex"
+					[pageSize]="tableConfig().pageSize"
+					[totalItems]="tableConfig().dataTotal"
+					(pageChange)="onPageChange($event)"
+				/>
+			</div>
+		}
+
+		@if (tableConfig().isLoading()) {
+			<div class="spinner-container">
+				<mat-progress-spinner color="primary" mode="indeterminate"></mat-progress-spinner>
+			</div>
+		}
+	</div>
+}

@@ -1,0 +1,35 @@
+<mat-form-field [appearance]="inputConfig().appearance" class="textbox-field">
+	<mat-label>{{ inputConfig().label }}</mat-label>
+	<input
+		matInput
+		[formControl]="control()"
+		[placeholder]="inputConfig().placeholder"
+		[maxlength]="inputConfig().limit || null"
+		(input)="onInputChange($event)"
+	/>
+
+	@if (matPrefixRef) {
+		<ng-container matPrefix [ngTemplateOutlet]="matPrefixRef"> </ng-container>
+	}
+	@if (matSuffixRef) {
+		<ng-container matSuffix [ngTemplateOutlet]="matSuffixRef"> </ng-container>
+	}
+	@if (matTextPrefixRef) {
+		<ng-container matTextPrefix [ngTemplateOutlet]="matTextPrefixRef"> </ng-container>
+	}
+	@if (matTextSuffixRef) {
+		<ng-container matTextSuffix [ngTemplateOutlet]="matTextSuffixRef"> </ng-container>
+	}
+
+	@if (inputConfig().hint) {
+		<mat-hint align="end">{{ inputConfig().hint }}</mat-hint>
+	}
+
+	@if (inputConfig().limit) {
+		<mat-hint align="end">{{ control().value.length }} / {{ inputConfig().limit }}</mat-hint>
+	}
+
+	@if (formStore.isValid(control())) {
+		<mat-error align="end">{{ formStore.getErrorMessage(control()) }}</mat-error>
+	}
+</mat-form-field>

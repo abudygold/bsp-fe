@@ -1,0 +1,23 @@
+<mat-form-field [appearance]="inputConfig().appearance" class="textarea-field">
+	<mat-label>{{ inputConfig().label }}</mat-label>
+	<textarea
+		matInput
+		[formControl]="control()"
+		[rows]="inputConfig().rows"
+		[placeholder]="inputConfig().placeholder"
+		[maxlength]="inputConfig().limit || null"
+		(input)="onInputChange($event)"
+	></textarea>
+
+	@if (inputConfig().hint) {
+		<mat-hint align="end">{{ inputConfig().hint }}</mat-hint>
+	}
+
+	@if (inputConfig().limit) {
+		<mat-hint align="end">{{ control().value.length }} / {{ inputConfig().limit }}</mat-hint>
+	}
+
+	@if (formStore.isValid(control())) {
+		<mat-error align="end">{{ formStore.getErrorMessage(control()) }}</mat-error>
+	}
+</mat-form-field>
