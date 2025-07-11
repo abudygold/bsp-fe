@@ -3,11 +3,11 @@
 // Custom Theme Angular Material
 @use './theme/custom.theme.scss';
 
-// Variable
-@use './abstract/variables';
-
 // Custom Angular Material Style
 @use './material/buttons';
+@use './material/input';
+@use './material/checkbox';
+@use './material/radio';
 
 @tailwind base;
 @tailwind components;

@@ -1,1 +1,51 @@
-<p>datepicker works!</p>
+<mat-form-field [appearance]="options().appearance" class="datepicker-field" floatLabel="auto">
+	<mat-label>{{ options().label }}</mat-label>
+
+	<ng-container>
+		@if (options().isRangeDate) {
+			<mat-date-range-input [formGroup]="range" [rangePicker]="picker">
+				<input
+					matStartDate
+					formControlName="start"
+					[placeholder]="options().placeholderStart"
+					(dateChange)="onDateChange($event)"
+				/>
+				<input
+					matEndDate
+					formControlName="end"
+					[placeholder]="options().placeholderEnd"
+					(dateChange)="onDateChange($event)"
+				/>
+			</mat-date-range-input>
+			<mat-datepicker-toggle matIconSuffix [for]="picker" />
+			<mat-date-range-picker #picker />
+		} @else {
+			<input
+				matInput
+				[matDatepicker]="picker"
+				[placeholder]="options().placeholder"
+				[formControl]="$any(control())"
+				(dateChange)="onDateChange($event)"
+			/>
+			<mat-datepicker-toggle matIconSuffix [for]="picker" />
+			<mat-datepicker #picker />
+		}
+	</ng-container>
+
+	@if (options().hint) {
+		<mat-hint align="end">{{ options().hint }}</mat-hint>
+	}
+
+	@if (!options().isRangeDate && formStore.isValid($any(control()))) {
+		<mat-error align="end">{{ formStore.getErrorMessage($any(control())) }}</mat-error>
+	}
+
+	@if (options().isRangeDate) {
+		@if (formStore.isValid($any(range.get('start')))) {
+			<mat-error align="end">{{ formStore.getErrorMessage($any(range.get('start'))) }}</mat-error>
+		}
+		@if (formStore.isValid($any(range.get('end')))) {
+			<mat-error align="end">{{ formStore.getErrorMessage($any(range.get('end'))) }}</mat-error>
+		}
+	}
+</mat-form-field>

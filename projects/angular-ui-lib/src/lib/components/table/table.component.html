@@ -1,9 +1,9 @@
-@if (tableConfig()) {
+@if (options()) {
 	<div
 		class="table-container"
-		[class.table-row]="tableConfig().isEmpty()"
-		[class.table-empty]="tableConfig().isEmpty()"
-		[class.loading]="tableConfig().isLoading()"
+		[class.table-row]="options().isEmpty()"
+		[class.table-empty]="options().isEmpty()"
+		[class.loading]="options().isLoading()"
 	>
 		<div class="table-wrapper">
 			<table
@@ -11,27 +11,25 @@
 				matSortDisableClear
 				mat-table
 				class="table"
-				[class]="tableConfig().tableClass"
+				[class]="options().tableClass"
 				[dataSource]="pagedData"
-				[matSortActive]="
-					tableConfig().isSorter() ? tableConfig().sortKey || tableConfig().dataKey[0] : ''
-				"
-				[matSortDirection]="tableConfig().sortOrder"
+				[matSortActive]="options().isSorter() ? options().sortKey || options().dataKey[0] : ''"
+				[matSortDirection]="options().sortOrder"
 				(matSortChange)="sortChange.emit($event)"
 			>
-				<tr mat-header-row class="table-header" *matHeaderRowDef="tableConfig().dataKey"></tr>
+				<tr mat-header-row class="table-header" *matHeaderRowDef="options().dataKey"></tr>
 
 				<tr
 					mat-row
 					class="table-row"
-					*matRowDef="let row; columns: tableConfig().dataKey; let rowIndex = index"
-					[class.table-row-selected]="tableConfig().isSelected(row)"
+					*matRowDef="let row; columns: options().dataKey; let rowIndex = index"
+					[class.table-row-selected]="options().isSelected(row)"
 					(click)="selectData.emit(row)"
 					(mouseleave)="mouseOverChange.emit(null)"
 					(mouseover)="mouseOverChange.emit(row)"
 				></tr>
 
-				@for (tableKey of tableConfig().dataKey; track tableKey; let index = $index) {
+				@for (tableKey of options().dataKey; track tableKey; let index = $index) {
 					<ng-container [matColumnDef]="tableKey">
 						<th mat-header-cell *matHeaderCellDef>
 							@if (tableKey === 'selection') {
@@ -41,9 +39,9 @@
 									class="table-header"
 									mat-sort-header
 									[disableClear]="true"
-									[class.tw-font-normal]="!tableConfig().isSorter()"
+									[class.tw-font-normal]="!options().isSorter()"
 								>
-									{{ tableConfig().dataLabel[index] }}
+									{{ options().dataLabel[index] }}
 								</span>
 							}
 						</th>
@@ -54,11 +52,10 @@
 							(click)="disableClick($event, tableKey)"
 						>
 							<div class="table-row-cell">
-								@switch (tableConfig().dataType[tableKey].type) {
+								@switch (options().dataType[tableKey].type) {
 									@case ('date') {
 										{{
-											getPropertyValue(data, tableKey)
-												| date: tableConfig().dataType[tableKey].format
+											getPropertyValue(data, tableKey) | date: options().dataType[tableKey].format
 										}}
 									}
 									@case ('number') {
@@ -72,10 +69,10 @@
 										{{
 											getPropertyValue(data, tableKey) || 0
 												| currencyIntl
-													: tableConfig().dataType[tableKey].currency
-													: tableConfig().dataType[tableKey].locale
-													: tableConfig().dataType[tableKey].minimumFractionDigits
-													: tableConfig().dataType[tableKey].maximumFractionDigits
+													: options().dataType[tableKey].currency
+													: options().dataType[tableKey].locale
+													: options().dataType[tableKey].minimumFractionDigits
+													: options().dataType[tableKey].maximumFractionDigits
 										}}
 									}
 									@case ('custom') {
@@ -86,8 +83,7 @@
 												key: tableKey,
 												index: rowIndex,
 											}"
-										>
-										</ng-container>
+										/>
 									}
 									@default {
 										{{ displayValue(getPropertyValue(data, tableKey)) }}
@@ -98,12 +94,12 @@
 					</ng-container>
 				}
 
-				@if (tableConfig().isEmpty()) {
+				@if (options().isEmpty()) {
 					<ng-container>
 						<tr
 							mat-footer-row
 							*matFooterRowDef="['nodata']"
-							[hidden]="(tableConfig().dataSource || []).length"
+							[hidden]="(options().dataSource || []).length"
 						>
 							<span> No Data Available </span>
 						</tr>
@@ -114,7 +110,7 @@
 							mat-footer-row
 							*matFooterCellDef
 							class="border-empty"
-							[colSpan]="(tableConfig().dataKey || []).length"
+							[colSpan]="(options().dataKey || []).length"
 						>
 							No Data Available
 						</td>
@@ -123,18 +119,18 @@
 			</table>
 		</div>
 
-		@if (!tableConfig().isEmpty() && tableConfig().isPagination()) {
+		@if (!options().isEmpty() && options().isPagination()) {
 			<div class="table-pagination">
 				<lib-pagination
-					[pageIndex]="tableConfig().pageIndex"
-					[pageSize]="tableConfig().pageSize"
-					[totalItems]="tableConfig().dataTotal"
+					[pageIndex]="options().pageIndex"
+					[pageSize]="options().pageSize"
+					[totalItems]="options().dataTotal"
 					(pageChange)="onPageChange($event)"
 				/>
 			</div>
 		}
 
-		@if (tableConfig().isLoading()) {
+		@if (options().isLoading()) {
 			<div class="spinner-container">
 				<mat-progress-spinner color="primary" mode="indeterminate"></mat-progress-spinner>
 			</div>

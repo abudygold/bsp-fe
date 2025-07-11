@@ -1,12 +1,17 @@
 <div class="tw-m-5">
-	<div class="tw-mb-3">
-		<lib-button [config]="buttonConfig" (onClick)="onSubmit()" />
+	<div class="tw-flex tw-gap-5 tw-mb-3">
+		<lib-button [options]="buttonConfig" (onClick)="onSubmit()" />
+		<lib-button [options]="buttonRaisedConfig" (onClick)="onSubmit()" />
+		<lib-button [options]="buttonStrokedConfig" (onClick)="onSubmit()" />
+		<lib-button [options]="buttonFlatConfig" (onClick)="onSubmit()" />
+		<lib-button [options]="buttonIconConfig" (onClick)="onSubmit()" />
+		<lib-button [options]="buttonFabConfig" (onClick)="onSubmit()" />
 	</div>
 
 	<div class="tw-mb-3" [formGroup]="form">
 		<div class="tw-w-full tw-mb-2">
 			<lib-textbox
-				[inputConfig]="textboxConfig"
+				[options]="textboxConfig"
 				[control]="$any(form.get('name'))"
 				(onInput)="onInputChange($event)"
 			>
@@ -30,7 +35,7 @@
 
 		<div class="tw-w-full tw-mb-2">
 			<lib-textarea
-				[inputConfig]="textareaConfig"
+				[options]="textareaConfig"
 				[control]="$any(form.get('description'))"
 				(onInput)="onInputChange($event)"
 			></lib-textarea>
@@ -38,15 +43,23 @@
 
 		<div class="tw-w-full tw-mb-2">
 			<lib-dropdown
-				[inputConfig]="dropdownConfig"
+				[options]="dropdownConfig"
 				[control]="$any(form.get('dropdown'))"
 				(onSelection)="onInputChange($event)"
 			/>
 		</div>
 
 		<div class="tw-w-full tw-mb-2">
+			<lib-datepicker [options]="datepickerConfig" [control]="$any(form.get('datepicker'))" />
+		</div>
+
+		<div class="tw-w-full tw-mb-2">
+			<lib-datepicker [options]="datepickerRangeConfig" />
+		</div>
+
+		<div class="tw-w-full tw-mb-2">
 			<lib-radio-button
-				[inputConfig]="radioConfig"
+				[options]="radioConfig"
 				[control]="$any(form.get('radio'))"
 				(onChange)="onInputChange($event)"
 			/>
@@ -54,14 +67,14 @@
 
 		<div class="tw-w-full tw-mb-2">
 			<lib-checkbox
-				[inputConfig]="checkboxConfig"
+				[options]="checkboxConfig"
 				[control]="$any(form.get('checkbox'))"
 				(onChange)="onInputChange($event)"
 			/>
 		</div>
 	</div>
 
-	<lib-table [tableConfig]="tableConfig" (sortChange)="sortChange($event)">
+	<lib-table [options]="tableConfig" (sortChange)="sortChange($event)">
 		<ng-template #customTemplate let-data="data" let-key="key">
 			@if (key === 'selection') {
 				<div [class.show-checkbox]="data.isSelected">

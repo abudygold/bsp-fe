@@ -17,6 +17,6 @@ export class DropdownComponent {
 
 	onSelection = output<any>();
 
-	inputConfig = input.required<DropdownModel>();
+	options = input.required<DropdownModel>();
 	control = input.required<FormControl>();
 }

@@ -17,39 +17,38 @@ export class CheckboxComponent {
 
 	onChange = output<any>();
 
-	inputConfig = input.required<CheckboxModel>();
+	options = input.required<CheckboxModel>();
 	control = input.required<FormControl>();
 
 	get partiallyComplete(): boolean {
-		const options = this.inputConfig().options;
+		const options = this.options().options;
 
-		if (!options[this.inputConfig().childKey]) return false;
+		if (!options[this.options().childKey]) return false;
 
 		return (
-			options[this.inputConfig().childKey].some((t: any) => t.completed) &&
-			!options[this.inputConfig().childKey].every((t: any) => t.completed)
+			options[this.options().childKey].some((t: any) => t.completed) &&
+			!options[this.options().childKey].every((t: any) => t.completed)
 		);
 	}
 
 	onUpdate(completed: boolean, index?: number): void {
 		if (index === undefined) {
-			this.inputConfig().options.completed = completed;
-			this.inputConfig().options[this.inputConfig().childKey]?.forEach(
+			this.options().options.completed = completed;
+			this.options().options[this.options().childKey]?.forEach(
 				(t: any) => (t.completed = completed),
 			);
 			this.control().setValue(
-				this.inputConfig().options[this.inputConfig().childKey].filter((t: any) => t.completed),
+				this.options().options[this.options().childKey].filter((t: any) => t.completed),
 			);
 			this.onChange.emit(this.control().value);
 			return;
 		}
 
-		this.inputConfig().options[this.inputConfig().childKey][index].completed = completed;
-		this.inputConfig().options[this.inputConfig().childKey].completed =
-			this.inputConfig().options[this.inputConfig().childKey]?.every((t: any) => t.completed) ??
-			true;
+		this.options().options[this.options().childKey][index].completed = completed;
+		this.options().options[this.options().childKey].completed =
+			this.options().options[this.options().childKey]?.every((t: any) => t.completed) ?? true;
 		this.control().setValue(
-			this.inputConfig().options[this.inputConfig().childKey].filter((t: any) => t.completed),
+			this.options().options[this.options().childKey].filter((t: any) => t.completed),
 		);
 		this.onChange.emit(this.control().value);
 	}
@@ -62,8 +61,8 @@ export class CheckboxComponent {
 		}
 
 		const options = (this.control().value || []).filter((t: any) =>
-			typeof option === 'object' && this.inputConfig().key
-				? t[this.inputConfig().key] !== option[this.inputConfig().key]
+			typeof option === 'object' && this.options().key
+				? t[this.options().key] !== option[this.options().key]
 				: t !== option,
 		);
 

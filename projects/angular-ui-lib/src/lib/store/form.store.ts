@@ -51,6 +51,12 @@ export class FormStore {
 		if (errors['pattern']) {
 			return 'Invalid format.';
 		}
+		if (errors['matStartDateInvalid']) {
+			return 'Invalid start date.';
+		}
+		if (errors['matEndDateInvalid']) {
+			return 'Invalid end date.';
+		}
 		// Add more error mappings as needed
 
 		return 'Invalid field.';

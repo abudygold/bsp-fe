@@ -1,17 +1,17 @@
-<mat-form-field [appearance]="inputConfig().appearance" class="dropdown-field">
-	<mat-label>{{ inputConfig().label }}</mat-label>
+<mat-form-field [appearance]="options().appearance" class="dropdown-field">
+	<mat-label>{{ options().label }}</mat-label>
 	<mat-select
 		[formControl]="control()"
-		[placeholder]="inputConfig().placeholder"
-		[multiple]="inputConfig().isMultiple"
+		[placeholder]="options().placeholder"
+		[multiple]="options().isMultiple"
 		(selectionChange)="onSelection.emit($event.value)"
 	>
-		@if (inputConfig().isMultiple) {
+		@if (options().isMultiple) {
 			<mat-select-trigger>
 				{{
 					control().value
-						? typeof control().value?.at(0) === 'object' && inputConfig().keyLabel
-							? control().value.at(0)[inputConfig().keyLabel]
+						? typeof control().value?.at(0) === 'object' && options().keyLabel
+							? control().value.at(0)[options().keyLabel]
 							: control().value.at(0)
 						: ''
 				}}
@@ -23,15 +23,15 @@
 				}
 			</mat-select-trigger>
 		}
-		@for (option of inputConfig().options; track option) {
-			<mat-option [value]="inputConfig().keyValue ? option[inputConfig().keyValue] : option">
-				{{ inputConfig().keyLabel ? option[inputConfig().keyLabel] : option }}
+		@for (option of options().options; track option) {
+			<mat-option [value]="options().keyValue ? option[options().keyValue] : option">
+				{{ options().keyLabel ? option[options().keyLabel] : option }}
 			</mat-option>
 		}
 	</mat-select>
 
-	@if (inputConfig().hint) {
-		<mat-hint align="end">{{ inputConfig().hint }}</mat-hint>
+	@if (options().hint) {
+		<mat-hint align="end">{{ options().hint }}</mat-hint>
 	}
 
 	@if (formStore.isValid(control())) {

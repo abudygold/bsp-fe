@@ -1,14 +1,15 @@
-@if (!config().link) {
+@if (!options().link) {
 	<button
 		mat-button
-		[disabled]="config().disabled"
-		[class.mat-mdc-raised-button]="config().variant === 'raised'"
-		[class.mat-mdc-outlined-button]="config().variant === 'stroked'"
-		[class.mat-mdc-unelevated-button]="config().variant === 'flat'"
-		[class.mat-mdc-icon-button]="config().variant === 'icon'"
-		[class.mat-mdc-fab]="config().variant === 'fab'"
-		[class.mat-mdc-mini-fab]="config().variant === 'mini-fab'"
-		[class.mat-mdc-extended-fab]="config().variant === 'extended-fab'"
+		[color]="options().color"
+		[disabled]="options().disabled"
+		[class.mat-mdc-raised-button]="options().variant === 'raised'"
+		[class.mat-mdc-outlined-button]="options().variant === 'stroked'"
+		[class.mat-mdc-unelevated-button]="options().variant === 'flat'"
+		[class.mat-mdc-icon-button]="options().variant === 'icon'"
+		[class.mat-mdc-fab]="options().variant === 'fab'"
+		[class.mat-mdc-mini-fab]="options().variant === 'mini-fab'"
+		[class.mat-mdc-extended-fab]="options().variant === 'extended-fab'"
 		(click)="onClick.emit()"
 	>
 		<ng-container [ngTemplateOutlet]="buttonLabel" />
@@ -17,28 +18,29 @@
 	<a
 		mat-button
 		target="_blank"
-		[href]="config().link"
-		[disabled]="config().disabled"
-		[class.mat-mdc-raised-button]="config().variant === 'raised'"
-		[class.mat-mdc-outlined-button]="config().variant === 'stroked'"
-		[class.mat-mdc-unelevated-button]="config().variant === 'flat'"
-		[class.mat-mdc-icon-button]="config().variant === 'icon'"
-		[class.mat-mdc-fab]="config().variant === 'fab'"
-		[class.mat-mdc-mini-fab]="config().variant === 'mini-fab'"
-		[class.mat-mdc-extended-fab]="config().variant === 'extended-fab'"
+		[color]="options().color"
+		[href]="options().link"
+		[disabled]="options().disabled"
+		[class.mat-mdc-raised-button]="options().variant === 'raised'"
+		[class.mat-mdc-outlined-button]="options().variant === 'stroked'"
+		[class.mat-mdc-unelevated-button]="options().variant === 'flat'"
+		[class.mat-mdc-icon-button]="options().variant === 'icon'"
+		[class.mat-mdc-fab]="options().variant === 'fab'"
+		[class.mat-mdc-mini-fab]="options().variant === 'mini-fab'"
+		[class.mat-mdc-extended-fab]="options().variant === 'extended-fab'"
 	>
 		<ng-container [ngTemplateOutlet]="buttonLabel" />
 	</a>
 }
 
 <ng-template #buttonLabel>
-	@if (config().icon && config().iconPosition === 'start') {
-		<mat-icon>{{ config().icon }}</mat-icon>
+	@if (options().icon && options().iconPosition === 'start') {
+		<mat-icon>{{ options().icon }}</mat-icon>
 	}
 
-	<span>{{ config().label }}</span>
+	<span>{{ options().label }}</span>
 
-	@if (config().icon && config().iconPosition === 'end') {
-		<mat-icon>{{ config().icon }}</mat-icon>
+	@if (options().icon && options().iconPosition === 'end') {
+		<mat-icon>{{ options().icon }}</mat-icon>
 	}
 </ng-template>

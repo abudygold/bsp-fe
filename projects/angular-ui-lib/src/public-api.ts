@@ -10,6 +10,7 @@ export * from './lib/components/textarea/textarea.component';
 export * from './lib/components/dropdown/dropdown.component';
 export * from './lib/components/radio-button/radio-button.component';
 export * from './lib/components/checkbox/checkbox.component';
+export * from './lib/components/datepicker/datepicker.component';
 
 // Services
 export * from './lib/services/index';
