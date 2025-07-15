@@ -1,9 +1,11 @@
+import { signal } from '@angular/core';
 import {
 	AutocompleteModel,
 	BreadcrumbModel,
 	ButtonModel,
 	ButtonToggleModel,
 	CheckboxModel,
+	ChipModel,
 	DatepickerModel,
 	DropdownModel,
 	RadioModel,
@@ -326,6 +328,86 @@ export const DUMMMY_CHECKBOX_CONFIG: CheckboxModel = new CheckboxModel(
 	false,
 	true,
 	'children',
+);
+
+export const DUMMMY_AVATAR_CHIP_CONFIG: ChipModel = new ChipModel(
+	'avatar',
+	signal([
+		{ label: 'Dog one', avatar: 'https://material.angular.dev/assets/img/examples/shiba1.jpg' },
+		{ label: 'Dog two', avatar: 'https://material.angular.dev/assets/img/examples/shiba1.jpg' },
+		{ label: 'Dog three', avatar: 'https://material.angular.dev/assets/img/examples/shiba1.jpg' },
+	]),
+	'avatar',
+	'label',
+	'outline',
+	'Avatar Chip',
+);
+
+export const DUMMMY_DRAG_DROP_CHIP_CONFIG: ChipModel = new ChipModel(
+	'dragdrop',
+	signal([
+		{ label: 'Dog one', avatar: 'https://material.angular.dev/assets/img/examples/shiba1.jpg' },
+		{ label: 'Dog two', avatar: 'https://material.angular.dev/assets/img/examples/shiba1.jpg' },
+		{ label: 'Dog three', avatar: 'https://material.angular.dev/assets/img/examples/shiba1.jpg' },
+	]),
+	'',
+	'label',
+	'outline',
+	'Drag & Drop Chip',
+);
+
+export const DUMMMY_INPUT_CHIP_CONFIG: ChipModel = new ChipModel(
+	'input',
+	signal([
+		{
+			name: 'React',
+		},
+		{
+			name: 'Angular',
+		},
+		{
+			name: 'Vue',
+		},
+		{
+			name: 'Svelte',
+		},
+	]),
+	// signal(['React', 'Angular', 'Vue', 'Svelte']),
+	'',
+	'name',
+	'outline',
+	'Select Framework',
+	'Please select framework',
+	true,
+);
+
+export const DUMMMY_AUTOCOMPLETE_CHIP_CONFIG: ChipModel = new ChipModel(
+	'autocomplete',
+	signal([
+		{
+			name: 'React',
+		},
+	]),
+	'',
+	'name',
+	'outline',
+	'Select Framework',
+	'Please select framework',
+	true,
+	[
+		{
+			name: 'React',
+		},
+		{
+			name: 'Angular',
+		},
+		{
+			name: 'Vue',
+		},
+		{
+			name: 'Svelte',
+		},
+	],
 );
 
 export const BREADCRUMBS: BreadcrumbModel[] = [

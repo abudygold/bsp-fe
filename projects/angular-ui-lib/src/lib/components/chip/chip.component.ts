@@ -1,4 +1,4 @@
-import { Component, inject, input, signal } from '@angular/core';
+import { Component, computed, inject, input, output, signal } from '@angular/core';
 import { MatChipEditedEvent, MatChipInputEvent, MatChipsModule } from '@angular/material/chips';
 import { ChipModel } from '../../shared/model';
 import { CdkDrag, CdkDragDrop, CdkDropList, moveItemInArray } from '@angular/cdk/drag-drop';
@@ -6,71 +6,108 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { COMMA, ENTER } from '@angular/cdk/keycodes';
 import { LiveAnnouncer } from '@angular/cdk/a11y';
 import { MatIconModule } from '@angular/material/icon';
+import {
+	MatAutocompleteModule,
+	MatAutocompleteSelectedEvent,
+} from '@angular/material/autocomplete';
 
 @Component({
 	selector: 'lib-chip',
-	imports: [CdkDropList, CdkDrag, MatFormFieldModule, MatChipsModule, MatIconModule],
+	imports: [
+		CdkDropList,
+		CdkDrag,
+		MatFormFieldModule,
+		MatChipsModule,
+		MatAutocompleteModule,
+		MatIconModule,
+	],
 	templateUrl: './chip.component.html',
 	styleUrl: './chip.component.scss',
 })
 export class ChipComponent {
 	readonly announcer = inject(LiveAnnouncer);
 
+	onSelection = output<any>();
+
 	options = input.required<ChipModel>();
 
-	drop(event: CdkDragDrop<any[]>) {
-		this.options().options.filter(item => {
-			moveItemInArray(item, event.previousIndex, event.currentIndex);
-			return [...item];
-		});
-	}
+	selectedTag = signal<any[]>([]);
 
 	readonly separatorKeysCodes = [ENTER, COMMA] as const;
+	readonly filteredOptions = computed(() => {
+		if (this.options().chipType !== 'autocomplete') return [];
 
-	/* input */
-	readonly fruits = signal<any[]>([{ name: 'Lemon' }, { name: 'Lime' }, { name: 'Apple' }]);
+		const key = this.options().key;
+		const tags = this.options().tags();
+		const options = this.options().autocompleteOptions || [];
+
+		return tags && typeof tags.at(0) === 'object'
+			? options.filter(option => !tags.some(tag => tag[key] === option[key]))
+			: options.filter(option => !tags.some(tag => tag === option));
+	});
+
+	drop(event: CdkDragDrop<any[]>) {
+		this.options().tags.update(tags => {
+			moveItemInArray(tags, event.previousIndex, event.currentIndex);
+			return [...tags];
+		});
+	}
 
 	add(event: MatChipInputEvent): void {
 		const value = (event.value || '').trim();
 
-		// if (value) this.fruits.update(fruits => [...fruits, { name: value }]);
-		if (value)
-			this.options().options = [...this.options().options, { [this.options().keyValue]: value }];
+		if (value) {
+			this.options().tags.update(tags => [
+				...tags,
+				this.options().key ? { [this.options().key]: value } : value,
+			]);
+			this.onSelection.emit(this.options().tags());
+		}
 
 		event.chipInput!.clear();
 	}
 
-	remove(fruit: any): void {
-		this.fruits.update(fruits => {
-			const index = fruits.indexOf(fruit);
+	remove(tag: any): void {
+		this.options().tags.update(tags => {
+			const index = tags.indexOf(tag);
 			if (index < 0) {
-				return fruits;
+				return tags;
 			}
 
-			fruits.splice(index, 1);
-			this.announcer.announce(`Removed ${fruit.name}`);
-			return [...fruits];
+			tags.splice(index, 1);
+			this.announcer.announce(`Removed ${this.options().key ? tag[this.options().key] : tag}`);
+			return [...tags];
 		});
+		this.onSelection.emit(this.options().tags());
 	}
 
-	edit(fruit: any, event: MatChipEditedEvent) {
+	edit(_tag: any, event: MatChipEditedEvent) {
 		const value = event.value.trim();
 
-		// Remove fruit if it no longer has a name
 		if (!value) {
-			this.remove(fruit);
+			this.remove(_tag);
 			return;
 		}
 
-		// Edit existing fruit
-		this.fruits.update(fruits => {
-			const index = fruits.indexOf(fruit);
+		this.options().tags.update(tags => {
+			const index = tags.indexOf(_tag);
 			if (index >= 0) {
-				fruits[index].name = value;
-				return [...fruits];
+				tags[index][this.options().key] = value;
+				return [...tags];
 			}
-			return fruits;
+			return tags;
 		});
+		this.onSelection.emit(this.options().tags());
 	}
-	/* input */
+
+	selected(event: MatAutocompleteSelectedEvent): void {
+		this.options().tags.update(tags => [
+			...tags,
+			this.options().key
+				? { [this.options().key]: event.option.viewValue }
+				: event.option.viewValue,
+		]);
+		this.onSelection.emit(this.options().tags());
+		event.option.deselect();
+	}
 }

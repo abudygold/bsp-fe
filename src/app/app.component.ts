@@ -19,6 +19,8 @@ import {
 	ButtonToggleModel,
 	CheckboxComponent,
 	CheckboxModel,
+	ChipComponent,
+	ChipModel,
 	DatepickerComponent,
 	DatepickerModel,
 	DropdownComponent,
@@ -35,6 +37,8 @@ import {
 import {
 	BREADCRUMBS,
 	DUMMMY_AUTOCOMPLETE_CONFIG,
+	DUMMMY_AVATAR_CHIP_CONFIG,
+	DUMMMY_DRAG_DROP_CHIP_CONFIG,
 	DUMMMY_BUTTON_TOGGLE_CONFIG,
 	DUMMMY_CHECKBOX_CONFIG,
 	DUMMMY_DATEPICKER_CONFIG,
@@ -50,6 +54,8 @@ import {
 	DUMMY_BUTTTON_RAISED_CONFIG,
 	DUMMY_BUTTTON_STROKED_CONFIG,
 	DUMMY_TABLE_CONFIG,
+	DUMMMY_INPUT_CHIP_CONFIG,
+	DUMMMY_AUTOCOMPLETE_CHIP_CONFIG,
 } from './app.const';
 import { MatIconModule } from '@angular/material/icon';
 import { ExampleDialogComponent } from './pages/example-dialog';
@@ -73,6 +79,7 @@ import { MatDialog, MatDialogModule } from '@angular/material/dialog';
 		DatepickerComponent,
 		AutocompleteComponent,
 		ButtonToggleComponent,
+		ChipComponent,
 		BreadcrumbsComponent,
 	],
 	templateUrl: './app.component.html',
@@ -98,6 +105,10 @@ export class AppComponent {
 	datepickerRangeConfig: DatepickerModel = DUMMMY_DATEPICKER_RANGE_CONFIG;
 	buttonToggleConfig: ButtonToggleModel = DUMMMY_BUTTON_TOGGLE_CONFIG;
 	autocompleteConfig: AutocompleteModel = DUMMMY_AUTOCOMPLETE_CONFIG;
+	avatarChipConfig: ChipModel = DUMMMY_AVATAR_CHIP_CONFIG;
+	dragdropChipConfig: ChipModel = DUMMMY_DRAG_DROP_CHIP_CONFIG;
+	inputChipConfig: ChipModel = DUMMMY_INPUT_CHIP_CONFIG;
+	autocompleteChipConfig: ChipModel = DUMMMY_AUTOCOMPLETE_CHIP_CONFIG;
 	breadcrumbs: BreadcrumbModel[] = BREADCRUMBS;
 
 	form: FormGroup = new FormGroup({

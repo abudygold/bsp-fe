@@ -86,6 +86,22 @@
 		</div>
 
 		<div class="tw-w-full tw-mb-2">
+			<lib-chip [options]="avatarChipConfig" />
+		</div>
+
+		<div class="tw-w-full tw-mb-2">
+			<lib-chip [options]="dragdropChipConfig" />
+		</div>
+
+		<div class="tw-w-full tw-mb-2">
+			<lib-chip [options]="inputChipConfig" (onSelection)="onInputChange($event)" />
+		</div>
+
+		<div class="tw-w-full tw-mb-2">
+			<lib-chip [options]="autocompleteChipConfig" (onSelection)="onInputChange($event)" />
+		</div>
+
+		<div class="tw-w-full tw-mb-2">
 			<lib-button-toggle
 				[options]="buttonToggleConfig"
 				[control]="$any(form.get('buttonToggle'))"
