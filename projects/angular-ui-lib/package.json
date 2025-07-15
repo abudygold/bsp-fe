@@ -1,5 +1,5 @@
 {
-	"name": "angular-ui-lib",
+	"name": "@abudygold/angular-ui-lib",
 	"version": "1.0.0",
 	"peerDependencies": {
 		"@angular/common": "^19.2.0",
