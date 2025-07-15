@@ -33,7 +33,7 @@ import {
 	TextareaComponent,
 	TextboxComponent,
 	TextboxModel,
-} from 'angular-ui-lib';
+} from '@abudygold/angular-ui-lib';
 import {
 	BREADCRUMBS,
 	DUMMMY_AUTOCOMPLETE_CONFIG,

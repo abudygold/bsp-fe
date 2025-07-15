@@ -1,4 +1,3 @@
-import { signal } from '@angular/core';
 import {
 	AutocompleteModel,
 	BreadcrumbModel,
@@ -11,7 +10,8 @@ import {
 	RadioModel,
 	TableConfigModel,
 	TextboxModel,
-} from 'angular-ui-lib';
+} from '@abudygold/angular-ui-lib';
+import { signal } from '@angular/core';
 
 export const DUMMY_DATA = [
 	{

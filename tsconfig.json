@@ -3,9 +3,6 @@
 {
 	"compileOnSave": false,
 	"compilerOptions": {
-		"paths": {
-			"angular-ui-lib": ["./dist/angular-ui-lib"]
-		},
 		"outDir": "./dist/out-tsc",
 		"strict": true,
 		"noImplicitOverride": true,
