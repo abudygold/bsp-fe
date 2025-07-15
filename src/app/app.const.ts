@@ -285,7 +285,6 @@ export const DUMMMY_RADIO_CONFIG: RadioModel = new RadioModel(
 			value: 'svelte',
 		},
 	],
-	// ['React', 'Angular', 'Vue', 'Svelte'],
 	'value',
 	'label',
 	true,
