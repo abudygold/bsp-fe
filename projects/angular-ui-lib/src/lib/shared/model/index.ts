@@ -5,3 +5,7 @@ export * from './dropdown.model';
 export * from './radio.model';
 export * from './checkbox.model';
 export * from './datepicker.model';
+export * from './autocomplete.model';
+export * from './button-toggle.model';
+export * from './breadcrumb.model';
+export * from './chip.model';

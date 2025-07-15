@@ -1,5 +1,8 @@
 import {
+	AutocompleteModel,
+	BreadcrumbModel,
 	ButtonModel,
+	ButtonToggleModel,
 	CheckboxModel,
 	DatepickerModel,
 	DropdownModel,
@@ -196,6 +199,42 @@ export const DUMMMY_DATEPICKER_RANGE_CONFIG: DatepickerModel = new DatepickerMod
 	true,
 );
 
+export const DUMMMY_AUTOCOMPLETE_CONFIG: AutocompleteModel = new AutocompleteModel(
+	'outline',
+	'Number',
+	'Select a Number',
+	// ['One', 'Two', 'Three'],
+	[
+		{
+			label: 'React',
+			value: 'react',
+			id: 'One',
+		},
+		{
+			label: 'Angular',
+			value: 'angular',
+			id: 'Two',
+		},
+		{
+			label: 'Vue',
+			value: 'vue',
+			id: 'Three',
+		},
+		{
+			label: 'Svelte',
+			value: 'svelte',
+			id: 'Four',
+		},
+	],
+	'',
+	'label',
+	'id',
+);
+
+export const DUMMMY_BUTTON_TOGGLE_CONFIG: ButtonToggleModel = new ButtonToggleModel(
+	'I agree to the terms and conditions',
+);
+
 export const DUMMMY_DROPDOWN_CONFIG: DropdownModel = new DropdownModel(
 	'outline',
 	'Javascript Framework',
@@ -288,3 +327,9 @@ export const DUMMMY_CHECKBOX_CONFIG: CheckboxModel = new CheckboxModel(
 	true,
 	'children',
 );
+
+export const BREADCRUMBS: BreadcrumbModel[] = [
+	{ label: 'Home', icon: 'home', url: '/home' },
+	{ label: 'Dashboard', icon: 'help_outline', url: '/dashboard' },
+	{ label: 'Detail', icon: 'info' },
+];

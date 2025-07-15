@@ -11,6 +11,11 @@ export * from './lib/components/dropdown/dropdown.component';
 export * from './lib/components/radio-button/radio-button.component';
 export * from './lib/components/checkbox/checkbox.component';
 export * from './lib/components/datepicker/datepicker.component';
+export * from './lib/components/autocomplete/autocomplete.component';
+export * from './lib/components/button-toggle/button-toggle.component';
+export * from './lib/components/modal/modal.component';
+export * from './lib/components/chip/chip.component';
+export * from './lib/components/breadcrumbs/breadcrumbs.component';
 
 // Services
 export * from './lib/services/index';

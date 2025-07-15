@@ -1,1 +1,13 @@
-<p>button-toggle works!</p>
+<p>
+	<mat-slide-toggle
+		[labelPosition]="options().labelPosition"
+		[formControl]="control()"
+		(change)="onChange.emit($event)"
+	>
+		{{ options().label }}
+	</mat-slide-toggle>
+
+	@if (formStore.isValid($any(control()))) {
+		<mat-error align="end">{{ formStore.getErrorMessage($any(control())) }}</mat-error>
+	}
+</p>

@@ -1,1 +1,30 @@
-<p>autocomplete works!</p>
+<mat-form-field [appearance]="options().appearance" class="autcomplete-field">
+	<mat-label>{{ options().label }}</mat-label>
+	<input
+		type="text"
+		matInput
+		[placeholder]="options().placeholder"
+		[formControl]="control()"
+		[matAutocomplete]="auto"
+		(input)="onFilter($event)"
+		(change)="onChange.emit($event)"
+	/>
+	<mat-autocomplete
+		#auto="matAutocomplete"
+		[displayWith]="options().displayKey ? displayFn.bind(this) : null"
+	>
+		@for (option of filteredOptions; track option) {
+			<mat-option [value]="options().keyValue ? option[options().keyValue] : option">
+				{{ options().keyLabel ? option[options().keyLabel] : option }}
+			</mat-option>
+		}
+	</mat-autocomplete>
+
+	@if (options().hint) {
+		<mat-hint align="end">{{ options().hint }}</mat-hint>
+	}
+
+	@if (formStore.isValid($any(control()))) {
+		<mat-error align="end">{{ formStore.getErrorMessage($any(control())) }}</mat-error>
+	}
+</mat-form-field>

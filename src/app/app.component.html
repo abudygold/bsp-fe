@@ -1,11 +1,15 @@
 <div class="tw-m-5">
+	<lib-breadcrumbs [breadcrumbs]="breadcrumbs" />
+</div>
+
+<div class="tw-m-5">
 	<div class="tw-flex tw-gap-5 tw-mb-3">
 		<lib-button [options]="buttonConfig" (onClick)="onSubmit()" />
 		<lib-button [options]="buttonRaisedConfig" (onClick)="onSubmit()" />
 		<lib-button [options]="buttonStrokedConfig" (onClick)="onSubmit()" />
 		<lib-button [options]="buttonFlatConfig" (onClick)="onSubmit()" />
 		<lib-button [options]="buttonIconConfig" (onClick)="onSubmit()" />
-		<lib-button [options]="buttonFabConfig" (onClick)="onSubmit()" />
+		<lib-button [options]="buttonFabConfig" (onClick)="openDialog()" />
 	</div>
 
 	<div class="tw-mb-3" [formGroup]="form">
@@ -50,11 +54,15 @@
 		</div>
 
 		<div class="tw-w-full tw-mb-2">
-			<lib-datepicker [options]="datepickerConfig" [control]="$any(form.get('datepicker'))" />
+			<lib-datepicker
+				[options]="datepickerConfig"
+				[control]="$any(form.get('datepicker'))"
+				(onChange)="onInputChange($event)"
+			/>
 		</div>
 
 		<div class="tw-w-full tw-mb-2">
-			<lib-datepicker [options]="datepickerRangeConfig" />
+			<lib-datepicker [options]="datepickerRangeConfig" (onChange)="onInputChange($event)" />
 		</div>
 
 		<div class="tw-w-full tw-mb-2">
@@ -69,6 +77,18 @@
 			<lib-checkbox
 				[options]="checkboxConfig"
 				[control]="$any(form.get('checkbox'))"
+				(onChange)="onInputChange($event)"
+			/>
+		</div>
+
+		<div class="tw-w-full tw-mb-2">
+			<lib-autocomplete [options]="autocompleteConfig" [control]="$any(form.get('autocomplete'))" />
+		</div>
+
+		<div class="tw-w-full tw-mb-2">
+			<lib-button-toggle
+				[options]="buttonToggleConfig"
+				[control]="$any(form.get('buttonToggle'))"
 				(onChange)="onInputChange($event)"
 			/>
 		</div>

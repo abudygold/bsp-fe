@@ -1,9 +1,13 @@
-import { Component } from '@angular/core';
+import { Component, input } from '@angular/core';
+import { MatDialogModule } from '@angular/material/dialog';
+import { MatIconModule } from '@angular/material/icon';
 
 @Component({
 	selector: 'lib-modal',
-	imports: [],
+	imports: [MatDialogModule, MatIconModule],
 	templateUrl: './modal.component.html',
 	styleUrl: './modal.component.scss',
 })
-export class ModalComponent {}
+export class ModalComponent {
+	title = input.required();
+}

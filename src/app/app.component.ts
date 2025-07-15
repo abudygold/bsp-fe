@@ -9,8 +9,14 @@ import {
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import { Sort } from '@angular/material/sort';
 import {
+	AutocompleteComponent,
+	AutocompleteModel,
+	BreadcrumbModel,
+	BreadcrumbsComponent,
 	ButtonComponent,
 	ButtonModel,
+	ButtonToggleComponent,
+	ButtonToggleModel,
 	CheckboxComponent,
 	CheckboxModel,
 	DatepickerComponent,
@@ -27,6 +33,9 @@ import {
 	TextboxModel,
 } from 'angular-ui-lib';
 import {
+	BREADCRUMBS,
+	DUMMMY_AUTOCOMPLETE_CONFIG,
+	DUMMMY_BUTTON_TOGGLE_CONFIG,
 	DUMMMY_CHECKBOX_CONFIG,
 	DUMMMY_DATEPICKER_CONFIG,
 	DUMMMY_DATEPICKER_RANGE_CONFIG,
@@ -43,6 +52,8 @@ import {
 	DUMMY_TABLE_CONFIG,
 } from './app.const';
 import { MatIconModule } from '@angular/material/icon';
+import { ExampleDialogComponent } from './pages/example-dialog';
+import { MatDialog, MatDialogModule } from '@angular/material/dialog';
 
 @Component({
 	selector: 'app-root',
@@ -52,6 +63,7 @@ import { MatIconModule } from '@angular/material/icon';
 		ButtonComponent,
 		MatCheckboxModule,
 		MatIconModule,
+		MatDialogModule,
 		TableComponent,
 		TextboxComponent,
 		TextareaComponent,
@@ -59,12 +71,16 @@ import { MatIconModule } from '@angular/material/icon';
 		RadioButtonComponent,
 		CheckboxComponent,
 		DatepickerComponent,
+		AutocompleteComponent,
+		ButtonToggleComponent,
+		BreadcrumbsComponent,
 	],
 	templateUrl: './app.component.html',
 	styleUrl: './app.component.scss',
 })
 export class AppComponent {
 	protected formStore = inject(FormStore);
+	#dialog = inject(MatDialog);
 
 	buttonConfig: ButtonModel = DUMMY_BUTTTON_BASIC_CONFIG;
 	buttonRaisedConfig: ButtonModel = DUMMY_BUTTTON_RAISED_CONFIG;
@@ -80,6 +96,9 @@ export class AppComponent {
 	checkboxConfig: CheckboxModel = DUMMMY_CHECKBOX_CONFIG;
 	datepickerConfig: DatepickerModel = DUMMMY_DATEPICKER_CONFIG;
 	datepickerRangeConfig: DatepickerModel = DUMMMY_DATEPICKER_RANGE_CONFIG;
+	buttonToggleConfig: ButtonToggleModel = DUMMMY_BUTTON_TOGGLE_CONFIG;
+	autocompleteConfig: AutocompleteModel = DUMMMY_AUTOCOMPLETE_CONFIG;
+	breadcrumbs: BreadcrumbModel[] = BREADCRUMBS;
 
 	form: FormGroup = new FormGroup({
 		name: new FormControl('', Validators.required),
@@ -88,12 +107,16 @@ export class AppComponent {
 		radio: new FormControl('', Validators.required),
 		checkbox: new FormControl([], Validators.required),
 		datepicker: new FormControl('', Validators.required),
+		buttonToggle: new FormControl('', Validators.requiredTrue),
+		autocomplete: new FormControl('', Validators.required),
 		start: new FormControl('', Validators.required),
 		end: new FormControl('', Validators.required),
 	});
 
 	onSubmit(): void {
 		this.form.markAllAsTouched();
+
+		console.log('form', this.form.getRawValue());
 
 		if (!this.form.valid) return;
 	}
@@ -115,5 +138,12 @@ export class AppComponent {
 
 	onInputChange(value: any): void {
 		console.log('Input Changed:', value);
+	}
+
+	openDialog(): void {
+		this.#dialog.open(ExampleDialogComponent, {
+			width: '700px',
+			autoFocus: false,
+		});
 	}
 }

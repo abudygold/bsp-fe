@@ -33,7 +33,11 @@ export class DatepickerComponent {
 		end: new FormControl<Date | null>(null),
 	});
 
-	onDateChange(event: MatDatepickerInputEvent<any, any>): void {
+	onDateChange(event: MatDatepickerInputEvent<any, any>, isRange: boolean = false): void {
+		if (isRange) {
+			this.onChange.emit(this.range.getRawValue());
+			return;
+		}
 		const dateValue = event.value;
 		this.onChange.emit(dateValue);
 	}

@@ -1,1 +1,81 @@
-<p>chip works!</p>
+@if (options().chipType === 'avatar') {
+	<mat-chip-set aria-label="Dog selection">
+		@for (item of options().options; track $index) {
+			<mat-chip>
+				<img matChipAvatar [src]="item[options().keyValue]" [alt]="item[options().keyLabel]" />
+				{{ item[options().keyLabel] }}
+			</mat-chip>
+		}
+	</mat-chip-set>
+} @else if (options().chipType === 'dragdrop') {
+	<mat-chip-set
+		class="example-chip"
+		cdkDropList
+		cdkDropListOrientation="horizontal"
+		(cdkDropListDropped)="drop($event)"
+	>
+		@for (item of options().options; track item) {
+			<mat-chip class="example-box" cdkDrag>
+				{{ item[options().keyLabel] }}
+			</mat-chip>
+		}
+	</mat-chip-set>
+} @else if (options().chipType === 'input') {
+	<mat-form-field class="chip-field">
+		<mat-label>Favorite Fruits</mat-label>
+		<mat-chip-grid #chipGrid aria-label="Enter fruits">
+			@for (fruit of fruits(); track fruit) {
+				<mat-chip-row
+					(removed)="remove(fruit)"
+					[editable]="true"
+					(edited)="edit(fruit, $event)"
+					[aria-description]="'press enter to edit ' + fruit.name"
+				>
+					{{ fruit.name }}
+					<button matChipRemove [attr.aria-label]="'remove ' + fruit.name">
+						<mat-icon>cancel</mat-icon>
+					</button>
+				</mat-chip-row>
+			}
+			<input
+				placeholder="New fruit..."
+				[matChipInputFor]="chipGrid"
+				[matChipInputSeparatorKeyCodes]="separatorKeysCodes"
+				[matChipInputAddOnBlur]="options().addBlur"
+				(matChipInputTokenEnd)="add($event)"
+			/>
+		</mat-chip-grid>
+	</mat-form-field>
+} @else if (options().chipType === 'autocomplete') {
+	<!-- <mat-form-field class="example-chip-list">
+		<mat-label>Favorite Fruits</mat-label>
+		<mat-chip-grid #chipGrid aria-label="Fruit selection">
+			@for (fruit of fruits(); track $index) {
+				<mat-chip-row (removed)="remove(fruit)">
+					{{ fruit }}
+					<button matChipRemove [attr.aria-label]="'remove ' + fruit">
+						<mat-icon>cancel</mat-icon>
+					</button>
+				</mat-chip-row>
+			}
+		</mat-chip-grid>
+		<input
+			name="currentFruit"
+			placeholder="New Fruit..."
+			#fruitInput
+			[(ngModel)]="currentFruit"
+			[matChipInputFor]="chipGrid"
+			[matAutocomplete]="auto"
+			[matChipInputSeparatorKeyCodes]="separatorKeysCodes"
+			(matChipInputTokenEnd)="add($event)"
+		/>
+		<mat-autocomplete
+			#auto="matAutocomplete"
+			(optionSelected)="selected($event); fruitInput.value = ''"
+		>
+			@for (fruit of filteredFruits(); track fruit) {
+				<mat-option [value]="fruit">{{ fruit }}</mat-option>
+			}
+		</mat-autocomplete>
+	</mat-form-field> -->
+}
