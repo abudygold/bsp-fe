@@ -61,8 +61,8 @@ export class CheckboxComponent {
 		}
 
 		const options = (this.control().value || []).filter((t: any) =>
-			typeof option === 'object' && this.options().key
-				? t[this.options().key] !== option[this.options().key]
+			this.options().keyValue
+				? t[this.options().keyValue] !== option[this.options().keyValue]
 				: t !== option,
 		);
 

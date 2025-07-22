@@ -5,10 +5,10 @@ export class DropdownModel {
 		public appearance: Appearance = 'outline',
 		public label: string = '',
 		public options: any[] = [],
-		public isMultiple: boolean = false,
-		public keyValue: string = '',
-		public keyLabel: string = '',
 		public placeholder: string = '',
+		public keyLabel: string = '',
+		public keyValue: string = '',
 		public hint: string = '',
+		public isMultiple: boolean = false,
 	) {}
 }

@@ -1,0 +1,40 @@
+<!-- Example of rendering UI fields using formConfig from angular-ui-lib -->
+
+<form [formGroup]="form" (ngSubmit)="onSubmit()">
+	@for (field of formConfig; track $index) {
+		@switch (field.type) {
+			@case ('text') {
+				<lib-textbox
+					[options]="field.options"
+					[control]="$any(form.get(field.key))"
+					(onInput)="onInputChange($event)"
+				/>
+			}
+
+			@case ('textarea') {
+				<lib-textarea
+					[options]="field.options"
+					[control]="$any(form.get(field.key))"
+					(onInput)="onInputChange($event)"
+				></lib-textarea>
+			}
+
+			@case ('dropdown') {
+				<lib-dropdown
+					[options]="field.options"
+					[control]="$any(form.get(field.key))"
+					(onSelection)="onInputChange($event)"
+				/>
+			}
+
+			@case ('date') {
+				<lib-datepicker
+					[options]="field.options"
+					[control]="$any(form.get(field.key))"
+					(onChange)="onInputChange($event)"
+				/>
+			}
+		}
+	}
+	<button type="submit">Submit</button>
+</form>

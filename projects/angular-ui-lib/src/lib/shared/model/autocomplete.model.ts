@@ -6,9 +6,8 @@ export class AutocompleteModel {
 		public label: string = '',
 		public placeholder: string = '',
 		public options: any[] = [],
-		public keyValue: string = '',
 		public keyLabel: string = '',
-		public displayKey: string = '',
+		public keyValue: string = '',
 		public hint: string = '',
 	) {}
 }

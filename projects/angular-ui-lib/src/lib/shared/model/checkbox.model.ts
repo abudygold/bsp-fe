@@ -1,15 +1,12 @@
-import { Signal } from '@angular/core';
-
 export class CheckboxModel {
 	constructor(
-		public key: string,
 		public label: string = '',
 		public options: any = null,
-		public keyValue: string = '',
 		public keyLabel: string = '',
-		public labelPosition: 'after' | 'before' = 'after',
-		public disabled: boolean = false,
-		public isVertical: boolean = false,
+		public keyValue: string = '',
 		public childKey: string = '',
+		public isVertical: boolean = false,
+		public disabled: boolean = false,
+		public labelPosition: 'after' | 'before' = 'after',
 	) {}
 }

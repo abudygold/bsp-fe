@@ -11,7 +11,7 @@
 	/>
 	<mat-autocomplete
 		#auto="matAutocomplete"
-		[displayWith]="options().displayKey ? displayFn.bind(this) : null"
+		[displayWith]="options().keyLabel ? displayFn.bind(this) : null"
 	>
 		@for (option of filteredOptions; track option) {
 			<mat-option [value]="options().keyValue ? option[options().keyValue] : option">

@@ -1,8 +1,6 @@
-<div class="tw-m-5">
-	<lib-breadcrumbs [breadcrumbs]="breadcrumbs" />
-</div>
+<router-outlet></router-outlet>
 
-<div class="tw-m-5">
+<!-- <div class="tw-m-5">
 	<div class="tw-flex tw-gap-5 tw-mb-3">
 		<lib-button [options]="buttonConfig" (onClick)="onSubmit()" />
 		<lib-button [options]="buttonRaisedConfig" (onClick)="onSubmit()" />
@@ -19,21 +17,6 @@
 				[control]="$any(form.get('name'))"
 				(onInput)="onInputChange($event)"
 			>
-				<!-- <ng-template #matPrefixRef>
-					<mat-icon>sentiment_very_satisfied</mat-icon>
-				</ng-template>
-
-				<ng-template #matSuffixRef>
-					<mat-icon>sentiment_very_satisfied</mat-icon>
-				</ng-template>
-
-				<ng-template #matTextPrefixRef>
-					<span>$&nbsp;</span>
-				</ng-template>
-
-				<ng-template #matTextSuffixRef>
-					<span>.00</span>
-				</ng-template> -->
 			</lib-textbox>
 		</div>
 
@@ -82,6 +65,14 @@
 		</div>
 
 		<div class="tw-w-full tw-mb-2">
+			<lib-checkbox
+				[options]="checkboxAllConfig"
+				[control]="$any(form.get('checkbox'))"
+				(onChange)="onInputChange($event)"
+			/>
+		</div>
+
+		<div class="tw-w-full tw-mb-2">
 			<lib-autocomplete [options]="autocompleteConfig" [control]="$any(form.get('autocomplete'))" />
 		</div>
 
@@ -109,33 +100,4 @@
 			/>
 		</div>
 	</div>
-
-	<lib-table [options]="tableConfig" (sortChange)="sortChange($event)">
-		<ng-template #customTemplate let-data="data" let-key="key">
-			@if (key === 'selection') {
-				<div [class.show-checkbox]="data.isSelected">
-					<mat-checkbox
-						class="check-box check__file"
-						[checked]="tableConfig.isSelected(data)"
-						(change)="onCheckedHandler(data)"
-					/>
-				</div>
-			} @else if (key === 'statusName') {
-				<div
-					class="tw-px-4 tw-py-2 tw-text-white tw-font-medium tw-w-max tw-rounded-full"
-					[class.tw-bg-green-700]="data.statusName?.toLowerCase() === 'active'"
-					[class.tw-bg-red-700]="data.statusName?.toLowerCase() === 'inactive'"
-					[class.tw-bg-gray-700]="data.statusName?.toLowerCase() === 'pending'"
-				>
-					{{ data.statusName }}
-				</div>
-			}
-		</ng-template>
-
-		<ng-template #selectionTemplate>
-			<div class="filter-list">
-				<mat-checkbox class="check__file" (change)="selectAllData($event.checked)" />
-			</div>
-		</ng-template>
-	</lib-table>
-</div>
+</div> -->

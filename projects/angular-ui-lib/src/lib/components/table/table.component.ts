@@ -10,7 +10,7 @@ import {
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { MatSort, MatSortModule, Sort } from '@angular/material/sort';
 import { MatTableDataSource, MatTableModule } from '@angular/material/table';
-import { TableConfigModel } from '../../shared/model';
+import { TableModel } from '../../shared/model';
 import { CommonModule, NgTemplateOutlet } from '@angular/common';
 import { CurrencyIntlPipe } from '../../shared/pipes';
 import { PaginationComponent } from './pagination';
@@ -43,7 +43,7 @@ export class TableComponent {
 
 	dataSource: MatTableDataSource<any> = new MatTableDataSource<any>([]);
 
-	options = input.required<TableConfigModel>();
+	options = input.required<TableModel>();
 
 	@ViewChild(MatSort) sort!: MatSort;
 
@@ -74,6 +74,10 @@ export class TableComponent {
 		}
 
 		return obj !== undefined ? obj : null;
+	}
+
+	get headerRow(): string[] {
+		return this.options().columns.map(c => c.key);
 	}
 
 	get pagedData(): MatTableDataSource<any> {

@@ -17,9 +17,12 @@ type FilterOptions = FilterRequestPayload;
 const TablePageIndexDefaultConst = 0;
 const TablePageSizeDefaultConst = 10;
 
-export class TableConfigModel {
-	public dataKey: string[];
-	public dataLabel: string[];
+export class TableModel {
+	public columns: {
+		key: string;
+		label: string;
+		sortable: boolean;
+	}[];
 	public dataSource: any[];
 	public dataTotal: number;
 	public pageIndex: number;
@@ -54,8 +57,7 @@ export class TableConfigModel {
 	} = {};
 
 	constructor() {
-		this.dataKey = [];
-		this.dataLabel = [];
+		this.columns = [];
 		this.dataSource = [];
 		this.dataTotal = 0;
 		this.pageIndex = TablePageIndexDefaultConst;
@@ -69,9 +71,7 @@ export class TableConfigModel {
 		for (const key in this.dataSource[0]) {
 			const keyValue = this.dataSource[0][key];
 
-			if (!this.dataKey.includes(key)) {
-				continue;
-			}
+			if (!this.columns.some(t => t.key === key)) continue;
 
 			let dataType: DataType = '';
 			if (keyValue instanceof Date) {

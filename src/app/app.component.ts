@@ -7,12 +7,9 @@ import {
 	Validators,
 } from '@angular/forms';
 import { MatCheckboxModule } from '@angular/material/checkbox';
-import { Sort } from '@angular/material/sort';
 import {
 	AutocompleteComponent,
 	AutocompleteModel,
-	BreadcrumbModel,
-	BreadcrumbsComponent,
 	ButtonComponent,
 	ButtonModel,
 	ButtonToggleComponent,
@@ -28,14 +25,11 @@ import {
 	FormStore,
 	RadioButtonComponent,
 	RadioModel,
-	TableComponent,
-	TableConfigModel,
 	TextareaComponent,
 	TextboxComponent,
 	TextboxModel,
 } from '@abudygold/angular-ui-lib';
 import {
-	BREADCRUMBS,
 	DUMMMY_AUTOCOMPLETE_CONFIG,
 	DUMMMY_AVATAR_CHIP_CONFIG,
 	DUMMMY_DRAG_DROP_CHIP_CONFIG,
@@ -53,13 +47,14 @@ import {
 	DUMMY_BUTTTON_ICON_CONFIG,
 	DUMMY_BUTTTON_RAISED_CONFIG,
 	DUMMY_BUTTTON_STROKED_CONFIG,
-	DUMMY_TABLE_CONFIG,
 	DUMMMY_INPUT_CHIP_CONFIG,
 	DUMMMY_AUTOCOMPLETE_CHIP_CONFIG,
+	DUMMMY_CHECKBOX_CHILD_CONFIG,
 } from './app.const';
 import { MatIconModule } from '@angular/material/icon';
-import { ExampleDialogComponent } from './pages/example-dialog';
 import { MatDialog, MatDialogModule } from '@angular/material/dialog';
+import { ExampleDialogComponent } from './pages/example/dialog/example-dialog/example-dialog.component';
+import { RouterOutlet } from '@angular/router';
 
 @Component({
 	selector: 'app-root',
@@ -70,7 +65,6 @@ import { MatDialog, MatDialogModule } from '@angular/material/dialog';
 		MatCheckboxModule,
 		MatIconModule,
 		MatDialogModule,
-		TableComponent,
 		TextboxComponent,
 		TextareaComponent,
 		DropdownComponent,
@@ -80,7 +74,7 @@ import { MatDialog, MatDialogModule } from '@angular/material/dialog';
 		AutocompleteComponent,
 		ButtonToggleComponent,
 		ChipComponent,
-		BreadcrumbsComponent,
+		RouterOutlet,
 	],
 	templateUrl: './app.component.html',
 	styleUrl: './app.component.scss',
@@ -95,12 +89,12 @@ export class AppComponent {
 	buttonFlatConfig: ButtonModel = DUMMY_BUTTTON_FLAT_CONFIG;
 	buttonIconConfig: ButtonModel = DUMMY_BUTTTON_ICON_CONFIG;
 	buttonFabConfig: ButtonModel = DUMMY_BUTTTON_FAB_CONFIG;
-	tableConfig: TableConfigModel = DUMMY_TABLE_CONFIG;
 	textboxConfig: TextboxModel = DUMMMY_TEXTBOX_CONFIG;
 	textareaConfig: TextboxModel = DUMMMY_TEXTAREA_CONFIG;
 	dropdownConfig: DropdownModel = DUMMMY_DROPDOWN_CONFIG;
 	radioConfig: RadioModel = DUMMMY_RADIO_CONFIG;
 	checkboxConfig: CheckboxModel = DUMMMY_CHECKBOX_CONFIG;
+	checkboxAllConfig: CheckboxModel = DUMMMY_CHECKBOX_CHILD_CONFIG;
 	datepickerConfig: DatepickerModel = DUMMMY_DATEPICKER_CONFIG;
 	datepickerRangeConfig: DatepickerModel = DUMMMY_DATEPICKER_RANGE_CONFIG;
 	buttonToggleConfig: ButtonToggleModel = DUMMMY_BUTTON_TOGGLE_CONFIG;
@@ -109,11 +103,10 @@ export class AppComponent {
 	dragdropChipConfig: ChipModel = DUMMMY_DRAG_DROP_CHIP_CONFIG;
 	inputChipConfig: ChipModel = DUMMMY_INPUT_CHIP_CONFIG;
 	autocompleteChipConfig: ChipModel = DUMMMY_AUTOCOMPLETE_CHIP_CONFIG;
-	breadcrumbs: BreadcrumbModel[] = BREADCRUMBS;
 
 	form: FormGroup = new FormGroup({
 		name: new FormControl('', Validators.required),
-		description: new FormControl('', [Validators.required, Validators.maxLength(10)]),
+		description: new FormControl('', [Validators.required]),
 		dropdown: new FormControl('', Validators.required),
 		radio: new FormControl('', Validators.required),
 		checkbox: new FormControl([], Validators.required),
@@ -132,19 +125,8 @@ export class AppComponent {
 		if (!this.form.valid) return;
 	}
 
-	onCheckedHandler(row: any): void {
-		this.tableConfig.selectRow(row);
-		console.log('selectRowData', this.tableConfig.selection.selected);
-	}
-
-	selectAllData(isChecked: boolean): void {
-		this.tableConfig.selectAll(isChecked);
-		console.log('selectAllData', this.tableConfig.selection.selected);
-	}
-
-	sortChange(event: Sort): void {
-		this.tableConfig.sortKey = event.active;
-		this.tableConfig.sortOrder = event.direction;
+	pageChange(event: any): void {
+		console.log(event);
 	}
 
 	onInputChange(value: any): void {

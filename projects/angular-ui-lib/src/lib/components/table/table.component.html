@@ -13,35 +13,38 @@
 				class="table"
 				[class]="options().tableClass"
 				[dataSource]="pagedData"
-				[matSortActive]="options().isSorter() ? options().sortKey || options().dataKey[0] : ''"
+				[matSortActive]="
+					options().isSorter() ? options().sortKey || options().columns.at(0)?.key! : ''
+				"
 				[matSortDirection]="options().sortOrder"
 				(matSortChange)="sortChange.emit($event)"
 			>
-				<tr mat-header-row class="table-header" *matHeaderRowDef="options().dataKey"></tr>
+				<tr mat-header-row *matHeaderRowDef="headerRow" class="table-header"></tr>
 
 				<tr
 					mat-row
+					*matRowDef="let row; columns: headerRow; let rowIndex = index"
 					class="table-row"
-					*matRowDef="let row; columns: options().dataKey; let rowIndex = index"
 					[class.table-row-selected]="options().isSelected(row)"
 					(click)="selectData.emit(row)"
 					(mouseleave)="mouseOverChange.emit(null)"
 					(mouseover)="mouseOverChange.emit(row)"
 				></tr>
 
-				@for (tableKey of options().dataKey; track tableKey; let index = $index) {
-					<ng-container [matColumnDef]="tableKey">
+				@for (column of options().columns; track column; let index = $index) {
+					<ng-container [matColumnDef]="column.key">
 						<th mat-header-cell *matHeaderCellDef>
-							@if (tableKey === 'selection') {
-								<ng-container [ngTemplateOutlet]="selectionTemplate"> </ng-container>
+							@if (column.key === 'selection') {
+								<ng-container [ngTemplateOutlet]="selectionTemplate" />
 							} @else {
 								<span
 									class="table-header"
 									mat-sort-header
 									[disableClear]="true"
+									[disabled]="!column.sortable"
 									[class.tw-font-normal]="!options().isSorter()"
 								>
-									{{ options().dataLabel[index] }}
+									{{ column.label }}
 								</span>
 							}
 						</th>
@@ -49,30 +52,31 @@
 						<td
 							mat-cell
 							*matCellDef="let data; let i = index; let rowIndex = index"
-							(click)="disableClick($event, tableKey)"
+							(click)="disableClick($event, column.key)"
 						>
 							<div class="table-row-cell">
-								@switch (options().dataType[tableKey].type) {
+								@switch (options().dataType[column.key].type) {
 									@case ('date') {
 										{{
-											getPropertyValue(data, tableKey) | date: options().dataType[tableKey].format
+											getPropertyValue(data, column.key)
+												| date: options().dataType[column.key].format
 										}}
 									}
 									@case ('number') {
-										{{ getPropertyValue(data, tableKey) }}
+										{{ getPropertyValue(data, column.key) }}
 									}
 									@case ('title') {
-										{{ getPropertyValue(data, tableKey) | titlecase }}
+										{{ getPropertyValue(data, column.key) | titlecase }}
 									}
 									@case ('currency') {
 										<!-- {{ 123456.789 | currencyIntl:'JPY':'ja-JP':0:0 }} -->
 										{{
-											getPropertyValue(data, tableKey) || 0
+											getPropertyValue(data, column.key) || 0
 												| currencyIntl
-													: options().dataType[tableKey].currency
-													: options().dataType[tableKey].locale
-													: options().dataType[tableKey].minimumFractionDigits
-													: options().dataType[tableKey].maximumFractionDigits
+													: options().dataType[column.key].currency
+													: options().dataType[column.key].locale
+													: options().dataType[column.key].minimumFractionDigits
+													: options().dataType[column.key].maximumFractionDigits
 										}}
 									}
 									@case ('custom') {
@@ -80,13 +84,13 @@
 											[ngTemplateOutlet]="customTemplate"
 											[ngTemplateOutletContext]="{
 												data: data,
-												key: tableKey,
+												key: column.key,
 												index: rowIndex,
 											}"
 										/>
 									}
 									@default {
-										{{ displayValue(getPropertyValue(data, tableKey)) }}
+										{{ displayValue(getPropertyValue(data, column.key)) }}
 									}
 								}
 							</div>
@@ -110,7 +114,7 @@
 							mat-footer-row
 							*matFooterCellDef
 							class="border-empty"
-							[colSpan]="(options().dataKey || []).length"
+							[colSpan]="(options().columns || []).length"
 						>
 							No Data Available
 						</td>

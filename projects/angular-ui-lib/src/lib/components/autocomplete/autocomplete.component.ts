@@ -33,7 +33,7 @@ export class AutocompleteComponent implements OnInit {
 	}
 
 	displayFn(option: any): string {
-		return option && option[this.options().displayKey] ? option[this.options().displayKey] : '';
+		return option && option[this.options().keyLabel] ? option[this.options().keyLabel] : '';
 	}
 
 	onFilter(event: Event): void {
@@ -45,9 +45,9 @@ export class AutocompleteComponent implements OnInit {
 		}
 
 		this.filteredOptions = this.options().options.filter(option =>
-			this.options().keyValue
-				? option[this.options().keyValue].toLowerCase().includes(inputValue)
-				: option.toLowerCase().includes(inputValue),
+			typeof option === 'object'
+				? option[this.options().keyLabel]?.toLowerCase().includes(inputValue)
+				: option?.toLowerCase().includes(inputValue),
 		);
 	}
 }
