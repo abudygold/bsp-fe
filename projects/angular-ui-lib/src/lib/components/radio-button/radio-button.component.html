@@ -1,12 +1,15 @@
-<label>{{ options().label }}</label>
+<mat-label [class]="config().labelClass">
+	{{ config().label }}
+</mat-label>
+
 <mat-radio-group
-	[class.vertical]="options().isVertical"
+	[class.vertical]="config().isVertical"
 	[formControl]="control()"
 	(change)="onChange.emit($event.value)"
 >
-	@for (option of options().options; track $index) {
-		<mat-radio-button [value]="options().keyValue ? option[options().keyValue] : option">
-			{{ options().keyLabel ? option[options().keyLabel] : option }}
+	@for (option of options(); track $index) {
+		<mat-radio-button [value]="config().keyValue ? option[config().keyValue] : option">
+			{{ config().keyLabel ? option[config().keyLabel] : option }}
 		</mat-radio-button>
 	}
 </mat-radio-group>

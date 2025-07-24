@@ -44,7 +44,7 @@ export class ExampleListComponent {
 
 	onRowSelection(row: any): void {
 		this.tableConfig.selectRow(row);
-		console.log('selectRowData', this.tableConfig.selection.selected);
+		console.log('selectRowData', this.tableConfig.selection.selected, this.tableConfig);
 	}
 
 	onAllSelection(isChecked: boolean): void {

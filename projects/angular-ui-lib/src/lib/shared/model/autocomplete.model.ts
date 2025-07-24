@@ -5,9 +5,9 @@ export class AutocompleteModel {
 		public appearance: Appearance = 'outline',
 		public label: string = '',
 		public placeholder: string = '',
-		public options: any[] = [],
 		public keyLabel: string = '',
 		public keyValue: string = '',
+		public labelClass: string = '',
 		public hint: string = '',
 	) {}
 }

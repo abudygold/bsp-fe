@@ -23,30 +23,31 @@ export class AutocompleteComponent implements OnInit {
 
 	onChange = output<any>();
 
-	options = input.required<AutocompleteModel>();
+	config = input.required<AutocompleteModel>();
 	control = input.required<FormControl>();
+	options = input.required<any[]>();
 
 	filteredOptions: any[] = [];
 
 	ngOnInit(): void {
-		this.filteredOptions = this.options().options || [];
+		this.filteredOptions = this.options() || [];
 	}
 
 	displayFn(option: any): string {
-		return option && option[this.options().keyLabel] ? option[this.options().keyLabel] : '';
+		return option && option[this.config().keyLabel] ? option[this.config().keyLabel] : option;
 	}
 
 	onFilter(event: Event): void {
 		const inputValue = (event.target as HTMLInputElement).value;
 
 		if (!inputValue) {
-			this.filteredOptions = this.options().options;
+			this.filteredOptions = this.options();
 			return;
 		}
 
-		this.filteredOptions = this.options().options.filter(option =>
+		this.filteredOptions = this.options().filter(option =>
 			typeof option === 'object'
-				? option[this.options().keyLabel]?.toLowerCase().includes(inputValue)
+				? option[this.config().keyLabel]?.toLowerCase().includes(inputValue)
 				: option?.toLowerCase().includes(inputValue),
 		);
 	}

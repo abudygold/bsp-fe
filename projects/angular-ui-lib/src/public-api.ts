@@ -15,6 +15,7 @@ export * from './lib/components/autocomplete/autocomplete.component';
 export * from './lib/components/button-toggle/button-toggle.component';
 export * from './lib/components/modal/modal.component';
 export * from './lib/components/chip/chip.component';
+export * from './lib/components/formly/formly.component';
 export * from './lib/components/breadcrumbs/breadcrumbs.component';
 
 // Services

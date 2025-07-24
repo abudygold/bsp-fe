@@ -26,7 +26,7 @@ export class TextboxComponent {
 
 	onInput = output<any>();
 
-	options = input.required<TextboxModel>();
+	config = input.required<TextboxModel>();
 	control = input.required<FormControl>();
 
 	@ContentChild('matPrefixRef')

@@ -1,1 +1,84 @@
-<p>formly works!</p>
+<div [class]="formConfig().formClass">
+	@for (fc of formConfig().fields; track $index) {
+		<div [class]="fc.inputClass">
+			@switch (fc.type) {
+				@case ('textbox') {
+					<lib-textbox
+						[config]="fc.config"
+						[control]="$any(form().get(fc.control))"
+						(onInput)="onChange.emit()"
+					/>
+				}
+
+				@case ('textarea') {
+					<lib-textarea
+						[config]="fc.config"
+						[control]="$any(form().get(fc.control))"
+						(onInput)="onChange.emit()"
+					/>
+				}
+
+				@case ('datepicker') {
+					<lib-datepicker
+						[config]="fc.config"
+						[control]="$any(form().get(fc.control))"
+						(onChange)="onChange.emit()"
+					/>
+				}
+
+				@case ('dropdown') {
+					<lib-dropdown
+						[config]="fc.config"
+						[control]="$any(form().get(fc.control))"
+						[options]="optionList(fc.keyOption || '')"
+						(onSelection)="onChange.emit()"
+					/>
+				}
+
+				@case ('radio') {
+					<lib-radio-button
+						[config]="fc.config"
+						[control]="$any(form().get(fc.control))"
+						[options]="optionList(fc.keyOption || '')"
+						(onChange)="onChange.emit()"
+					/>
+				}
+
+				@case ('checkbox') {
+					<lib-checkbox
+						[config]="fc.config"
+						[control]="$any(form().get(fc.control))"
+						[options]="optionList(fc.keyOption || '')"
+						(onChange)="onChange.emit()"
+					/>
+				}
+
+				@case ('autocomplete') {
+					<lib-autocomplete
+						[config]="fc.config"
+						[control]="$any(form().get(fc.control))"
+						[options]="optionList(fc.keyOption || '')"
+						(onChange)="onChange.emit()"
+					/>
+				}
+
+				@case ('chip') {
+					<lib-chip
+						[config]="fc.config"
+						[control]="$any(form().get(fc.control))"
+						[options]="optionList(fc.keyOption || '')"
+						(onSelection)="onChange.emit()"
+					/>
+				}
+
+				@case ('button-toggle') {
+					<lib-button-toggle
+						[config]="fc.config"
+						[control]="$any(form().get(fc.control))"
+						(onChange)="onChange.emit()"
+					/>
+				}
+			}
+		</div>
+	}
+</div>

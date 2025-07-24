@@ -1,9 +1,9 @@
-@if (options()) {
+@if (config()) {
 	<div
 		class="table-container"
-		[class.table-row]="options().isEmpty()"
-		[class.table-empty]="options().isEmpty()"
-		[class.loading]="options().isLoading()"
+		[class.table-row]="config().isEmpty()"
+		[class.table-empty]="config().isEmpty()"
+		[class.loading]="config().isLoading()"
 	>
 		<div class="table-wrapper">
 			<table
@@ -11,12 +11,12 @@
 				matSortDisableClear
 				mat-table
 				class="table"
-				[class]="options().tableClass"
+				[class]="config().tableClass"
 				[dataSource]="pagedData"
 				[matSortActive]="
-					options().isSorter() ? options().sortKey || options().columns.at(0)?.key! : ''
+					config().isSorter() ? config().sortKey || config().columns.at(0)?.key! : ''
 				"
-				[matSortDirection]="options().sortOrder"
+				[matSortDirection]="config().sortOrder"
 				(matSortChange)="sortChange.emit($event)"
 			>
 				<tr mat-header-row *matHeaderRowDef="headerRow" class="table-header"></tr>
@@ -25,13 +25,13 @@
 					mat-row
 					*matRowDef="let row; columns: headerRow; let rowIndex = index"
 					class="table-row"
-					[class.table-row-selected]="options().isSelected(row)"
+					[class.table-row-selected]="config().isSelected(row)"
 					(click)="selectData.emit(row)"
 					(mouseleave)="mouseOverChange.emit(null)"
 					(mouseover)="mouseOverChange.emit(row)"
 				></tr>
 
-				@for (column of options().columns; track column; let index = $index) {
+				@for (column of config().columns; track column; let index = $index) {
 					<ng-container [matColumnDef]="column.key">
 						<th mat-header-cell *matHeaderCellDef>
 							@if (column.key === 'selection') {
@@ -42,7 +42,7 @@
 									mat-sort-header
 									[disableClear]="true"
 									[disabled]="!column.sortable"
-									[class.tw-font-normal]="!options().isSorter()"
+									[class.tw-font-normal]="!config().isSorter()"
 								>
 									{{ column.label }}
 								</span>
@@ -55,11 +55,11 @@
 							(click)="disableClick($event, column.key)"
 						>
 							<div class="table-row-cell">
-								@switch (options().dataType[column.key].type) {
+								@switch (config().dataType[column.key].type) {
 									@case ('date') {
 										{{
 											getPropertyValue(data, column.key)
-												| date: options().dataType[column.key].format
+												| date: config().dataType[column.key].format
 										}}
 									}
 									@case ('number') {
@@ -73,10 +73,10 @@
 										{{
 											getPropertyValue(data, column.key) || 0
 												| currencyIntl
-													: options().dataType[column.key].currency
-													: options().dataType[column.key].locale
-													: options().dataType[column.key].minimumFractionDigits
-													: options().dataType[column.key].maximumFractionDigits
+													: config().dataType[column.key].currency
+													: config().dataType[column.key].locale
+													: config().dataType[column.key].minimumFractionDigits
+													: config().dataType[column.key].maximumFractionDigits
 										}}
 									}
 									@case ('custom') {
@@ -98,12 +98,12 @@
 					</ng-container>
 				}
 
-				@if (options().isEmpty()) {
+				@if (config().isEmpty()) {
 					<ng-container>
 						<tr
 							mat-footer-row
 							*matFooterRowDef="['nodata']"
-							[hidden]="(options().dataSource || []).length"
+							[hidden]="(config().dataSource || []).length"
 						>
 							<span> No Data Available </span>
 						</tr>
@@ -114,7 +114,7 @@
 							mat-footer-row
 							*matFooterCellDef
 							class="border-empty"
-							[colSpan]="(options().columns || []).length"
+							[colSpan]="(config().columns || []).length"
 						>
 							No Data Available
 						</td>
@@ -123,18 +123,18 @@
 			</table>
 		</div>
 
-		@if (!options().isEmpty() && options().isPagination()) {
+		@if (!config().isEmpty() && config().isPagination()) {
 			<div class="table-pagination">
 				<lib-pagination
-					[pageIndex]="options().pageIndex"
-					[pageSize]="options().pageSize"
-					[totalItems]="options().dataTotal"
+					[pageIndex]="config().pageIndex"
+					[pageSize]="config().pageSize"
+					[totalItems]="config().dataTotal"
 					(pageChange)="onPageChange($event)"
 				/>
 			</div>
 		}
 
-		@if (options().isLoading()) {
+		@if (config().isLoading()) {
 			<div class="spinner-container">
 				<mat-progress-spinner color="primary" mode="indeterminate"></mat-progress-spinner>
 			</div>

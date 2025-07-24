@@ -16,6 +16,6 @@ export class ButtonToggleComponent {
 
 	onChange = output<any>();
 
-	options = input.required<ButtonToggleModel>();
+	config = input.required<ButtonToggleModel>();
 	control = input.required<FormControl>();
 }

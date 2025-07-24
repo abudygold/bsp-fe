@@ -1,29 +1,29 @@
-@if (options().isRangeDate) {
-	<mat-form-field [appearance]="options().appearance" class="datepicker-field">
-		<mat-label>{{ options().label }}</mat-label>
+@if (config().isRangeDate) {
+	<mat-form-field [appearance]="config().appearance" class="datepicker-field">
+		<mat-label>{{ config().label }}</mat-label>
 
 		<mat-date-range-input [formGroup]="range" [rangePicker]="picker">
 			<input
 				matStartDate
 				formControlName="start"
-				[placeholder]="options().placeholderStart"
+				[placeholder]="config().placeholderStart"
 				(dateChange)="onDateChange($event, true)"
 			/>
 			<input
 				matEndDate
 				formControlName="end"
-				[placeholder]="options().placeholderEnd"
+				[placeholder]="config().placeholderEnd"
 				(dateChange)="onDateChange($event, true)"
 			/>
 		</mat-date-range-input>
 		<mat-datepicker-toggle matIconSuffix [for]="picker" />
 		<mat-date-range-picker #picker />
 
-		@if (options().hint) {
-			<mat-hint align="end">{{ options().hint }}</mat-hint>
+		@if (config().hint) {
+			<mat-hint align="end">{{ config().hint }}</mat-hint>
 		}
 
-		@if (options().isRangeDate) {
+		@if (config().isRangeDate) {
 			@if (formStore.isValid($any(range.get('start')))) {
 				<mat-error align="end">{{ formStore.getErrorMessage($any(range.get('start'))) }}</mat-error>
 			}
@@ -33,24 +33,24 @@
 		}
 	</mat-form-field>
 } @else {
-	<mat-form-field [appearance]="options().appearance" class="datepicker-field">
-		<mat-label>{{ options().label }}</mat-label>
+	<mat-form-field [appearance]="config().appearance" class="datepicker-field">
+		<mat-label>{{ config().label }}</mat-label>
 
 		<input
 			matInput
 			[matDatepicker]="picker"
-			[placeholder]="options().placeholder"
+			[placeholder]="config().placeholder"
 			[formControl]="$any(control())"
 			(dateChange)="onDateChange($event)"
 		/>
 		<mat-datepicker-toggle matIconSuffix [for]="picker" />
 		<mat-datepicker #picker />
 
-		@if (options().hint) {
-			<mat-hint align="end">{{ options().hint }}</mat-hint>
+		@if (config().hint) {
+			<mat-hint align="end">{{ config().hint }}</mat-hint>
 		}
 
-		@if (!options().isRangeDate && formStore.isValid($any(control()))) {
+		@if (!config().isRangeDate && formStore.isValid($any(control()))) {
 			<mat-error align="end">{{ formStore.getErrorMessage($any(control())) }}</mat-error>
 		}
 	</mat-form-field>

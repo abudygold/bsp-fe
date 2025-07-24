@@ -9,3 +9,4 @@ export * from './autocomplete.model';
 export * from './button-toggle.model';
 export * from './breadcrumb.model';
 export * from './chip.model';
+export * from './formly.model';

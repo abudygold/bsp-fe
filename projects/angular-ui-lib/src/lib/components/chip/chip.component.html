@@ -1,68 +1,68 @@
-@if (options().chipType === 'avatar') {
-	<mat-label>{{ options().label }}</mat-label>
+@if (config().chipType === 'avatar') {
+	<mat-label>{{ config().label }}</mat-label>
 	<mat-chip-set aria-label="Dog selection">
-		@for (item of options().tags(); track $index) {
+		@for (item of options(); track $index) {
 			<mat-chip>
-				<img matChipAvatar [src]="item[options().avatar]" [alt]="item[options().key]" />
-				{{ item[options().key] }}
+				<img matChipAvatar [src]="item[config().keyAvatar]" [alt]="item[config().keyLabel]" />
+				{{ item[config().keyLabel] }}
 			</mat-chip>
 		}
 	</mat-chip-set>
-} @else if (options().chipType === 'dragdrop') {
-	<mat-label>{{ options().label }}</mat-label>
+} @else if (config().chipType === 'dragdrop') {
+	<mat-label>{{ config().label }}</mat-label>
 	<mat-chip-set
 		class="example-chip"
 		cdkDropList
 		cdkDropListOrientation="horizontal"
 		(cdkDropListDropped)="drop($event)"
 	>
-		@for (item of options().tags(); track item) {
+		@for (item of options(); track item) {
 			<mat-chip class="example-box" cdkDrag>
-				{{ item[options().key] }}
+				{{ item[config().keyLabel] }}
 			</mat-chip>
 		}
 	</mat-chip-set>
-} @else if (options().chipType === 'input') {
-	<mat-form-field [appearance]="options().appearance! || 'outline'" class="chip-field">
-		<mat-label>{{ options().label }}</mat-label>
+} @else if (config().chipType === 'input') {
+	<mat-form-field [appearance]="config().appearance! || 'outline'" class="chip-field">
+		<mat-label>{{ config().label }}</mat-label>
 		<mat-chip-grid #chipGrid aria-label="Enter tag">
-			@for (tag of options().tags(); track tag) {
+			@for (tag of control().value; track tag) {
 				<mat-chip-row
 					(removed)="remove(tag)"
-					[editable]="true"
+					[editable]="config().editable"
 					(edited)="edit(tag, $event)"
 					[aria-description]="
-						'press enter to edit ' + typeof tag === 'object' ? tag[options().key] : tag
+						'press enter to edit ' + typeof tag === 'object' ? tag[config().keyLabel] : tag
 					"
 				>
-					{{ typeof tag === 'object' ? tag[options().key] : tag }}
+					{{ typeof tag === 'object' ? tag[config().keyLabel] : tag }}
 					<button
 						matChipRemove
-						[attr.aria-label]="'remove ' + typeof tag === 'object' ? tag[options().key] : tag"
+						[attr.aria-label]="'remove ' + typeof tag === 'object' ? tag[config().keyLabel] : tag"
 					>
 						<mat-icon>cancel</mat-icon>
 					</button>
 				</mat-chip-row>
 			}
 			<input
-				[placeholder]="options().placeholder! || ''"
+				[placeholder]="config().placeholder! || ''"
 				[matChipInputFor]="chipGrid"
 				[matChipInputSeparatorKeyCodes]="separatorKeysCodes"
-				[matChipInputAddOnBlur]="options().addBlur"
+				[matChipInputAddOnBlur]="config().addBlur"
 				(matChipInputTokenEnd)="add($event)"
 			/>
 		</mat-chip-grid>
 	</mat-form-field>
-} @else if (options().chipType === 'autocomplete') {
-	<mat-form-field [appearance]="options().appearance! || 'outline'" class="chip-field">
-		<mat-label>{{ options().label }}</mat-label>
+} @else if (config().chipType === 'autocomplete') {
+	<mat-form-field [appearance]="config().appearance! || 'outline'" class="chip-field">
+		<mat-label>{{ config().label }}</mat-label>
 		<mat-chip-grid #chipGrid aria-label="Tag selection">
-			@for (tag of options().tags(); track $index) {
+			@for (tag of control().value; track $index) {
 				<mat-chip-row (removed)="remove(tag)">
-					{{ typeof tag === 'object' ? tag[options().key] : tag }}
+					{{ typeof tag === 'object' ? tag[config().keyLabel] : tag }}
 					<button
 						matChipRemove
-						[attr.aria-label]="'remove ' + typeof tag === 'object' ? tag[options().key] : tag"
+						[attr.aria-label]="'remove ' + typeof tag === 'object' ? tag[config().keyLabel] : tag"
 					>
 						<mat-icon>cancel</mat-icon>
 					</button>
@@ -70,7 +70,7 @@
 			}
 		</mat-chip-grid>
 		<input
-			[placeholder]="options().placeholder! || ''"
+			[placeholder]="config().placeholder! || ''"
 			#tagInput
 			[matChipInputFor]="chipGrid"
 			[matAutocomplete]="auto"
@@ -83,7 +83,7 @@
 		>
 			@for (option of filteredOptions(); track option) {
 				<mat-option [value]="option">
-					{{ typeof option === 'object' ? option[options().key] : option }}
+					{{ typeof option === 'object' ? option[config().keyLabel] : option }}
 				</mat-option>
 			}
 		</mat-autocomplete>

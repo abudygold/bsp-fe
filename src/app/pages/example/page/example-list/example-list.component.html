@@ -5,11 +5,7 @@
 <div class="tw-m-5">
 	<div class="tw-flex tw-justify-between tw-items-center tw-mb-4">
 		<div class="tw-w-1/3">
-			<lib-textbox
-				[options]="formList.searchTextbox"
-				[control]="searchControl"
-				class="search-field"
-			>
+			<lib-textbox [config]="formList.searchTextbox" [control]="searchControl" class="search-field">
 				<ng-template #matSuffixRef>
 					<mat-icon class="tw-cursor-pointer" (click)="onInputChange()">search</mat-icon>
 				</ng-template>
@@ -31,11 +27,11 @@
 			</lib-textbox>
 		</div>
 
-		<lib-button [options]="formList.addNewButton" (onClick)="navigateToAdd()" />
+		<lib-button [config]="formList.addNewButton" (onClick)="navigateToAdd()" />
 	</div>
 
 	<lib-table
-		[options]="tableConfig"
+		[config]="tableConfig"
 		(sortChange)="sortChange($event)"
 		(pageChange)="pageChange($event)"
 	>

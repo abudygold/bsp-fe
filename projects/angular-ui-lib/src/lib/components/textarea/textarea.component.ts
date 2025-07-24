@@ -17,7 +17,7 @@ export class TextareaComponent {
 
 	onInput = output<any>();
 
-	options = input.required<TextboxModel>();
+	config = input.required<TextboxModel>();
 	control = input.required<FormControl>();
 
 	onInputChange(event: Event): void {

@@ -1,42 +1,53 @@
-<section
-	[class.vertical-section]="options().isVertical"
-	[class.horizontal-section]="!options().isVertical"
->
-	@if (options().childKey) {
+<section [class.horizontal-section]="!config().isVertical">
+	@if (config().childKey) {
 		<span>
 			<mat-checkbox
-				[class.horizontal-section-margin]="!options().isVertical"
-				[checked]="options().options.completed"
+				[class.horizontal-section-margin]="!config().isVertical"
+				[checked]="options().completed"
 				[indeterminate]="partiallyComplete"
+				[disabled]="config().disabled"
 				(change)="onUpdate($event.checked)"
 			>
-				{{ options().options.name }}
+				{{ options().name }}
 			</mat-checkbox>
 		</span>
 		<span>
 			<ul>
-				@for (option of options().options[options().childKey]; track option; let i = $index) {
+				@for (option of options()[config().childKey]; track option; let i = $index) {
 					<li class="child-section">
-						<mat-checkbox [checked]="option.completed" (change)="onUpdate($event.checked, i)">
-							{{ option.name }}
+						<mat-checkbox
+							[checked]="option.completed"
+							[value]="config().keyValue ? option[config().keyValue] : option"
+							[checked]="isChecked(option)"
+							[disabled]="config().disabled"
+							(change)="onUpdate($event.checked, i)"
+						>
+							{{ config().keyLabel ? option[config().keyLabel] : option }}
 						</mat-checkbox>
 					</li>
 				}
 			</ul>
 		</span>
 	} @else {
-		<label>{{ options().label }}</label>
-		@for (option of options().options; track $index) {
-			<p>
-				<mat-checkbox
-					[class.horizontal-section-margin]="!options().isVertical"
-					[value]="options().keyValue ? option[options().keyValue] : option"
-					(change)="onChecked($event, option)"
-				>
-					{{ options().keyLabel ? option[options().keyLabel] : option }}
-				</mat-checkbox>
-			</p>
-		}
+		<mat-label [class]="config().labelClass">
+			{{ config().label }}
+		</mat-label>
+
+		<div [class.vertical-section]="config().isVertical">
+			@for (option of options(); track $index) {
+				<p>
+					<mat-checkbox
+						[class.horizontal-section-margin]="!config().isVertical"
+						[value]="config().keyValue ? option[config().keyValue] : option"
+						[checked]="isChecked(option)"
+						[disabled]="config().disabled"
+						(change)="onChecked($event.checked, option)"
+					>
+						{{ config().keyLabel ? option[config().keyLabel] : option }}
+					</mat-checkbox>
+				</p>
+			}
+		</div>
 	}
 </section>
 

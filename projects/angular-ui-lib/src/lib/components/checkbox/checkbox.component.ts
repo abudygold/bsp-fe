@@ -1,6 +1,6 @@
 import { ChangeDetectionStrategy, Component, inject, input, output } from '@angular/core';
 import { FormControl, FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { MatCheckboxChange, MatCheckboxModule } from '@angular/material/checkbox';
+import { MatCheckboxModule } from '@angular/material/checkbox';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { FormStore } from '../../store';
 import { CheckboxModel } from '../../shared/model';
@@ -17,56 +17,77 @@ export class CheckboxComponent {
 
 	onChange = output<any>();
 
-	options = input.required<CheckboxModel>();
+	config = input.required<CheckboxModel>();
 	control = input.required<FormControl>();
+	options = input.required<any>();
 
 	get partiallyComplete(): boolean {
-		const options = this.options().options;
+		const options = this.options()[this.config().childKey];
 
-		if (!options[this.options().childKey]) return false;
+		if (!options) return false;
 
-		return (
-			options[this.options().childKey].some((t: any) => t.completed) &&
-			!options[this.options().childKey].every((t: any) => t.completed)
-		);
+		return options.some((t: any) => t.completed) && !options.every((t: any) => t.completed);
 	}
 
 	onUpdate(completed: boolean, index?: number): void {
+		const options = this.options()[this.config().childKey];
+
 		if (index === undefined) {
-			this.options().options.completed = completed;
-			this.options().options[this.options().childKey]?.forEach(
-				(t: any) => (t.completed = completed),
-			);
-			this.control().setValue(
-				this.options().options[this.options().childKey].filter((t: any) => t.completed),
-			);
+			this.options().completed = completed;
+			options?.forEach((t: any) => (t.completed = completed));
+
+			this.control().setValue(options.filter((t: any) => t.completed));
 			this.onChange.emit(this.control().value);
 			return;
 		}
 
-		this.options().options[this.options().childKey][index].completed = completed;
-		this.options().options[this.options().childKey].completed =
-			this.options().options[this.options().childKey]?.every((t: any) => t.completed) ?? true;
-		this.control().setValue(
-			this.options().options[this.options().childKey].filter((t: any) => t.completed),
-		);
+		options[index].completed = completed;
+		options.completed = options?.every((t: any) => t.completed) ?? true;
+
+		this.control().setValue(options.filter((t: any) => t.completed));
 		this.onChange.emit(this.control().value);
 	}
 
-	onChecked(event: MatCheckboxChange, option: any): void {
-		if (event.checked) {
+	onChecked(isChecked: boolean, option: any): void {
+		if (isChecked) {
 			this.control().setValue([...this.control().value, option]);
 			this.onChange.emit(this.control().value);
 			return;
 		}
 
 		const options = (this.control().value || []).filter((t: any) =>
-			this.options().keyValue
-				? t[this.options().keyValue] !== option[this.options().keyValue]
+			this.config().keyValue
+				? t[this.config().keyValue] !== option[this.config().keyValue]
 				: t !== option,
 		);
 
 		this.control().setValue(options);
 		this.onChange.emit(this.control().value);
+	}
+
+	isChecked(option: any): boolean {
+		const value = this.control().value as any[];
+
+		if (this.config().childKey) {
+			if (this.config().keyValue) {
+				const isSame = value.some((t: any) => t === option[this.config().keyValue]);
+
+				if (isSame) option.completed === true;
+
+				return isSame;
+			}
+
+			const isSame = value.some((t: any) => JSON.stringify(t) === JSON.stringify(option));
+
+			if (isSame) option.completed === true;
+
+			return isSame;
+		}
+
+		return value.some((t: any) =>
+			this.config().keyValue
+				? t === option[this.config().keyValue]
+				: JSON.stringify(t) === JSON.stringify(option),
+		);
 	}
 }

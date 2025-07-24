@@ -11,6 +11,7 @@ import { ButtonModel } from '../../shared/model';
 	styleUrl: './button.component.scss',
 })
 export class ButtonComponent {
-	options = input.required<ButtonModel>();
 	onClick = output<void>();
+
+	config = input.required<ButtonModel>();
 }

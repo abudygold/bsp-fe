@@ -6,8 +6,8 @@
 	</ng-container>
 	<ng-container actions>
 		<div class="tw-flex tw-justify-between tw-gap-3">
-			<lib-button [options]="cancelButton" mat-dialog-close />
-			<lib-button [options]="saveButton" (onClick)="onSubmit()" />
+			<lib-button [config]="cancelButton" mat-dialog-close />
+			<lib-button [config]="saveButton" (onClick)="onSubmit()" />
 		</div>
 	</ng-container>
 </lib-modal>

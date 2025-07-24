@@ -43,7 +43,7 @@ export class TableComponent {
 
 	dataSource: MatTableDataSource<any> = new MatTableDataSource<any>([]);
 
-	options = input.required<TableModel>();
+	config = input.required<TableModel>();
 
 	@ViewChild(MatSort) sort!: MatSort;
 
@@ -77,11 +77,11 @@ export class TableComponent {
 	}
 
 	get headerRow(): string[] {
-		return this.options().columns.map(c => c.key);
+		return this.config().columns.map(c => c.key);
 	}
 
 	get pagedData(): MatTableDataSource<any> {
-		const { dataSource, pageIndex, pageSize } = this.options();
+		const { dataSource, pageIndex, pageSize } = this.config();
 
 		if (Array.isArray(dataSource)) {
 			const start = pageIndex * pageSize;
@@ -97,13 +97,13 @@ export class TableComponent {
 	onPageChange(page: Pagination): void {
 		if (!page) return;
 
-		if (this.options().isHttpPagination()) {
+		if (this.config().isHttpPagination()) {
 			this.pageChange.emit(page);
 			return;
 		}
 
-		this.options().pageIndex = page.pageIndex;
-		this.options().pageSize = page.pageSize;
+		this.config().pageIndex = page.pageIndex;
+		this.config().pageSize = page.pageSize;
 		this.pagedData;
 	}
 }

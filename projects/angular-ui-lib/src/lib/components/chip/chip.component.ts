@@ -1,4 +1,4 @@
-import { Component, computed, inject, input, output, signal } from '@angular/core';
+import { Component, computed, inject, input, output } from '@angular/core';
 import { MatChipEditedEvent, MatChipInputEvent, MatChipsModule } from '@angular/material/chips';
 import { ChipModel } from '../../shared/model';
 import { CdkDrag, CdkDragDrop, CdkDropList, moveItemInArray } from '@angular/cdk/drag-drop';
@@ -10,6 +10,7 @@ import {
 	MatAutocompleteModule,
 	MatAutocompleteSelectedEvent,
 } from '@angular/material/autocomplete';
+import { FormControl } from '@angular/forms';
 
 @Component({
 	selector: 'lib-chip',
@@ -29,59 +30,62 @@ export class ChipComponent {
 
 	onSelection = output<any>();
 
-	options = input.required<ChipModel>();
-
-	selectedTag = signal<any[]>([]);
+	config = input.required<ChipModel>();
+	control = input.required<FormControl>();
+	options = input.required<any[]>();
 
 	readonly separatorKeysCodes = [ENTER, COMMA] as const;
 	readonly filteredOptions = computed(() => {
-		if (this.options().chipType !== 'autocomplete') return [];
+		if (this.config().chipType !== 'autocomplete') return [];
 
-		const key = this.options().key;
-		const tags = this.options().tags();
-		const options = this.options().autocompleteOptions || [];
+		const key = this.config().keyLabel;
+		const tags = this.control().value;
+		const options = this.options() || [];
 
 		return tags && typeof tags.at(0) === 'object'
-			? options.filter(option => !tags.some(tag => tag[key] === option[key]))
-			: options.filter(option => !tags.some(tag => tag === option));
+			? options.filter(option => !tags.some((tag: any) => tag[key] === option[key]))
+			: options.filter(option => !tags.some((tag: any) => tag === option));
 	});
 
 	drop(event: CdkDragDrop<any[]>) {
-		this.options().tags.update(tags => {
-			moveItemInArray(tags, event.previousIndex, event.currentIndex);
-			return [...tags];
-		});
+		moveItemInArray(this.options(), event.previousIndex, event.currentIndex);
+		this.onSelection.emit(this.options());
 	}
 
 	add(event: MatChipInputEvent): void {
 		const value = (event.value || '').trim();
+		const tags = [...(this.control()?.value || [])];
 
 		if (value) {
-			this.options().tags.update(tags => [
+			this.control().setValue([
 				...tags,
-				this.options().key ? { [this.options().key]: value } : value,
+				this.config().keyLabel ? { [this.config().keyLabel]: value } : value,
 			]);
-			this.onSelection.emit(this.options().tags());
+			this.onSelection.emit(this.control().value);
 		}
 
 		event.chipInput!.clear();
 	}
 
 	remove(tag: any): void {
-		this.options().tags.update(tags => {
-			const index = tags.indexOf(tag);
-			if (index < 0) {
-				return tags;
-			}
+		const tags = [...(this.control()?.value || [])];
+		const index = this.config().keyLabel
+			? tags.findIndex((t: any) => t[this.config().keyLabel] === tag[this.config().keyLabel])
+			: tags.indexOf(tag);
 
+		if (index >= 0) {
 			tags.splice(index, 1);
-			this.announcer.announce(`Removed ${this.options().key ? tag[this.options().key] : tag}`);
-			return [...tags];
-		});
-		this.onSelection.emit(this.options().tags());
+			this.announcer.announce(
+				`Removed ${this.config().keyLabel ? tag[this.config().keyLabel] : tag}`,
+			);
+		}
+
+		this.control().setValue(tags);
+		this.onSelection.emit(tags);
 	}
 
 	edit(_tag: any, event: MatChipEditedEvent) {
+		const tags = [...(this.control()?.value || [])];
 		const value = event.value.trim();
 
 		if (!value) {
@@ -89,25 +93,32 @@ export class ChipComponent {
 			return;
 		}
 
-		this.options().tags.update(tags => {
-			const index = tags.indexOf(_tag);
-			if (index >= 0) {
-				tags[index][this.options().key] = value;
-				return [...tags];
-			}
-			return tags;
-		});
-		this.onSelection.emit(this.options().tags());
+		const index = tags.findIndex((tag: any) =>
+			this.config().keyLabel
+				? tag[this.config().keyLabel] === _tag[this.config().keyLabel]
+				: tag === _tag,
+		);
+
+		if (index >= 0) {
+			if (this.config().keyLabel) tags[index][this.config().keyLabel] = value;
+			else tags[index] = value;
+		}
+
+		this.control().setValue(tags);
+		this.onSelection.emit(tags);
 	}
 
 	selected(event: MatAutocompleteSelectedEvent): void {
-		this.options().tags.update(tags => [
-			...tags,
-			this.options().key
-				? { [this.options().key]: event.option.viewValue }
-				: event.option.viewValue,
-		]);
-		this.onSelection.emit(this.options().tags());
+		const tags = [...(this.control()?.value || [])];
+		const newTag = this.config().keyLabel
+			? { [this.config().keyLabel]: event.option.viewValue }
+			: event.option.viewValue;
+
+		if (Array.isArray(tags)) tags.push(newTag);
+
+		this.control().setValue(tags);
+		this.onSelection.emit(tags);
+
 		event.option.deselect();
 	}
 }

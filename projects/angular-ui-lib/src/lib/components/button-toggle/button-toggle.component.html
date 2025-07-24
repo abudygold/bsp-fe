@@ -1,10 +1,10 @@
 <p>
 	<mat-slide-toggle
-		[labelPosition]="options().labelPosition"
+		[labelPosition]="config().labelPosition"
 		[formControl]="control()"
 		(change)="onChange.emit($event)"
 	>
-		{{ options().label }}
+		{{ config().label }}
 	</mat-slide-toggle>
 
 	@if (formStore.isValid($any(control()))) {

@@ -17,6 +17,13 @@ export class DropdownComponent {
 
 	onSelection = output<any>();
 
-	options = input.required<DropdownModel>();
+	config = input.required<DropdownModel>();
 	control = input.required<FormControl>();
+	options = input.required<any[]>();
+
+	compareWith = (option1: any, option2: any): boolean => {
+		return this.config().keyCompare && option1 && option2
+			? option1[this.config().keyCompare] === option2[this.config().keyCompare]
+			: option1 === option2;
+	};
 }

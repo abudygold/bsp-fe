@@ -25,7 +25,7 @@ export class DatepickerComponent {
 
 	onChange = output<any>();
 
-	options = input.required<DatepickerModel>();
+	config = input.required<DatepickerModel>();
 	control = input<FormControl>();
 
 	readonly range = new FormGroup({

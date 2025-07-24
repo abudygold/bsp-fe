@@ -17,6 +17,7 @@ export class RadioButtonComponent {
 
 	onChange = output<any>();
 
-	options = input.required<RadioModel>();
+	config = input.required<RadioModel>();
 	control = input.required<FormControl>();
+	options = input.required<any[]>();
 }
