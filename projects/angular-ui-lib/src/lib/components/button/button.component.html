@@ -10,6 +10,7 @@
 		[class.mat-mdc-fab]="config().variant === 'fab'"
 		[class.mat-mdc-mini-fab]="config().variant === 'mini-fab'"
 		[class.mat-mdc-extended-fab]="config().variant === 'extended-fab'"
+		[class]="config().buttonClass"
 		(click)="onClick.emit()"
 	>
 		<ng-container [ngTemplateOutlet]="buttonLabel" />
@@ -28,6 +29,7 @@
 		[class.mat-mdc-fab]="config().variant === 'fab'"
 		[class.mat-mdc-mini-fab]="config().variant === 'mini-fab'"
 		[class.mat-mdc-extended-fab]="config().variant === 'extended-fab'"
+		[class]="config().buttonClass"
 	>
 		<ng-container [ngTemplateOutlet]="buttonLabel" />
 	</a>

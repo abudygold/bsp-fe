@@ -6,6 +6,7 @@ export const DUMMY_BUTTTON_BASIC_CONFIG: ButtonModel = new ButtonModel(
 	'primary',
 	false,
 	'',
+	'',
 	'home',
 	'start',
 );
@@ -15,6 +16,7 @@ export const DUMMY_BUTTTON_RAISED_CONFIG: ButtonModel = new ButtonModel(
 	'Raised',
 	'secondary-gray',
 	false,
+	'',
 	'',
 	'home',
 	'start',
@@ -26,6 +28,7 @@ export const DUMMY_BUTTTON_STROKED_CONFIG: ButtonModel = new ButtonModel(
 	'primary',
 	false,
 	'',
+	'',
 	'home',
 	'end',
 );
@@ -35,6 +38,7 @@ export const DUMMY_BUTTTON_FLAT_CONFIG: ButtonModel = new ButtonModel(
 	'Flat',
 	'primary',
 	false,
+	'',
 	'',
 	'home',
 	'start',
@@ -46,6 +50,7 @@ export const DUMMY_BUTTTON_ICON_CONFIG: ButtonModel = new ButtonModel(
 	'tertiary',
 	false,
 	'',
+	'',
 	'home',
 	'start',
 );
@@ -55,6 +60,7 @@ export const DUMMY_BUTTTON_FAB_CONFIG: ButtonModel = new ButtonModel(
 	'',
 	'secondary',
 	false,
+	'',
 	'',
 	'home',
 	'start',

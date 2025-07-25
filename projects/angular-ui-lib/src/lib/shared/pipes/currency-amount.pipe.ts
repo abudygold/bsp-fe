@@ -33,4 +33,17 @@ export class CurrencyIntlPipe implements PipeTransform {
 
 		return new Intl.NumberFormat(locale, options).format(value);
 	}
+
+	public parse(value: string): string {
+		return value
+			?.toString()
+			.split('.')
+			.join('')
+			.split(',')
+			.join('')
+			.split(' ')
+			.join('')
+			?.match(/(\d+)/)
+			?.shift() as string;
+	}
 }

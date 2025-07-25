@@ -3,6 +3,7 @@
 		<span>
 			<mat-checkbox
 				[class.horizontal-section-margin]="!config().isVertical"
+				[labelPosition]="config().labelPosition"
 				[checked]="options().completed"
 				[indeterminate]="partiallyComplete"
 				[disabled]="config().disabled"
@@ -16,9 +17,9 @@
 				@for (option of options()[config().childKey]; track option; let i = $index) {
 					<li class="child-section">
 						<mat-checkbox
-							[checked]="option.completed"
-							[value]="config().keyValue ? option[config().keyValue] : option"
+							[labelPosition]="config().labelPosition"
 							[checked]="isChecked(option)"
+							[value]="config().keyValue ? option[config().keyValue] : option"
 							[disabled]="config().disabled"
 							(change)="onUpdate($event.checked, i)"
 						>
@@ -28,7 +29,7 @@
 				}
 			</ul>
 		</span>
-	} @else {
+	} @else if (options().length > 0) {
 		<mat-label [class]="config().labelClass">
 			{{ config().label }}
 		</mat-label>
@@ -38,6 +39,7 @@
 				<p>
 					<mat-checkbox
 						[class.horizontal-section-margin]="!config().isVertical"
+						[labelPosition]="config().labelPosition"
 						[value]="config().keyValue ? option[config().keyValue] : option"
 						[checked]="isChecked(option)"
 						[disabled]="config().disabled"
@@ -47,6 +49,14 @@
 					</mat-checkbox>
 				</p>
 			}
+		</div>
+	} @else {
+		<div [class.vertical-section]="config().isVertical">
+			<p>
+				<mat-checkbox [labelPosition]="config().labelPosition" [formControl]="control()">
+					{{ config().label }}
+				</mat-checkbox>
+			</p>
 		</div>
 	}
 </section>

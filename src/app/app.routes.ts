@@ -1,32 +1,13 @@
 import { Routes } from '@angular/router';
+import { LAYOUT_ROUTES } from './layout/layout.routes';
+import { AUTH_ROUTES } from './pages/auth/auth.routes';
 
 export const routes: Routes = [
 	{
 		path: '',
-		loadComponent: () =>
-			import('./pages/example/page/example-list/example-list.component').then(
-				m => m.ExampleListComponent,
-			),
+		pathMatch: 'full',
+		redirectTo: 'auth',
 	},
-	{
-		path: 'add',
-		loadComponent: () =>
-			import('./pages/example/page/example-add/example-add.component').then(
-				m => m.ExampleAddComponent,
-			),
-	},
-	{
-		path: 'edit/:id',
-		loadComponent: () =>
-			import('./pages/example/page/example-edit/example-edit.component').then(
-				m => m.ExampleEditComponent,
-			),
-	},
-	{
-		path: 'detail/:id',
-		loadComponent: () =>
-			import('./pages/example/page/example-detail/example-detail.component').then(
-				m => m.ExampleDetailComponent,
-			),
-	},
+	...AUTH_ROUTES,
+	...LAYOUT_ROUTES,
 ];

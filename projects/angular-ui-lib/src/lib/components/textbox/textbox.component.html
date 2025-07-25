@@ -1,10 +1,19 @@
-<mat-form-field [appearance]="config().appearance" class="textbox-field">
+<mat-form-field
+	[appearance]="config().appearance"
+	[floatLabel]="config().floatLabel"
+	class="textbox-field"
+>
 	<mat-label>{{ config().label }}</mat-label>
 	<input
 		matInput
+		appEmptySpace
+		appOnlyNumber
+		[isNumberType]="config().type === 'number'"
+		[type]="config().type"
 		[formControl]="control()"
 		[placeholder]="config().placeholder"
 		[maxlength]="config().limit || null"
+		[autocomplete]="config().type === 'password' ? 'new-password' : 'off'"
 		(input)="onInputChange($event)"
 	/>
 

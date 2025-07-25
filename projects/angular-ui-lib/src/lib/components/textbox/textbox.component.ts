@@ -13,10 +13,19 @@ import { MatInputModule } from '@angular/material/input';
 import { TextboxModel } from '../../shared/model';
 import { FormControl, FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { FormStore } from '../../store';
+import { EmptySpaceDirective, OnlyNumberDirective } from '../../shared/directives';
 
 @Component({
 	selector: 'lib-textbox',
-	imports: [NgTemplateOutlet, FormsModule, ReactiveFormsModule, MatFormFieldModule, MatInputModule],
+	imports: [
+		NgTemplateOutlet,
+		FormsModule,
+		ReactiveFormsModule,
+		MatFormFieldModule,
+		MatInputModule,
+		EmptySpaceDirective,
+		OnlyNumberDirective,
+	],
 	templateUrl: './textbox.component.html',
 	styleUrl: './textbox.component.scss',
 	changeDetection: ChangeDetectionStrategy.OnPush,

@@ -19,16 +19,19 @@ export * from './lib/components/formly/formly.component';
 export * from './lib/components/breadcrumbs/breadcrumbs.component';
 
 // Services
-export * from './lib/services/index';
+export * from './lib/services';
 
 // Store
-export * from './lib/store/index';
+export * from './lib/store';
+
+// Directives
+export * from './lib/shared/directives';
 
 // Pipes
-export * from './lib/shared/pipes/index';
+export * from './lib/shared/pipes';
 
 // Models
-export * from './lib/shared/model/index';
+export * from './lib/shared/model';
 
 // Utils
-// export * from './lib/shared/utils/index';
+export * from './lib/shared/utils';

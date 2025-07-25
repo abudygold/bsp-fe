@@ -1,4 +1,8 @@
-<mat-form-field [appearance]="config().appearance" class="textarea-field">
+<mat-form-field
+	[appearance]="config().appearance"
+	[floatLabel]="config().floatLabel"
+	class="textarea-field"
+>
 	<mat-label>{{ config().label }}</mat-label>
 	<textarea
 		matInput

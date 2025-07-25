@@ -2,6 +2,7 @@ import { ButtonModel, TextboxModel } from '@abudygold/angular-ui-lib';
 
 const SEARCH_TEXTBOX_CONST: TextboxModel = new TextboxModel(
 	'outline',
+	'auto',
 	'Search by Name',
 	'text',
 	'Enter your name',

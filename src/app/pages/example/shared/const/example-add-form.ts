@@ -17,7 +17,7 @@ export const EXAMPLE_ADD_FORM: FormlyModel = {
 		{
 			type: 'textbox',
 			control: 'name',
-			config: new TextboxModel('outline', 'Name', 'text', 'Enter your name'),
+			config: new TextboxModel('outline', 'auto', 'Name', 'text', 'Enter your name'),
 			inputClass: 'tw-col-span-1',
 		},
 		{
@@ -36,7 +36,15 @@ export const EXAMPLE_ADD_FORM: FormlyModel = {
 		{
 			type: 'textarea',
 			control: 'description',
-			config: new TextboxModel('outline', 'Description', 'textarea', 'Enter description', '', 5),
+			config: new TextboxModel(
+				'outline',
+				'auto',
+				'Description',
+				'textarea',
+				'Enter description',
+				'',
+				5,
+			),
 			inputClass: 'tw-col-span-2',
 		},
 		{
