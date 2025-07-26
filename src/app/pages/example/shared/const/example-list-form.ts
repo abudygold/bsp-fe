@@ -14,6 +14,7 @@ const ADD_NEW_BUTTON: ButtonModel = new ButtonModel(
 	'primary',
 	false,
 	'',
+	'',
 	'add',
 );
 

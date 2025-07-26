@@ -18,7 +18,7 @@ import { Sort } from '@angular/material/sort';
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import { MatIconModule } from '@angular/material/icon';
 import { FormControl } from '@angular/forms';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
 	selector: 'app-example-list',
@@ -35,6 +35,7 @@ import { Router } from '@angular/router';
 })
 export class ExampleListComponent {
 	#router = inject(Router);
+	#activatedRoute = inject(ActivatedRoute);
 
 	searchControl: FormControl = new FormControl('');
 
@@ -85,6 +86,8 @@ export class ExampleListComponent {
 	}
 
 	navigateToAdd(): void {
-		this.#router.navigate(['/add']);
+		this.#router.navigate(['./add'], {
+			relativeTo: this.#activatedRoute,
+		});
 	}
 }

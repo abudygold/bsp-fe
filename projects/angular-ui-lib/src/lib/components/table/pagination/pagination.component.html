@@ -7,22 +7,26 @@
 			}
 		</mat-select>
 
-		<mat-divider [vertical]="true" class="divider" />
+		@if (!isMobile) {
+			<mat-divider [vertical]="true" class="divider" />
 
-		<span class="label"> {{ rangeStart }}-{{ rangeEnd }} of {{ totalItems() }} Item </span>
+			<span class="label"> {{ rangeStart }}-{{ rangeEnd }} of {{ totalItems() }} Item </span>
+		}
 	</div>
 
 	<div class="right">
 		<mat-divider [vertical]="true" class="divider" />
 
-		<mat-select [(value)]="pageIndex" (selectionChange)="onPageChange()">
-			@for (item of totalPagesArray; track $index) {
-				<mat-option [value]="item">{{ item + 1 }}</mat-option>
-			}
-		</mat-select>
-		<span>of {{ totalPages }}</span>
+		@if (!isMobile) {
+			<mat-select [(value)]="pageIndex" (selectionChange)="onPageChange()">
+				@for (item of totalPagesArray; track $index) {
+					<mat-option [value]="item">{{ item + 1 }}</mat-option>
+				}
+			</mat-select>
+			<span>of {{ totalPages }}</span>
 
-		<mat-divider [vertical]="true" class="divider" />
+			<mat-divider [vertical]="true" class="divider" />
+		}
 
 		<button mat-icon-button (click)="prevPage()" [disabled]="pageIndex() === 0" class="arrow-icon">
 			<mat-icon>arrow_back</mat-icon>

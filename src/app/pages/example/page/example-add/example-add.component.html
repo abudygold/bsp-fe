@@ -1,10 +1,8 @@
-<div class="tw-m-5">
-	<form [formGroup]="form" (ngSubmit)="onSubmit()">
-		@defer {
-			<lib-formly [form]="form" [formConfig]="formConfig" (onChange)="onInputChange()" />
-			<button type="submit">Submit</button>
-		} @loading (minimum 500ms) {
-			Please wait...
-		}
-	</form>
-</div>
+<form [formGroup]="form" (ngSubmit)="onSubmit()">
+	@defer {
+		<lib-formly [form]="form" [formConfig]="formConfig" (onChange)="onInputChange()" />
+		<button type="submit">Submit</button>
+	} @loading (minimum 500ms) {
+		Please wait...
+	}
+</form>

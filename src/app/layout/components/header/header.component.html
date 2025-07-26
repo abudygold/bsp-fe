@@ -1,1 +1,11 @@
-<p>header works!</p>
+<mat-toolbar class="!tw-bg-white tw-border-t tw-shadow">
+	<button mat-icon-button (click)="sidenavToggle.emit()">
+		<mat-icon>menu</mat-icon>
+	</button>
+
+	<span class="header-spacer"></span>
+
+	<button mat-icon-button>
+		<mat-icon>settings</mat-icon>
+	</button>
+</mat-toolbar>

@@ -2,6 +2,7 @@ import { Component, OnInit, input, output, model } from '@angular/core';
 import { MatDividerModule } from '@angular/material/divider';
 import { MatIconModule } from '@angular/material/icon';
 import { MatSelectModule } from '@angular/material/select';
+import { isMobile } from '../../../shared/utils';
 
 @Component({
 	selector: 'lib-pagination',
@@ -13,6 +14,7 @@ export class PaginationComponent implements OnInit {
 	pageChange = output<{ pageIndex: number; pageSize: number }>();
 
 	pageSizeOptions = [5, 10, 25, 50];
+	isMobile: boolean = false;
 
 	totalItems = input.required<number>();
 	pageSize = model<number>(10);
@@ -37,6 +39,7 @@ export class PaginationComponent implements OnInit {
 	}
 
 	ngOnInit(): void {
+		this.isMobile = isMobile();
 		this.emitChange();
 	}
 
