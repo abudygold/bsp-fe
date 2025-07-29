@@ -1,18 +1,16 @@
-@if (config().isRangeDate) {
-	<mat-form-field [appearance]="config().appearance" class="datepicker-field">
-		<mat-label>{{ config().label }}</mat-label>
-
+@if (config().datepicker?.isRangeDate) {
+	<mat-form-field class="tw-w-full">
 		<mat-date-range-input [formGroup]="range" [rangePicker]="picker">
 			<input
 				matStartDate
 				formControlName="start"
-				[placeholder]="config().placeholderStart"
+				[placeholder]="config().datepicker?.placeholderStart"
 				(dateChange)="onDateChange($event, true)"
 			/>
 			<input
 				matEndDate
 				formControlName="end"
-				[placeholder]="config().placeholderEnd"
+				[placeholder]="config().datepicker?.placeholderStart"
 				(dateChange)="onDateChange($event, true)"
 			/>
 		</mat-date-range-input>
@@ -23,23 +21,25 @@
 			<mat-hint align="end">{{ config().hint }}</mat-hint>
 		}
 
-		@if (config().isRangeDate) {
+		@if (config().datepicker?.isRangeDate) {
 			@if (formStore.isValid($any(range.get('start')))) {
-				<mat-error align="end">{{ formStore.getErrorMessage($any(range.get('start'))) }}</mat-error>
+				<mat-error align="end">
+					{{ formStore.getErrorMessage($any(range.get('start')), {}) }}
+				</mat-error>
 			}
 			@if (formStore.isValid($any(range.get('end')))) {
-				<mat-error align="end">{{ formStore.getErrorMessage($any(range.get('end'))) }}</mat-error>
+				<mat-error align="end">
+					{{ formStore.getErrorMessage($any(range.get('end')), {}) }}
+				</mat-error>
 			}
 		}
 	</mat-form-field>
 } @else {
-	<mat-form-field [appearance]="config().appearance" class="datepicker-field">
-		<mat-label>{{ config().label }}</mat-label>
-
+	<mat-form-field class="tw-w-full">
 		<input
 			matInput
 			[matDatepicker]="picker"
-			[placeholder]="config().placeholder"
+			[placeholder]="config().placeholder || ''"
 			[formControl]="$any(control())"
 			(dateChange)="onDateChange($event)"
 		/>
@@ -48,10 +48,6 @@
 
 		@if (config().hint) {
 			<mat-hint align="end">{{ config().hint }}</mat-hint>
-		}
-
-		@if (!config().isRangeDate && formStore.isValid($any(control()))) {
-			<mat-error align="end">{{ formStore.getErrorMessage($any(control())) }}</mat-error>
 		}
 	</mat-form-field>
 }

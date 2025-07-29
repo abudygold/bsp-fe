@@ -25,39 +25,58 @@ export class FormStore {
 		return control.invalid && (control.dirty || control.touched);
 	}
 
-	getErrorMessage(control: AbstractControl): string | null {
+	getErrorMessage(
+		control: AbstractControl,
+		messageValidation: Record<string, string> | undefined,
+	): string | null {
 		if (!control || !control.errors) return null;
 
 		const errors = control.errors;
 
-		if (errors['required']) {
-			return 'This field is required.';
-		}
-		if (errors['email']) {
-			return 'Please enter a valid email address.';
-		}
-		if (errors['minlength']) {
-			return `Minimum length is ${errors['minlength'].requiredLength}.`;
-		}
-		if (errors['maxlength']) {
-			return `Maximum length is ${errors['maxlength'].requiredLength}.`;
-		}
-		if (errors['min']) {
-			return `Minimum value is ${errors['min'].min}.`;
-		}
-		if (errors['max']) {
-			return `Maximum value is ${errors['max'].max}.`;
-		}
-		if (errors['pattern']) {
-			return 'Invalid format.';
-		}
-		if (errors['matStartDateInvalid']) {
-			return 'Invalid start date.';
-		}
-		if (errors['matEndDateInvalid']) {
-			return 'Invalid end date.';
-		}
-		// Add more error mappings as needed
+		if (errors['required'])
+			return messageValidation && messageValidation['required']
+				? messageValidation['required']
+				: 'This field is required.';
+
+		if (errors['email'])
+			return messageValidation && messageValidation['email']
+				? messageValidation['email']
+				: 'Please enter a valid email address.';
+
+		if (errors['minlength'])
+			return messageValidation && messageValidation['minlength']
+				? messageValidation['minlength']
+				: `Minimum length is ${errors['minlength'].requiredLength}.`;
+
+		if (errors['maxlength'])
+			return messageValidation && messageValidation['maxlength']
+				? messageValidation['maxlength']
+				: `Maximum length is ${errors['maxlength'].requiredLength}.`;
+
+		if (errors['min'])
+			return messageValidation && messageValidation['min']
+				? messageValidation['min']
+				: `Minimum value is ${errors['min'].min}.`;
+
+		if (errors['max'])
+			return messageValidation && messageValidation['max']
+				? messageValidation['max']
+				: `Maximum value is ${errors['max'].max}.`;
+
+		if (errors['pattern'])
+			return messageValidation && messageValidation['pattern']
+				? messageValidation['pattern']
+				: 'Invalid format.';
+
+		if (errors['matStartDateInvalid'])
+			return messageValidation && messageValidation['matStartDateInvalid']
+				? messageValidation['matStartDateInvalid']
+				: 'Invalid start date.';
+
+		if (errors['matEndDateInvalid'])
+			return messageValidation && messageValidation['matEndDateInvalid']
+				? messageValidation['matEndDateInvalid']
+				: 'Invalid end date.';
 
 		return 'Invalid field.';
 	}

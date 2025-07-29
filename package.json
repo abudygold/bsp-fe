@@ -4,18 +4,19 @@
 	"scripts": {
 		"ng": "ng",
 		"start": "ng serve",
-		"start:dev": "concurrently \"ng build angular-ui-lib --watch\" \"ng serve\"",
+		"start:dev": "ng serve --configuration=development",
+		"start:prod": "ng serve --configuration=production",
 		"build": "ng build",
-		"build:lib": "ng build angular-ui-lib --configuration production",
-		"watch": "ng build --watch --configuration development",
+		"build:dev": "ng build --configuration=development",
+		"build:prod": "ng build --configuration=production",
 		"test": "ng test",
 		"format": "prettier \"**/*.{ts,js,json,scss,html,md}\" --write",
 		"format:check": "prettier \"**/*.{ts,js,json,scss,html,md}\" --check",
-		"install:lib": "npm install ../angular-ui/dist/angular-ui-lib"
+		"build:lib": "ng build angular-ui-lib --configuration production"
 	},
 	"private": true,
 	"dependencies": {
-		"@abudygold/angular-ui-lib": "^1.0.47",
+		"@abudygold/angular-ui-lib": "^1.0.57",
 		"@angular/cdk": "^19.2.18",
 		"@angular/common": "^19.2.0",
 		"@angular/compiler": "^19.2.0",

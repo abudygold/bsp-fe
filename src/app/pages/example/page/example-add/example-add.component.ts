@@ -1,5 +1,4 @@
 import { Component } from '@angular/core';
-import { EXAMPLE_ADD_FORM } from '../../shared/const';
 import {
 	FormControl,
 	FormGroup,
@@ -7,16 +6,19 @@ import {
 	ReactiveFormsModule,
 	Validators,
 } from '@angular/forms';
-import { FormlyComponent, FormlyModel } from '@abudygold/angular-ui-lib';
+import { ButtonComponent, FormlyComponent, FormlyModel } from '@abudygold/angular-ui-lib';
+import { ISubmitButton, SUBMIT_BUTTON_CONST } from '../../../../shared/const/button';
+import { EXAMPLE_FORM } from '../../../../shared/const/form/example';
 
 @Component({
 	selector: 'app-example-add',
-	imports: [FormsModule, ReactiveFormsModule, FormlyComponent],
+	imports: [FormsModule, ReactiveFormsModule, FormlyComponent, ButtonComponent],
 	templateUrl: './example-add.component.html',
 	styleUrl: './example-add.component.scss',
 })
 export class ExampleAddComponent {
-	formConfig: FormlyModel = EXAMPLE_ADD_FORM;
+	formConfig: FormlyModel = EXAMPLE_FORM;
+	submitButton: ISubmitButton = SUBMIT_BUTTON_CONST();
 	form: FormGroup = new FormGroup({
 		name: new FormControl('', Validators.required),
 		gender: new FormControl('', Validators.required),

@@ -1,67 +1,126 @@
-import { ButtonModel } from '@abudygold/angular-ui-lib';
+import { environment } from '../environments/environment';
 
-export const DUMMY_BUTTTON_BASIC_CONFIG: ButtonModel = new ButtonModel(
-	'basic',
-	'Basic',
-	'primary',
-	false,
-	'',
-	'',
-	'home',
-	'start',
-);
-
-export const DUMMY_BUTTTON_RAISED_CONFIG: ButtonModel = new ButtonModel(
-	'raised',
-	'Raised',
-	'secondary-gray',
-	false,
-	'',
-	'',
-	'home',
-	'start',
-);
-
-export const DUMMY_BUTTTON_STROKED_CONFIG: ButtonModel = new ButtonModel(
-	'stroked',
-	'Stroked',
-	'primary',
-	false,
-	'',
-	'',
-	'home',
-	'end',
-);
-
-export const DUMMY_BUTTTON_FLAT_CONFIG: ButtonModel = new ButtonModel(
-	'flat',
-	'Flat',
-	'primary',
-	false,
-	'',
-	'',
-	'home',
-	'start',
-);
-
-export const DUMMY_BUTTTON_ICON_CONFIG: ButtonModel = new ButtonModel(
-	'icon',
-	'',
-	'tertiary',
-	false,
-	'',
-	'',
-	'home',
-	'start',
-);
-
-export const DUMMY_BUTTTON_FAB_CONFIG: ButtonModel = new ButtonModel(
-	'fab',
-	'',
-	'secondary',
-	false,
-	'',
-	'',
-	'home',
-	'start',
-);
+export const API_URL = environment.apiUrl;
+export const NAVIGATIONS: any[] = [
+	{
+		label: 'Dashboard',
+		icon: 'home',
+		isOpened: false,
+		isParent: true,
+		isActive: false,
+		link: '/dashboard',
+	},
+	{
+		label: 'Users',
+		icon: 'groups',
+		isOpened: false,
+		isParent: true,
+		isActive: false,
+		subMenu: [
+			{
+				label: 'List',
+				icon: 'lists',
+				link: '/secure/users',
+				isActive: false,
+				paddingLeft: '2rem',
+			},
+			{
+				label: 'Add',
+				icon: 'add',
+				link: '/secure/users/add',
+				isActive: false,
+				paddingLeft: '2rem',
+			},
+		],
+	},
+	{
+		label: 'Example Page',
+		icon: 'settings',
+		isOpened: false,
+		isParent: true,
+		isActive: false,
+		subMenu: [
+			{
+				label: 'List',
+				icon: 'lists',
+				link: '/secure/example',
+				paddingLeft: '2rem',
+				isActive: false,
+			},
+			{
+				label: 'Add',
+				icon: 'add',
+				link: '/secure/example/add',
+				paddingLeft: '2rem',
+				isActive: false,
+			},
+			{
+				label: 'Expander',
+				icon: 'home',
+				link: '/ccc',
+				paddingLeft: '2rem',
+				isActive: false,
+			},
+			{
+				label: 'Component',
+				icon: 'home',
+				isOpened: false,
+				isActive: false,
+				paddingLeft: '2rem',
+				subMenu: [
+					{
+						label: 'Accordion',
+						icon: 'home',
+						link: '/ddd',
+						paddingLeft: '4rem',
+						isActive: false,
+					},
+					{
+						label: 'Button',
+						icon: 'home',
+						link: '/eee',
+						paddingLeft: '4rem',
+						isActive: false,
+					},
+					{
+						label: 'Expander',
+						icon: 'home',
+						link: '/fff',
+						paddingLeft: '4rem',
+						isActive: false,
+					},
+					{
+						label: 'Component',
+						icon: 'home',
+						isOpened: false,
+						isActive: false,
+						paddingLeft: '4rem',
+						subMenu: [
+							{
+								label: 'Accordion',
+								icon: 'home',
+								link: '/ggg',
+								paddingLeft: '6rem',
+								isActive: false,
+							},
+							{
+								label: 'Button',
+								icon: 'home',
+								link: '/hhh',
+								paddingLeft: '6rem',
+								isActive: false,
+							},
+							{
+								label: 'Expander',
+								icon: 'home',
+								link: '/iii',
+								paddingLeft: '6rem',
+								isActive: false,
+							},
+						],
+					},
+				],
+			},
+		],
+	},
+];

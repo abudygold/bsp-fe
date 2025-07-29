@@ -34,7 +34,7 @@
 </div>
 
 <lib-table
-	[config]="tableConfig"
+	[config]="clientSide"
 	(sortChange)="sortChange($event)"
 	(pageChange)="pageChange($event)"
 >
@@ -43,7 +43,7 @@
 			<div [class.show-checkbox]="data.isSelected">
 				<mat-checkbox
 					class="check-box check__file"
-					[checked]="tableConfig.isSelected(data)"
+					[checked]="clientSide.isSelected(data)"
 					(change)="onRowSelection(data)"
 				/>
 			</div>

@@ -1,9 +1,8 @@
-import { ChangeDetectionStrategy, Component, inject, input, output } from '@angular/core';
+import { ChangeDetectionStrategy, Component, input, output } from '@angular/core';
 import { FormControl, FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import { MatFormFieldModule } from '@angular/material/form-field';
-import { FormStore } from '../../store';
-import { CheckboxModel } from '../../shared/model';
+import { ConfigFieldModel } from '../../shared/model';
 
 @Component({
 	selector: 'lib-checkbox',
@@ -13,16 +12,14 @@ import { CheckboxModel } from '../../shared/model';
 	changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class CheckboxComponent {
-	protected formStore = inject(FormStore);
-
 	onChange = output<any>();
 
-	config = input.required<CheckboxModel>();
+	config = input.required<ConfigFieldModel>();
 	control = input.required<FormControl>();
 	options = input.required<any>();
 
 	get partiallyComplete(): boolean {
-		const options = this.options()[this.config().childKey];
+		const options = this.options()[this.config().checkbox?.optionChildKey!];
 
 		if (!options) return false;
 
@@ -30,7 +27,7 @@ export class CheckboxComponent {
 	}
 
 	onUpdate(completed: boolean, index?: number): void {
-		const options = this.options()[this.config().childKey];
+		const options = this.options()[this.config().checkbox?.optionChildKey!];
 
 		if (index === undefined) {
 			this.options().completed = completed;
@@ -56,8 +53,8 @@ export class CheckboxComponent {
 		}
 
 		const options = (this.control().value || []).filter((t: any) =>
-			this.config().keyValue
-				? t[this.config().keyValue] !== option[this.config().keyValue]
+			this.config().checkbox?.optionLabel
+				? t[this.config().checkbox?.optionLabel!] !== option[this.config().checkbox?.optionLabel!]
 				: t !== option,
 		);
 
@@ -68,9 +65,9 @@ export class CheckboxComponent {
 	isChecked(option: any): boolean {
 		const value = this.control().value as any[];
 
-		if (this.config().childKey) {
-			if (this.config().keyValue) {
-				const isSame = value.some((t: any) => t === option[this.config().keyValue]);
+		if (this.config().checkbox?.optionChildKey) {
+			if (this.config().checkbox?.optionKey) {
+				const isSame = value.some((t: any) => t === option[this.config().checkbox?.optionKey!]);
 
 				if (isSame) option.completed === true;
 
@@ -85,8 +82,8 @@ export class CheckboxComponent {
 		}
 
 		return value.some((t: any) =>
-			this.config().keyValue
-				? t === option[this.config().keyValue]
+			this.config().checkbox?.optionKey
+				? t === option[this.config().checkbox?.optionKey!]
 				: JSON.stringify(t) === JSON.stringify(option),
 		);
 	}

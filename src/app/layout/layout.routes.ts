@@ -1,5 +1,6 @@
 import { Routes } from '@angular/router';
 import { EXAMPLE_ROUTES } from '../pages/example/example.routes';
+import { USERS_ROUTES } from '../pages/users/users.routes';
 
 export const LAYOUT_ROUTES: Routes = [
 	{
@@ -13,6 +14,7 @@ export const LAYOUT_ROUTES: Routes = [
 				redirectTo: 'example',
 			},
 			...EXAMPLE_ROUTES,
+			...USERS_ROUTES,
 		],
 	},
 ];

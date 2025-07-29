@@ -1,11 +1,8 @@
-<mat-form-field [appearance]="config().appearance" class="autcomplete-field">
-	<mat-label [class]="config().labelClass">
-		{{ config().label }}
-	</mat-label>
+<mat-form-field class="tw-w-full">
 	<input
 		type="text"
 		matInput
-		[placeholder]="config().placeholder"
+		[placeholder]="config().placeholder || ''"
 		[formControl]="control()"
 		[matAutocomplete]="auto"
 		(input)="onFilter($event)"
@@ -13,17 +10,19 @@
 	/>
 	<mat-autocomplete #auto="matAutocomplete" [displayWith]="displayFn.bind(this)">
 		@for (option of filteredOptions; track option) {
-			<mat-option [value]="config().keyValue ? option[config().keyValue] : option">
-				{{ config().keyLabel ? option[config().keyLabel] : option }}
+			<mat-option
+				[value]="
+					config().autocomplete?.optionKey ? option[config().autocomplete?.optionKey!] : option
+				"
+			>
+				{{
+					config().autocomplete?.optionLabel ? option[config().autocomplete?.optionLabel!] : option
+				}}
 			</mat-option>
 		}
 	</mat-autocomplete>
 
 	@if (config().hint) {
 		<mat-hint align="end">{{ config().hint }}</mat-hint>
-	}
-
-	@if (formStore.isValid($any(control()))) {
-		<mat-error align="end">{{ formStore.getErrorMessage($any(control())) }}</mat-error>
 	}
 </mat-form-field>

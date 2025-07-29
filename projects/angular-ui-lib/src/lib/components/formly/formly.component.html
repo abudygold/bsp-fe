@@ -1,6 +1,20 @@
 <div [class]="formConfig().formClass">
 	@for (fc of formConfig().fields; track $index) {
-		<div [class]="fc.inputClass">
+		<div [class]="fc.fieldClass">
+			@if (fc.config.label) {
+				<label
+					class="tw-block tw-text-sm md:lg:tw-text-base tw-font-medium tw-mb-1 tw-text-[var(rgb(254, 235, 236))]"
+					[class]="fc.config.labelClass"
+					[class.invalid-color]="formStore.isValid($any(form().get(fc.control)))"
+				>
+					{{ fc.config.label }}
+
+					@if (fc.config.required) {
+						<span [class.invalid-color]="formStore.isValid($any(form().get(fc.control)))">*</span>
+					}
+				</label>
+			}
+
 			@switch (fc.type) {
 				@case ('textbox') {
 					<lib-textbox
@@ -30,7 +44,7 @@
 					<lib-dropdown
 						[config]="fc.config"
 						[control]="$any(form().get(fc.control))"
-						[options]="optionList(fc.keyOption || '')"
+						[options]="optionList(fc.optionKey || '')"
 						(onSelection)="onChange.emit()"
 					/>
 				}
@@ -39,7 +53,7 @@
 					<lib-radio-button
 						[config]="fc.config"
 						[control]="$any(form().get(fc.control))"
-						[options]="optionList(fc.keyOption || '')"
+						[options]="optionList(fc.optionKey || '')"
 						(onChange)="onChange.emit()"
 					/>
 				}
@@ -48,7 +62,7 @@
 					<lib-checkbox
 						[config]="fc.config"
 						[control]="$any(form().get(fc.control))"
-						[options]="optionList(fc.keyOption || '')"
+						[options]="optionList(fc.optionKey || '')"
 						(onChange)="onChange.emit()"
 					/>
 				}
@@ -57,7 +71,7 @@
 					<lib-autocomplete
 						[config]="fc.config"
 						[control]="$any(form().get(fc.control))"
-						[options]="optionList(fc.keyOption || '')"
+						[options]="optionList(fc.optionKey || '')"
 						(onChange)="onChange.emit()"
 					/>
 				}
@@ -66,7 +80,7 @@
 					<lib-chip
 						[config]="fc.config"
 						[control]="$any(form().get(fc.control))"
-						[options]="optionList(fc.keyOption || '')"
+						[options]="optionList(fc.optionKey || '')"
 						(onSelection)="onChange.emit()"
 					/>
 				}
@@ -78,6 +92,12 @@
 						(onChange)="onChange.emit()"
 					/>
 				}
+			}
+
+			@if (formStore.isValid($any(form().get(fc.control)))) {
+				<mat-error align="end" class="tw-text-sm">
+					{{ formStore.getErrorMessage($any(form().get(fc.control)), fc.messageValidation!) }}
+				</mat-error>
 			}
 		</div>
 	}

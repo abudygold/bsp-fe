@@ -1,15 +1,10 @@
-<mat-form-field
-	[appearance]="config().appearance"
-	[floatLabel]="config().floatLabel"
-	class="textarea-field"
->
-	<mat-label>{{ config().label }}</mat-label>
+<mat-form-field class="tw-w-full">
 	<textarea
 		matInput
 		[formControl]="control()"
-		[rows]="config().rows"
-		[placeholder]="config().placeholder"
-		[maxlength]="config().limit || null"
+		[rows]="config().textarea?.rows"
+		[placeholder]="config().placeholder || ''"
+		[maxlength]="config().textarea?.limit || null"
 		(input)="onInputChange($event)"
 	></textarea>
 
@@ -17,11 +12,7 @@
 		<mat-hint align="end">{{ config().hint }}</mat-hint>
 	}
 
-	@if (config().limit) {
-		<mat-hint align="end">{{ control().value.length }} / {{ config().limit }}</mat-hint>
-	}
-
-	@if (formStore.isValid(control())) {
-		<mat-error align="end">{{ formStore.getErrorMessage(control()) }}</mat-error>
+	@if (config().textarea?.limit) {
+		<mat-hint align="end">{{ control().value.length }} / {{ config().textarea?.limit }}</mat-hint>
 	}
 </mat-form-field>

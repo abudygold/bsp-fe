@@ -3,9 +3,9 @@ import { FormControl, FormGroup, FormsModule, ReactiveFormsModule } from '@angul
 import { MatDatepickerInputEvent, MatDatepickerModule } from '@angular/material/datepicker';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
-import { FormStore } from '../../store';
-import { DatepickerModel } from '../../shared/model';
 import { provideNativeDateAdapter } from '@angular/material/core';
+import { FormStore } from '../../store';
+import { ConfigFieldModel } from '../../shared/model';
 
 @Component({
 	selector: 'lib-datepicker',
@@ -25,7 +25,7 @@ export class DatepickerComponent {
 
 	onChange = output<any>();
 
-	config = input.required<DatepickerModel>();
+	config = input.required<ConfigFieldModel>();
 	control = input<FormControl>();
 
 	readonly range = new FormGroup({

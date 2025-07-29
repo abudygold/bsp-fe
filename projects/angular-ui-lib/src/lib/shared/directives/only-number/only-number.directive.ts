@@ -128,6 +128,8 @@ export class OnlyNumberDirective implements OnInit, OnDestroy {
 
 	@HostListener('paste', ['$event'])
 	onPaste(event: ClipboardEvent) {
+		if (!this.isNumberType()) return;
+
 		event.preventDefault();
 
 		const pastedInput: string =

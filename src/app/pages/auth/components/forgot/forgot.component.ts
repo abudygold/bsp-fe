@@ -5,11 +5,7 @@ import {
 	FormlyModel,
 } from '@abudygold/angular-ui-lib';
 import { Component, inject, signal } from '@angular/core';
-import {
-	BACK_TO_LOGIN_CONST,
-	FORM_FORGOT_PASSWORD_CONST,
-	SEND_FORGOT_PASSWORD_CONST,
-} from '../../shared/const';
+import { Router } from '@angular/router';
 import {
 	FormControl,
 	FormGroup,
@@ -17,7 +13,11 @@ import {
 	ReactiveFormsModule,
 	Validators,
 } from '@angular/forms';
-import { Router } from '@angular/router';
+import {
+	FORGOT_PASSWORD_FORM,
+	FORGOT_PASSWORD_SEND_BUTTON,
+} from '../../../../shared/const/form/auth';
+import { BACK_TO_LOGIN_CONST } from '../../../../shared/const/button';
 
 @Component({
 	selector: 'app-forgot',
@@ -29,8 +29,8 @@ export class ForgotComponent {
 	#router = inject(Router);
 
 	formConfig = {
-		formly: signal<FormlyModel>(FORM_FORGOT_PASSWORD_CONST),
-		send: signal<ButtonModel>(SEND_FORGOT_PASSWORD_CONST),
+		formly: signal<FormlyModel>(FORGOT_PASSWORD_FORM),
+		send: signal<ButtonModel>(FORGOT_PASSWORD_SEND_BUTTON),
 		back: signal<ButtonModel>(BACK_TO_LOGIN_CONST),
 	};
 

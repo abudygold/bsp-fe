@@ -1,13 +1,9 @@
 <p>
 	<mat-slide-toggle
-		[labelPosition]="config().labelPosition"
+		[labelPosition]="config().toggle?.labelPosition || 'after'"
 		[formControl]="control()"
 		(change)="onChange.emit($event)"
 	>
 		{{ config().label }}
 	</mat-slide-toggle>
-
-	@if (formStore.isValid($any(control()))) {
-		<mat-error align="end">{{ formStore.getErrorMessage($any(control())) }}</mat-error>
-	}
 </p>

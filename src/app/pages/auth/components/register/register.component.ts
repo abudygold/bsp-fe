@@ -13,7 +13,8 @@ import {
 	FormlyComponent,
 	FormlyModel,
 } from '@abudygold/angular-ui-lib';
-import { BACK_TO_LOGIN_CONST, FORM_REGISTER_CONST, REGISTER_CONST } from '../../shared/const';
+import { BACK_TO_LOGIN_CONST } from '../../../../shared/const/button';
+import { REGISTER_FORM, REGISTER_SEND_BUTTON } from '../../../../shared/const/form/auth';
 
 @Component({
 	selector: 'app-register',
@@ -25,8 +26,8 @@ export class RegisterComponent {
 	#router = inject(Router);
 
 	formConfig = {
-		formly: signal<FormlyModel>(FORM_REGISTER_CONST),
-		send: signal<ButtonModel>(REGISTER_CONST),
+		formly: signal<FormlyModel>(REGISTER_FORM),
+		send: signal<ButtonModel>(REGISTER_SEND_BUTTON),
 		back: signal<ButtonModel>(BACK_TO_LOGIN_CONST),
 	};
 

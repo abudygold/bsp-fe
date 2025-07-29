@@ -3,16 +3,14 @@ import {
 	ChangeDetectionStrategy,
 	Component,
 	ContentChild,
-	inject,
 	input,
 	output,
 	TemplateRef,
 } from '@angular/core';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
-import { TextboxModel } from '../../shared/model';
+import { ConfigFieldModel } from '../../shared/model';
 import { FormControl, FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { FormStore } from '../../store';
 import { EmptySpaceDirective, OnlyNumberDirective } from '../../shared/directives';
 
 @Component({
@@ -31,11 +29,9 @@ import { EmptySpaceDirective, OnlyNumberDirective } from '../../shared/directive
 	changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class TextboxComponent {
-	protected formStore = inject(FormStore);
-
 	onInput = output<any>();
 
-	config = input.required<TextboxModel>();
+	config = input.required<ConfigFieldModel>();
 	control = input.required<FormControl>();
 
 	@ContentChild('matPrefixRef')

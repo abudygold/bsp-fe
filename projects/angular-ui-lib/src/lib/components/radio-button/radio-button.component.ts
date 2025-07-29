@@ -1,8 +1,7 @@
-import { ChangeDetectionStrategy, Component, inject, input, output } from '@angular/core';
+import { ChangeDetectionStrategy, Component, input, output } from '@angular/core';
 import { FormControl, FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatRadioModule } from '@angular/material/radio';
-import { RadioModel } from '../../shared/model';
-import { FormStore } from '../../store';
+import { ConfigFieldModel } from '../../shared/model';
 import { MatFormFieldModule } from '@angular/material/form-field';
 
 @Component({
@@ -13,11 +12,9 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 	changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class RadioButtonComponent {
-	protected formStore = inject(FormStore);
-
 	onChange = output<any>();
 
-	config = input.required<RadioModel>();
+	config = input.required<ConfigFieldModel>();
 	control = input.required<FormControl>();
 	options = input.required<any[]>();
 }

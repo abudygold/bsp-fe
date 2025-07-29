@@ -2,11 +2,12 @@ import {
 	ButtonComponent,
 	ButtonModel,
 	CheckboxComponent,
-	CheckboxModel,
+	ConfigFieldModel,
 	FormlyComponent,
 	FormlyModel,
 } from '@abudygold/angular-ui-lib';
 import { Component, inject, signal } from '@angular/core';
+import { ActivatedRoute, Router } from '@angular/router';
 import {
 	FormControl,
 	FormGroup,
@@ -14,14 +15,13 @@ import {
 	ReactiveFormsModule,
 	Validators,
 } from '@angular/forms';
-import {
-	BUTTON_GOOGLE_LOGIN_CONST,
-	FORM_LOGIN_CONST,
-	REMEMBER_ME_CONST,
-	SUBMIT_LOGIN_CONST,
-} from '../../shared/const';
 import { MatDividerModule } from '@angular/material/divider';
-import { ActivatedRoute, Router } from '@angular/router';
+import {
+	LOGIN_BY_GOOGLE_BUTTON,
+	LOGIN_FORM,
+	LOGIN_SUBMIT_BUTTON,
+	REMEMBER_ME,
+} from '../../../../shared/const/form/auth';
 
 @Component({
 	selector: 'app-login',
@@ -41,10 +41,10 @@ export class LoginComponent {
 	#activatedRoute = inject(ActivatedRoute);
 
 	formConfig = {
-		formly: signal<FormlyModel>(FORM_LOGIN_CONST),
-		google: signal<ButtonModel>(BUTTON_GOOGLE_LOGIN_CONST),
-		remember: signal<CheckboxModel>(REMEMBER_ME_CONST),
-		login: signal<ButtonModel>(SUBMIT_LOGIN_CONST),
+		formly: signal<FormlyModel>(LOGIN_FORM),
+		remember: signal<ConfigFieldModel>(REMEMBER_ME),
+		google: signal<ButtonModel>(LOGIN_BY_GOOGLE_BUTTON),
+		login: signal<ButtonModel>(LOGIN_SUBMIT_BUTTON),
 	};
 
 	form: FormGroup = new FormGroup({

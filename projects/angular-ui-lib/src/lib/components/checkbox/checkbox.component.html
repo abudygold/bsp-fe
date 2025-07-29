@@ -1,9 +1,9 @@
-<section [class.horizontal-section]="!config().isVertical">
-	@if (config().childKey) {
+<section [class.horizontal-section]="!config().checkbox?.isVertical">
+	@if (config().checkbox?.optionChildKey) {
 		<span>
 			<mat-checkbox
-				[class.horizontal-section-margin]="!config().isVertical"
-				[labelPosition]="config().labelPosition"
+				[class.horizontal-section-margin]="!config().checkbox?.isVertical"
+				[labelPosition]="config().checkbox?.labelPosition || 'after'"
 				[checked]="options().completed"
 				[indeterminate]="partiallyComplete"
 				[disabled]="config().disabled"
@@ -14,53 +14,52 @@
 		</span>
 		<span>
 			<ul>
-				@for (option of options()[config().childKey]; track option; let i = $index) {
+				@for (
+					option of options()[config().checkbox?.optionChildKey!];
+					track option;
+					let i = $index
+				) {
 					<li class="child-section">
 						<mat-checkbox
-							[labelPosition]="config().labelPosition"
+							[labelPosition]="config().checkbox?.labelPosition || 'after'"
 							[checked]="isChecked(option)"
-							[value]="config().keyValue ? option[config().keyValue] : option"
+							[value]="
+								config().checkbox?.optionKey ? option[config().checkbox?.optionKey!] : option
+							"
 							[disabled]="config().disabled"
 							(change)="onUpdate($event.checked, i)"
 						>
-							{{ config().keyLabel ? option[config().keyLabel] : option }}
+							{{
+								config().checkbox?.optionLabel ? option[config().checkbox?.optionLabel!] : option
+							}}
 						</mat-checkbox>
 					</li>
 				}
 			</ul>
 		</span>
 	} @else if (options().length > 0) {
-		<mat-label [class]="config().labelClass">
-			{{ config().label }}
-		</mat-label>
-
-		<div [class.vertical-section]="config().isVertical">
-			@for (option of options(); track $index) {
-				<p>
-					<mat-checkbox
-						[class.horizontal-section-margin]="!config().isVertical"
-						[labelPosition]="config().labelPosition"
-						[value]="config().keyValue ? option[config().keyValue] : option"
-						[checked]="isChecked(option)"
-						[disabled]="config().disabled"
-						(change)="onChecked($event.checked, option)"
-					>
-						{{ config().keyLabel ? option[config().keyLabel] : option }}
-					</mat-checkbox>
-				</p>
-			}
-		</div>
-	} @else {
-		<div [class.vertical-section]="config().isVertical">
+		@for (option of options(); track $index) {
 			<p>
-				<mat-checkbox [labelPosition]="config().labelPosition" [formControl]="control()">
-					{{ config().label }}
+				<mat-checkbox
+					[class.horizontal-section-margin]="!config().checkbox?.isVertical"
+					[labelPosition]="config().checkbox?.labelPosition || 'after'"
+					[value]="config().checkbox?.optionKey ? option[config().checkbox?.optionKey!] : option"
+					[checked]="isChecked(option)"
+					[disabled]="config().disabled"
+					(change)="onChecked($event.checked, option)"
+				>
+					{{ config().checkbox?.optionLabel ? option[config().checkbox?.optionLabel!] : option }}
 				</mat-checkbox>
 			</p>
-		</div>
+		}
+	} @else {
+		<p>
+			<mat-checkbox
+				[labelPosition]="config().checkbox?.labelPosition || 'after'"
+				[formControl]="control()"
+			>
+				{{ config().label }}
+			</mat-checkbox>
+		</p>
 	}
 </section>
-
-@if (formStore.isValid(control())) {
-	<mat-error align="end">{{ formStore.getErrorMessage(control()) }}</mat-error>
-}

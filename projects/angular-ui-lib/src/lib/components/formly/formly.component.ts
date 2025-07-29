@@ -1,4 +1,5 @@
-import { Component, input, output } from '@angular/core';
+import { Component, inject, input, output } from '@angular/core';
+import { MatFormFieldModule } from '@angular/material/form-field';
 import { FormGroup } from '@angular/forms';
 import { TextboxComponent } from '../textbox';
 import { TextareaComponent } from '../textarea';
@@ -10,10 +11,12 @@ import { ChipComponent } from '../chip';
 import { CheckboxComponent } from '../checkbox';
 import { AutocompleteComponent } from '../autocomplete';
 import { ButtonToggleComponent } from '../button-toggle';
+import { FormStore } from '../../store';
 
 @Component({
 	selector: 'lib-formly',
 	imports: [
+		MatFormFieldModule,
 		TextboxComponent,
 		TextareaComponent,
 		DropdownComponent,
@@ -28,6 +31,8 @@ import { ButtonToggleComponent } from '../button-toggle';
 	styleUrl: './formly.component.scss',
 })
 export class FormlyComponent {
+	protected formStore = inject(FormStore);
+
 	onChange = output<void>();
 
 	form = input.required<FormGroup>();

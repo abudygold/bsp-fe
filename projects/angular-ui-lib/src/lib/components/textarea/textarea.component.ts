@@ -1,9 +1,8 @@
-import { ChangeDetectionStrategy, Component, inject, input, output } from '@angular/core';
+import { ChangeDetectionStrategy, Component, input, output } from '@angular/core';
 import { FormControl, FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
-import { TextboxModel } from '../../shared/model';
-import { FormStore } from '../../store';
+import { ConfigFieldModel } from '../../shared/model';
 
 @Component({
 	selector: 'lib-textarea',
@@ -13,11 +12,9 @@ import { FormStore } from '../../store';
 	changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class TextareaComponent {
-	protected formStore = inject(FormStore);
-
 	onInput = output<any>();
 
-	config = input.required<TextboxModel>();
+	config = input.required<ConfigFieldModel>();
 	control = input.required<FormControl>();
 
 	onInputChange(event: Event): void {

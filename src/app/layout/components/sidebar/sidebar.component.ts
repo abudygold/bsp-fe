@@ -19,7 +19,7 @@ export class SidebarComponent implements OnInit {
 		this.navigation.update(menus => this.#changeActivateMenu(menus, this.#router.url));
 	}
 
-	onExpandMenu(_menu: any): void {
+	#onExpandMenu(_menu: any): void {
 		if (!_menu?.isParent) {
 			_menu.isOpened = !_menu.isOpened;
 			return;
@@ -35,7 +35,10 @@ export class SidebarComponent implements OnInit {
 	}
 
 	onClickMenu(menu: any): void {
-		if (!menu.link) return;
+		if (!menu?.link) {
+			this.#onExpandMenu(menu);
+			return;
+		}
 
 		this.navigation.update(menus => this.#changeActivateMenu(menus, menu.link));
 		this.#router.navigate([menu.link]);
