@@ -47,8 +47,10 @@ The output will be in the `dist/angular-ui-lib` directory.
 After building, publish the library to npm:
 
 ```bash
-cd dist/angular-ui-lib
-npm publish / npm publish --access public
+cd .\dist\angular-ui-lib\
+npm publish
+---------- or ----------
+npm publish --access public
 ```
 
 ## Testing
