@@ -2,6 +2,13 @@
 
 Welcome to the Angular UI Library! This project provides reusable Angular components to accelerate your development workflow.
 
+## Features
+
+- Prebuilt UI components (Table, Breadcrumbs, Buttons, etc.)
+- Angular Material integration
+- Customizable themes
+- Easy to use and extend
+
 ## Getting Started
 
 To use this library in your Angular project, install it via npm:
@@ -16,62 +23,35 @@ Then, import the desired modules into your application:
 import { TableComponent, TableModel } from '@abudygold/angular-ui-lib';
 ```
 
-## Development
-
-### Generating Components
-
-Use Angular CLI to scaffold new components:
+## Folder Structure
 
 ```bash
-ng generate component component-name
+lib/
+│
+├── components/
+│   ├── components/
+│   ├── breadcrumbs/
+│   ├── button/
+│   ├── button-toggle/
+│   ├── checkbox/
+│   ├── chip/
+│   ├── datepicker/
+│   ├── dropdown/
+│   ├── formly/
+│   ├── modal/
+│   ├── radio-button/
+│   ├── [table/](https://github.com/abudygold/angular-ui-lib/blob/main/README-TABLE.md)
+│   ├── textarea/
+│   └── textbox/
+├── services/
+│   └── api/
+├── shared/
+│   ├── directives/
+│   ├── model/
+│   ├── pipes/
+│   └── utils/
+└── ...
 ```
-
-For a list of available schematics, run:
-
-```bash
-ng generate --help
-```
-
-### Building the Library
-
-To build the library, execute:
-
-```bash
-npm run build:lib
-```
-
-The output will be in the `dist/angular-ui-lib` directory.
-
-### Publishing
-
-After building, publish the library to npm:
-
-```bash
-cd .\dist\angular-ui-lib\
-npm publish
-# or
-npm publish --access public
-```
-
-## Testing
-
-### Unit Tests
-
-Run unit tests with Karma:
-
-```bash
-ng test
-```
-
-### End-to-End Tests
-
-To run e2e tests:
-
-```bash
-ng e2e
-```
-
-> Note: You may need to set up an e2e testing framework as Angular CLI does not include one by default.
 
 ## Resources
 
