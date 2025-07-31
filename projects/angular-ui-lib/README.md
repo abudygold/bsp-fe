@@ -1,64 +1,81 @@
-# AngularUiLib
+# Angular UI Library
 
-This project was generated using [Angular CLI](https://github.com/angular/angular-cli) version 19.2.0.
+Welcome to the Angular UI Library! This project provides reusable Angular components to accelerate your development workflow.
 
-## Code scaffolding
+## Getting Started
 
-Angular CLI includes powerful code scaffolding tools. To generate a new component, run:
+To use this library in your Angular project, install it via npm:
+
+```bash
+npm install angular-ui-lib
+```
+
+Then, import the desired modules into your application:
+
+```typescript
+import { UiModule } from 'angular-ui-lib';
+```
+
+## Development
+
+### Generating Components
+
+Use Angular CLI to scaffold new components:
 
 ```bash
 ng generate component component-name
 ```
 
-For a complete list of available schematics (such as `components`, `directives`, or `pipes`), run:
+For a list of available schematics, run:
 
 ```bash
 ng generate --help
 ```
 
-## Building
+### Building the Library
 
-To build the library, run:
+To build the library, execute:
 
 ```bash
 ng build angular-ui-lib
 ```
 
-This command will compile your project, and the build artifacts will be placed in the `dist/` directory.
+The output will be in the `dist/angular-ui-lib` directory.
 
-### Publishing the Library
+### Publishing
 
-Once the project is built, you can publish your library by following these steps:
+After building, publish the library to npm:
 
-1. Navigate to the `dist` directory:
+```bash
+cd dist/angular-ui-lib
+npm publish
+```
 
-   ```bash
-   cd dist/angular-ui-lib
-   ```
+## Testing
 
-2. Run the `npm publish` command to publish your library to the npm registry:
-   ```bash
-   npm publish
-   ```
+### Unit Tests
 
-## Running unit tests
-
-To execute unit tests with the [Karma](https://karma-runner.github.io) test runner, use the following command:
+Run unit tests with Karma:
 
 ```bash
 ng test
 ```
 
-## Running end-to-end tests
+### End-to-End Tests
 
-For end-to-end (e2e) testing, run:
+To run e2e tests:
 
 ```bash
 ng e2e
 ```
 
-Angular CLI does not come with an end-to-end testing framework by default. You can choose one that suits your needs.
+> Note: You may need to set up an e2e testing framework as Angular CLI does not include one by default.
 
-## Additional Resources
+## Resources
 
-For more information on using the Angular CLI, including detailed command references, visit the [Angular CLI Overview and Command Reference](https://angular.dev/tools/cli) page.
+- [Angular CLI Documentation](https://angular.dev/tools/cli)
+- [Angular Official Documentation](https://angular.dev/)
+
+---
+
+Feel free to contribute or open issues to help improve this library!
