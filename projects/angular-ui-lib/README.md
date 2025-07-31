@@ -7,13 +7,13 @@ Welcome to the Angular UI Library! This project provides reusable Angular compon
 To use this library in your Angular project, install it via npm:
 
 ```bash
-npm install angular-ui-lib
+npm install @abudygold/angular-ui-lib
 ```
 
 Then, import the desired modules into your application:
 
 ```typescript
-import { UiModule } from 'angular-ui-lib';
+import { TableComponent, TableModel } from '@abudygold/angular-ui-lib';
 ```
 
 ## Development
@@ -37,7 +37,7 @@ ng generate --help
 To build the library, execute:
 
 ```bash
-ng build angular-ui-lib
+npm run build:lib
 ```
 
 The output will be in the `dist/angular-ui-lib` directory.
@@ -48,7 +48,7 @@ After building, publish the library to npm:
 
 ```bash
 cd dist/angular-ui-lib
-npm publish
+npm publish / npm publish --access public
 ```
 
 ## Testing
