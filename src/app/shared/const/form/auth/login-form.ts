@@ -11,6 +11,7 @@ export const LOGIN_FORM: FormlyModel = {
 			config: {
 				label: 'Email',
 				placeholder: 'name@company.com',
+				hint: 'admin@example.com',
 				required: true,
 				textbox: {
 					textboxType: 'email',
@@ -24,6 +25,7 @@ export const LOGIN_FORM: FormlyModel = {
 			config: {
 				label: 'Password',
 				placeholder: '••••••••',
+				hint: '12345678',
 				required: true,
 				textbox: {
 					textboxType: 'password',

@@ -16,7 +16,7 @@
 	},
 	"private": true,
 	"dependencies": {
-		"@abudygold/angular-ui-lib": "^1.0.57",
+		"@abudygold/angular-ui-lib": "^1.0.58",
 		"@angular/cdk": "^19.2.18",
 		"@angular/common": "^19.2.0",
 		"@angular/compiler": "^19.2.0",

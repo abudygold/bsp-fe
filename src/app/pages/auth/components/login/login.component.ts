@@ -49,7 +49,7 @@ export class LoginComponent {
 
 	form: FormGroup = new FormGroup({
 		email: new FormControl('', [Validators.required, Validators.email]),
-		password: new FormControl('', [Validators.required]),
+		password: new FormControl('', [Validators.required, Validators.minLength(8)]),
 		rememberMe: new FormControl(false),
 	});
 
@@ -66,7 +66,9 @@ export class LoginComponent {
 	doLogin(): void {
 		this.form.markAllAsTouched();
 
-		if (!this.form.valid) return;
+		const { email, password } = this.form.getRawValue();
+
+		if (!this.form.valid || email !== 'admin@example.com' || password !== '12345678') return;
 
 		this.#router.navigate(['/secure']);
 	}
