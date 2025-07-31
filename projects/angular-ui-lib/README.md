@@ -49,7 +49,7 @@ After building, publish the library to npm:
 ```bash
 cd .\dist\angular-ui-lib\
 npm publish
----------- or ----------
+# or
 npm publish --access public
 ```
 
