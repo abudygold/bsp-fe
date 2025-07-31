@@ -1,4 +1,5 @@
 import { WritableSignal } from '@angular/core';
+import { DateFilterFn } from '@angular/material/datepicker';
 
 type FormType =
 	| 'textbox'
@@ -100,14 +101,20 @@ class DropdownModel {
 }
 
 class DatepickerModel {
+	public isInline?: boolean;
 	public isRangeDate?: boolean;
 	public placeholderStart?: string;
 	public placeholderEnd?: string;
+	public datepickerFilter?: DateFilterFn<any>;
+	public minDate?: Date;
+	public maxDate?: Date;
 
 	constructor() {
+		this.isInline = false;
 		this.isRangeDate = false;
 		this.placeholderStart = 'Start date';
 		this.placeholderEnd = 'End date';
+		this.datepickerFilter = (date: any) => true;
 	}
 }
 

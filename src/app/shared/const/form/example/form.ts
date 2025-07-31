@@ -1,51 +1,55 @@
 import { FormlyModel } from '@abudygold/angular-ui-lib';
 import { signal } from '@angular/core';
+import moment from 'moment';
+
+/* TODO */
+/* Filter autocomplete tag */
 
 export const EXAMPLE_FORM: FormlyModel = {
-	formClass: 'tw-grid tw-grid-cols-2 tw-gap-4',
+	formClass: 'tw-grid tw-grid-cols-12 tw-gap-4',
 	fields: [
 		{
 			type: 'textbox',
 			control: 'name',
-			fieldClass: 'tw-col-span-1',
+			fieldClass: 'tw-col-span-12',
 			config: {
 				label: 'Name',
-				placeholder: 'Enter your name',
+				placeholder: 'Enter name',
 				required: true,
 			},
 		},
 		{
-			type: 'dropdown',
-			control: 'gender',
-			fieldClass: 'tw-col-span-1',
+			type: 'autocomplete',
+			control: 'autocomplete',
+			fieldClass: 'tw-col-span-6',
 			optionKey: 'arrayOfObject',
 			config: {
-				label: 'Select gender',
-				placeholder: 'Enter your name',
+				label: 'Autocomplete Returning Object',
+				placeholder: 'Select gender',
 				required: true,
-				dropdown: {
+				autocomplete: {
 					optionLabel: 'label',
-					optionCompareWith: 'value',
 				},
 			},
 		},
 		{
-			type: 'datepicker',
-			control: 'bod',
-			fieldClass: 'tw-col-span-1',
+			type: 'autocomplete',
+			control: 'autocomplete1',
+			fieldClass: 'tw-col-span-6',
+			optionKey: 'arrayOfString',
 			config: {
-				label: 'Birth of Date',
-				placeholder: 'Select your Birth of Date',
+				label: 'Autocomplete Returning String',
+				placeholder: 'Select gender',
 				required: true,
 			},
 		},
 		{
 			type: 'textarea',
 			control: 'description',
-			fieldClass: 'tw-col-span-1',
+			fieldClass: 'tw-col-span-12',
 			config: {
 				label: 'Description',
-				placeholder: 'Enter description',
+				placeholder: 'Please add description here',
 				required: true,
 				textarea: {
 					rows: 5,
@@ -53,24 +57,112 @@ export const EXAMPLE_FORM: FormlyModel = {
 			},
 		},
 		{
-			type: 'autocomplete',
-			control: 'autocomplete',
-			fieldClass: 'tw-col-span-1',
+			type: 'dropdown',
+			control: 'gender',
+			fieldClass: 'tw-col-span-4',
+			optionKey: 'arrayOfObject',
+			config: {
+				label: 'Dropdown Returning Object',
+				placeholder: 'Select a gender',
+				hint: 'options is array of object',
+				required: true,
+				dropdown: {
+					optionLabel: 'label',
+				},
+			},
+		},
+		{
+			type: 'dropdown',
+			control: 'gender',
+			fieldClass: 'tw-col-span-4',
+			optionKey: 'arrayOfObject',
+			config: {
+				label: 'Dropdown Returning String',
+				placeholder: 'Select a gender',
+				hint: 'options is array of object',
+				required: true,
+				dropdown: {
+					optionLabel: 'label',
+					optionKey: 'value',
+				},
+			},
+		},
+		{
+			type: 'dropdown',
+			control: 'gender',
+			fieldClass: 'tw-col-span-4',
 			optionKey: 'arrayOfString',
 			config: {
-				label: 'Gender',
-				placeholder: 'Select gender',
+				label: 'Dropdown Returning String',
+				placeholder: 'Select a gender',
+				hint: 'options is array of string',
 				required: true,
+			},
+		},
+		{
+			type: 'datepicker',
+			control: 'birthOfDate',
+			fieldClass: 'tw-col-span-6',
+			config: {
+				label: 'Datepicker',
+				placeholder: 'Select Datepicker',
+				required: true,
+				datepicker: {
+					minDate: moment(new Date()).subtract(6, 'months').toDate(),
+					maxDate: moment(new Date()).add(6, 'months').toDate(),
+					datepickerFilter: (d: Date | null): boolean => {
+						const day = (d || new Date()).getDay();
+						// Prevent Saturday and Sunday from being selected.
+						return day !== 0 && day !== 6;
+					},
+				},
+			},
+		},
+		{
+			type: 'datepicker',
+			control: 'rangeDatepicker',
+			fieldClass: 'tw-col-span-6',
+			config: {
+				label: 'Range Datepicker',
+				placeholder: 'Select Range Datepicker',
+				required: true,
+				datepicker: {
+					isRangeDate: true,
+					placeholderStart: 'Start Date',
+					placeholderEnd: 'End Date',
+					minDate: moment(new Date()).subtract(6, 'months').toDate(),
+					maxDate: moment(new Date()).add(6, 'months').toDate(),
+					datepickerFilter: (d: Date | null): boolean => {
+						const day = (d || new Date()).getDay();
+						// Prevent Saturday and Sunday from being selected.
+						return day !== 0 && day !== 6;
+					},
+				},
 			},
 		},
 		{
 			type: 'radio',
 			control: 'radio',
-			fieldClass: 'tw-col-span-1',
+			fieldClass: 'tw-col-span-4',
 			optionKey: 'arrayOfObject',
 			config: {
-				label: 'Gender',
-				placeholder: 'Select gender',
+				label: 'Radio Returning Object (Options is array of object)',
+				placeholder: 'Select a gender',
+				required: true,
+				radio: {
+					optionLabel: 'label',
+					isVertical: true,
+				},
+			},
+		},
+		{
+			type: 'radio',
+			control: 'radio',
+			fieldClass: 'tw-col-span-4',
+			optionKey: 'arrayOfObject',
+			config: {
+				label: 'Radio Returning String (Options is array of object)',
+				placeholder: 'Select a gender',
 				required: true,
 				radio: {
 					optionLabel: 'label',
@@ -80,13 +172,27 @@ export const EXAMPLE_FORM: FormlyModel = {
 			},
 		},
 		{
+			type: 'radio',
+			control: 'radio',
+			fieldClass: 'tw-col-span-4',
+			optionKey: 'arrayOfString',
+			config: {
+				label: 'Radio Returning String (Options is array of string)',
+				placeholder: 'Select a gender',
+				required: true,
+				radio: {
+					isVertical: true,
+				},
+			},
+		},
+		{
 			type: 'checkbox',
 			control: 'checkbox',
-			fieldClass: 'tw-col-span-1',
+			fieldClass: 'tw-col-span-4',
 			optionKey: 'arrayOfObject',
 			config: {
-				label: 'Select gender',
-				placeholder: 'Select gender',
+				label: 'Checkbox Returning Object',
+				placeholder: 'Select a gender',
 				required: true,
 				checkbox: {
 					optionLabel: 'label',
@@ -97,11 +203,25 @@ export const EXAMPLE_FORM: FormlyModel = {
 		{
 			type: 'checkbox',
 			control: 'checkbox2',
-			fieldClass: 'tw-col-span-2',
+			fieldClass: 'tw-col-span-4',
+			optionKey: 'arrayOfString',
+			config: {
+				label: 'Radio Returning String',
+				placeholder: 'Select a gender',
+				required: true,
+				checkbox: {
+					isVertical: true,
+				},
+			},
+		},
+		{
+			type: 'checkbox',
+			control: 'parentCheckbox',
+			fieldClass: 'tw-col-span-4',
 			optionKey: 'parentTaskOption',
 			config: {
-				label: 'Select gender',
-				placeholder: 'Select gender',
+				label: 'Parent Options',
+				placeholder: 'Select a gender',
 				required: true,
 				checkbox: {
 					optionLabel: 'label',
@@ -113,7 +233,7 @@ export const EXAMPLE_FORM: FormlyModel = {
 		{
 			type: 'chip',
 			control: '',
-			fieldClass: 'tw-col-span-2',
+			fieldClass: 'tw-col-span-6',
 			optionKey: 'chipOptions',
 			config: {
 				label: 'Avatar Chip',
@@ -128,7 +248,7 @@ export const EXAMPLE_FORM: FormlyModel = {
 		{
 			type: 'chip',
 			control: '',
-			fieldClass: 'tw-col-span-2',
+			fieldClass: 'tw-col-span-6',
 			optionKey: 'arrayOfObject',
 			config: {
 				label: 'Drag & Drop Chip',
@@ -142,7 +262,7 @@ export const EXAMPLE_FORM: FormlyModel = {
 		{
 			type: 'chip',
 			control: 'chipInput',
-			fieldClass: 'tw-col-span-2',
+			fieldClass: 'tw-col-span-4',
 			config: {
 				label: 'Input Tag',
 				placeholder: 'Input a tag',
@@ -156,10 +276,10 @@ export const EXAMPLE_FORM: FormlyModel = {
 		{
 			type: 'chip',
 			control: 'chipAutocomplete',
-			fieldClass: 'tw-col-span-2',
-			optionKey: 'chip2Options',
+			fieldClass: 'tw-col-span-4',
+			optionKey: 'chipOptions2',
 			config: {
-				label: 'Autocomplete Tag',
+				label: 'Chip Autocomplete Returning Object',
 				placeholder: 'Input a tag',
 				required: true,
 				chip: {
@@ -169,9 +289,42 @@ export const EXAMPLE_FORM: FormlyModel = {
 			},
 		},
 		{
+			type: 'chip',
+			control: 'chipAutocomplete1',
+			fieldClass: 'tw-col-span-4',
+			optionKey: 'chipOptions3',
+			config: {
+				label: 'Chip Autocomplete Returning String',
+				placeholder: 'Input a tag',
+				required: true,
+				chip: {
+					chipType: 'autocomplete',
+				},
+			},
+		},
+		{
+			type: 'datepicker',
+			control: 'birthOfDate',
+			fieldClass: 'tw-col-span-4',
+			config: {
+				label: 'Inline Datepicker',
+				required: true,
+				datepicker: {
+					isInline: true,
+					minDate: moment(new Date()).subtract(6, 'months').toDate(),
+					maxDate: moment(new Date()).add(6, 'months').toDate(),
+					datepickerFilter: (d: Date | null): boolean => {
+						const day = (d || new Date()).getDay();
+						// Prevent Saturday and Sunday from being selected.
+						return day !== 0 && day !== 6;
+					},
+				},
+			},
+		},
+		{
 			type: 'button-toggle',
 			control: 'buttonToggle',
-			fieldClass: 'tw-col-span-2',
+			fieldClass: 'tw-col-span-12',
 			config: {
 				label: 'I agree to the terms and conditions',
 				required: true,
@@ -211,10 +364,11 @@ export const EXAMPLE_FORM: FormlyModel = {
 			{ label: 'Dog two', avatar: 'https://material.angular.dev/assets/img/examples/shiba1.jpg' },
 			{ label: 'Dog three', avatar: 'https://material.angular.dev/assets/img/examples/shiba1.jpg' },
 		]),
-		chip2Options: signal<any[]>([
+		chipOptions2: signal<any[]>([
 			{ label: 'Dog one' },
 			{ label: 'Dog two' },
 			{ label: 'Dog three' },
 		]),
+		chipOptions3: signal<any[]>(['Dog one', 'Dog two', 'Dog three']),
 	},
 };

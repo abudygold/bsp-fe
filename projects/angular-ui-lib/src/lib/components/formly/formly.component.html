@@ -94,7 +94,7 @@
 				}
 			}
 
-			@if (formStore.isValid($any(form().get(fc.control)))) {
+			@if (!fc.config.datepicker?.isRangeDate && formStore.isValid($any(form().get(fc.control)))) {
 				<mat-error align="end" class="tw-text-sm">
 					{{ formStore.getErrorMessage($any(form().get(fc.control)), fc.messageValidation!) }}
 				</mat-error>

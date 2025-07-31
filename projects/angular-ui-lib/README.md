@@ -25,33 +25,28 @@ import { TableComponent, TableModel } from '@abudygold/angular-ui-lib';
 
 ## Folder Structure
 
-```bash
-lib/
-│
-├── components/
-│   ├── components/
-│   ├── breadcrumbs/
-│   ├── button/
-│   ├── button-toggle/
-│   ├── checkbox/
-│   ├── chip/
-│   ├── datepicker/
-│   ├── dropdown/
-│   ├── formly/
-│   ├── modal/
-│   ├── radio-button/
-│   ├── [table/](https://github.com/abudygold/angular-ui-lib/blob/main/README-TABLE.md)
-│   ├── textarea/
-│   └── textbox/
-├── services/
-│   └── api/
-├── shared/
-│   ├── directives/
-│   ├── model/
-│   ├── pipes/
-│   └── utils/
-└── ...
-```
+- Components
+  - [Autocomplete](https://github.com/abudygold/angular-ui-lib/blob/main/projects/angular-ui-lib/README-FORM.md)
+  - Breadcrumbs
+  - Button
+  - [Button Toggle](https://github.com/abudygold/angular-ui-lib/blob/main/projects/angular-ui-lib/README-FORM.md)
+  - [Checkbox](https://github.com/abudygold/angular-ui-lib/blob/main/projects/angular-ui-lib/README-FORM.md)
+  - [Chip](https://github.com/abudygold/angular-ui-lib/blob/main/projects/angular-ui-lib/README-FORM.md)
+  - [Datepicker](https://github.com/abudygold/angular-ui-lib/blob/main/projects/angular-ui-lib/README-FORM.md)
+  - [Dropdown](https://github.com/abudygold/angular-ui-lib/blob/main/projects/angular-ui-lib/README-FORM.md)
+  - Formly
+  - Modal
+  - [Radio Button](https://github.com/abudygold/angular-ui-lib/blob/main/projects/angular-ui-lib/README-FORM.md)
+  - [Table](https://github.com/abudygold/angular-ui-lib/blob/main/projects/angular-ui-lib/README-TABLE.md)
+  - [Textarea](https://github.com/abudygold/angular-ui-lib/blob/main/projects/angular-ui-lib/README-FORM.md)
+  - [Textbox](https://github.com/abudygold/angular-ui-lib/blob/main/projects/angular-ui-lib/README-FORM.md)
+- Services
+  - API
+- Shared
+  - Directives
+  - Model
+  - Pipes
+  - Utils
 
 ## Resources
 

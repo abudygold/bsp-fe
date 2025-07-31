@@ -1,4 +1,4 @@
-import { Component, computed, inject, input, output } from '@angular/core';
+import { Component, computed, inject, input, output, signal } from '@angular/core';
 import { MatChipEditedEvent, MatChipInputEvent, MatChipsModule } from '@angular/material/chips';
 import { CdkDrag, CdkDragDrop, CdkDropList, moveItemInArray } from '@angular/cdk/drag-drop';
 import { MatFormFieldModule } from '@angular/material/form-field';
@@ -30,6 +30,8 @@ export class ChipComponent {
 
 	onSelection = output<any>();
 
+	#reloadOptions = signal<boolean>(false);
+
 	config = input.required<ConfigFieldModel>();
 	control = input.required<FormControl>();
 	options = input.required<any[]>();
@@ -38,6 +40,7 @@ export class ChipComponent {
 	readonly filteredOptions = computed(() => {
 		if (this.config().chip?.chipType !== 'autocomplete') return [];
 
+		const reload = this.#reloadOptions();
 		const key = this.config().chip?.optionLabel || '';
 		const tags = this.control().value;
 		const options = this.options() || [];
@@ -62,6 +65,7 @@ export class ChipComponent {
 				this.config().chip?.optionLabel ? { [this.config().chip?.optionLabel!]: value } : value,
 			]);
 			this.onSelection.emit(this.control().value);
+			this.#reloadOptions.set(!this.#reloadOptions());
 		}
 
 		event.chipInput!.clear();
@@ -84,6 +88,7 @@ export class ChipComponent {
 
 		this.control().setValue(tags);
 		this.onSelection.emit(tags);
+		this.#reloadOptions.set(!this.#reloadOptions());
 	}
 
 	edit(_tag: any, event: MatChipEditedEvent) {
@@ -108,6 +113,7 @@ export class ChipComponent {
 
 		this.control().setValue(tags);
 		this.onSelection.emit(tags);
+		this.#reloadOptions.set(!this.#reloadOptions());
 	}
 
 	selected(event: MatAutocompleteSelectedEvent): void {
@@ -120,6 +126,7 @@ export class ChipComponent {
 
 		this.control().setValue(tags);
 		this.onSelection.emit(tags);
+		this.#reloadOptions.set(!this.#reloadOptions());
 
 		event.option.deselect();
 	}
