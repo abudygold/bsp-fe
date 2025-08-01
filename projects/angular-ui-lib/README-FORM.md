@@ -256,62 +256,56 @@ This file centralizes your table's column definitions and initial configuration 
 Define your table data and columns in your component:
 
 ```typescript
-import { TableModel, TableComponent, ApiService } from '@abudygold/angular-ui-lib';
+import { Component } from '@angular/core';
+import {
+	FormControl,
+	FormGroup,
+	FormsModule,
+	ReactiveFormsModule,
+	Validators,
+} from '@angular/forms';
+import { ButtonComponent, FormlyComponent, FormlyModel } from '@abudygold/angular-ui-lib';
+import { ISubmitButton, SUBMIT_BUTTON_CONST } from '../const/button';
+import { EXAMPLE_FORM } from '../const/form/example';
 
 @Component({
-	imports: [TableComponent, TableModel, ApiService],
+	selector: 'app-example-add',
+	imports: [FormsModule, ReactiveFormsModule, FormlyComponent, ButtonComponent],
+	templateUrl: './example-add.component.html',
+	styleUrl: './example-add.component.scss',
 })
-export class ExampleComponent {
-	#apiService = inject(ApiService);
+export class ExampleAddComponent {
+	formConfig: FormlyModel = EXAMPLE_FORM;
+	submitButton: ISubmitButton = SUBMIT_BUTTON_CONST();
+	form: FormGroup = new FormGroup({
+		name: new FormControl('', Validators.required),
+		description: new FormControl('', Validators.required),
+		gender: new FormControl('', Validators.required),
+		birthOfDate: new FormControl('', Validators.required),
+		rangeDatepicker: new FormControl('', [Validators.required]),
+		radio: new FormControl('', Validators.required),
+		checkbox: new FormControl([], Validators.required),
+		checkbox1: new FormControl([], Validators.required),
+		checkbox2: new FormControl([], Validators.required),
+		parentCheckbox: new FormControl([], Validators.required),
+		autocomplete: new FormControl('', Validators.required),
+		autocomplete1: new FormControl('', Validators.required),
+		chipInput: new FormControl([], Validators.required),
+		chipAutocomplete: new FormControl([], Validators.required),
+		chipAutocomplete1: new FormControl([], Validators.required),
+		buttonToggle: new FormControl(false, Validators.requiredTrue),
+	});
 
-	tableConfig: TableModel = EXAMPLE_TABLE;
-	params: Record<string, any> = {};
-
-	constructor() {
-		this.#getUsers();
+	onInputChange(): void {
+		console.log('form raw value:', this.form.getRawValue());
 	}
 
-	#getUsers(): void {
-		this.tableConfig.isLoading.set(true);
-		this.#apiService.get(API_URL + '/users', this.params).subscribe({
-			next: (resp: any) => {
-				this.tableConfig.dataSource = resp as any[];
-				this.tableConfig.dataTotal = (resp as any[]).length;
-				this.tableConfig.generateDataType();
-				this.tableConfig.dataType = {
-					...this.tableConfig.dataType,
-					selection: {
-						type: 'custom',
-					},
-					actions: {
-						type: 'custom',
-					},
-				};
-			},
-			complete: () => this.tableConfig.isLoading.set(false),
-			error: () => this.tableConfig.isLoading.set(false),
-		});
-	}
+	onSubmit(): void {
+		this.form.markAllAsTouched();
 
-	onRowSelection(row: any): void {
-		this.tableConfig.selectRow(row);
-	}
+		if (!this.form.valid) return;
 
-	onAllSelection(isChecked: boolean): void {
-		this.tableConfig.selectAll(isChecked);
-	}
-
-	sortChange(event: Sort): void {
-		this.tableConfig.sortKey = event.active;
-		this.tableConfig.sortOrder = event.direction;
-	}
-
-	pageChange(event: any): void {
-		console.log(event);
-	}
-
-	onAction(): void {
-		console.log('--- Action Clicked ---');
+		console.log(this.form.getRawValue());
 	}
 }
 ```
@@ -321,34 +315,16 @@ export class ExampleComponent {
 Add the component to your template and bind your data:
 
 ```html
-<lib-table
-	[config]="tableConfig"
-	(sortChange)="sortChange($event)"
-	(pageChange)="pageChange($event)"
->
-	<ng-template #customTemplate let-data="data" let-key="key">
-		@if (key === 'selection') {
-		<div [class.show-checkbox]="data.isSelected">
-			<mat-checkbox
-				class="check-box check__file"
-				[checked]="tableConfig.isSelected(data)"
-				(change)="onRowSelection(data)"
-			/>
-		</div>
-		} @else if (key === 'actions') {
-		<div class="tw-flex tw-gap-3">
-			<mat-icon class="tw-cursor-pointer" (click)="onAction()">edit</mat-icon>
-			<mat-icon class="tw-cursor-pointer" (click)="onAction()">delete</mat-icon>
-		</div>
-		}
-	</ng-template>
+<form [formGroup]="form" (ngSubmit)="onSubmit()">
+	@defer {
+	<lib-formly [form]="form" [formConfig]="formConfig" (onChange)="onInputChange()" />
 
-	<ng-template #selectionTemplate>
-		<div class="filter-list">
-			<mat-checkbox class="check__file" (change)="onAllSelection($event.checked)" />
-		</div>
-	</ng-template>
-</lib-table>
+	<div class="tw-flex tw-justify-end tw-gap-4 tw-my-4">
+		<lib-button [config]="submitButton.cancelButton" />
+		<lib-button [config]="submitButton.submitButton" />
+	</div>
+	} @loading (minimum 500ms) { Please wait... }
+</form>
 ```
 
 ### 4. API

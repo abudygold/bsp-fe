@@ -19,20 +19,6 @@ import { EXAMPLE_FORM } from '../../../../shared/const/form/example';
 export class ExampleAddComponent {
 	formConfig: FormlyModel = EXAMPLE_FORM;
 	submitButton: ISubmitButton = SUBMIT_BUTTON_CONST();
-	/* form: FormGroup = new FormGroup({
-		name: new FormControl('', Validators.required),
-		gender: new FormControl('', Validators.required),
-		bod: new FormControl('', Validators.required),
-		description: new FormControl('', Validators.required),
-		radio: new FormControl('', Validators.required),
-		checkbox: new FormControl([], Validators.required),
-		checkbox2: new FormControl([], Validators.required),
-		autocomplete: new FormControl('', Validators.required),
-		chipInput: new FormControl([], Validators.required),
-		chipAutocomplete: new FormControl([], Validators.required),
-		buttonToggle: new FormControl(false, Validators.requiredTrue),
-	}); */
-
 	form: FormGroup = new FormGroup({
 		name: new FormControl('', Validators.required),
 		description: new FormControl('', Validators.required),
@@ -58,6 +44,8 @@ export class ExampleAddComponent {
 
 	onSubmit(): void {
 		this.form.markAllAsTouched();
+
+		if (!this.form.valid) return;
 
 		console.log(this.form.getRawValue());
 	}
