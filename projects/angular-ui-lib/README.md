@@ -34,7 +34,7 @@ import { TableComponent, TableModel } from '@abudygold/angular-ui-lib';
   - [Chip](https://github.com/abudygold/angular-ui-lib/blob/main/projects/angular-ui-lib/README-FORM.md)
   - [Datepicker](https://github.com/abudygold/angular-ui-lib/blob/main/projects/angular-ui-lib/README-FORM.md)
   - [Dropdown](https://github.com/abudygold/angular-ui-lib/blob/main/projects/angular-ui-lib/README-FORM.md)
-  - Formly
+  - [Formly](https://github.com/abudygold/angular-ui-lib/blob/main/projects/angular-ui-lib/README-FORM.md)
   - Modal
   - [Radio Button](https://github.com/abudygold/angular-ui-lib/blob/main/projects/angular-ui-lib/README-FORM.md)
   - [Table](https://github.com/abudygold/angular-ui-lib/blob/main/projects/angular-ui-lib/README-TABLE.md)
