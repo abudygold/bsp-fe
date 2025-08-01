@@ -353,30 +353,18 @@ Add the component to your template and bind your data:
 
 ### 4. API
 
-| Input              | Type                                                                                                            | Description                                                                                                      |
-| ------------------ | --------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------- |
-| `columns`          | Array<{ key, label, sortable }>                                                                                 | List of column definitions to display and sort.                                                                  |
-| `dataSource`       | any[]                                                                                                           | The raw data to be rendered in the table.                                                                        |
-| `dataTotal`        | number                                                                                                          | Total number of rows (used for pagination).                                                                      |
-| `pageIndex`        | number                                                                                                          | Current page index (starts from 0).                                                                              |
-| `pageSize`         | number                                                                                                          | Number of items per page.                                                                                        |
-| `sortKey`          | string                                                                                                          | Active sort key (column identifier).                                                                             |
-| `sortOrder`        | 'asc' / 'desc'                                                                                                  | Current sort direction of the table. Use `'asc'` for ascending, `'desc'` for descending, or `''` for no sorting. |
-| `selection`        | SelectionModel<any>                                                                                             | Angular CDK selection model for checkbox selection handling.                                                     |
-| `tableClass`       | string                                                                                                          | Custom class for the table (used for styling).                                                                   |
-| `isHttpPagination` | Signal<boolean>                                                                                                 | Whether pagination is handled via API.                                                                           |
-| `isPagination`     | Signal<boolean>                                                                                                 | Toggle for enabling/disabling client-side pagination.                                                            |
-| `isSorter`         | Signal<boolean>                                                                                                 | Toggle for enabling/disabling sorting UI.                                                                        |
-| `isLoading`        | Signal<boolean>                                                                                                 | Indicates loading state of the table.                                                                            |
-| `selectedOptionId` | Signal<string / number / null>                                                                                  | Reactive signal that holds the currently selected row's identifier, or `null` if no selection is made.           |
-| `options`          | FilterOptions                                                                                                   | Object used to store filter/sort/pagination settings sent to the server.                                         |
-| `dataType`         | Record<string, { type: DataType, format?, currency?, locale?, minimumFractionDigits?, maximumFractionDigits? }> | Optional field configuration for formatting cells (e.g., date, currency).                                        |
+| Input       | Type                                                                                                                                                       | Description                                                                         |
+| ----------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------- |
+| `formClass` | string                                                                                                                                                     | Custom CSS class for the form container.                                            |
+| `fields`    | Array<{ type: FormType; control: string; fieldClass?: string; optionKey?: string; messageValidation?: Record<string, string>; config: ConfigFieldModel; }> | An array of objects that define the form fields.                                    |
+| `options`   | Record<string, WritableSignal<any[]>>                                                                                                                      | An object to store and manage options for fields like dropdowns, radios, and chips. |
 
 ---
 
 ## For more advanced usage:
 
-- **Dynamic Column Formatting:** Use the dataType property to define custom display logic (like currency formatting or localized dates).
-- **Reactive Integration:** All Signal-based properties (like isLoading, selectedOptionId) can be used inside Angular signals/effects for responsive, reactive table behavior.
-- **Server-side Filtering:** Combine options with isHttpPagination to build query parameters for server-side filtering, sorting, and pagination.
-- **Selection Handling:** Use selection.selected to track selected rows programmatically.
+- **Dynamic Form Fields:** Use the <code>fields</code> property to dynamically generate various input types such as textboxes, dropdowns, datepickers, and chips within the form.
+- **Reactive Options:** The <code>options</code> property uses <code>WritableSignal<any[]></code> to provide reactive data for form fields like dropdowns, checkboxes, and chips.
+- **Custom Validation Messages:** The <code>messageValidation</code> property can be used to provide custom error messages for form validation.
+- **Layout and Styling:** Use <code>formClass</code> to apply custom CSS to the form layout and <code>fieldClass</code> to style individual form fields.
+- **Complex Checkboxes:** The <code>checkbox</code> field type supports nested options, defined by the <code>optionChildKey</code>, which allows for a parent-child relationship in the checkboxes.
