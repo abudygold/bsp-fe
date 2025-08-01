@@ -1,10 +1,10 @@
-## Usage: TableComponent
+## Usage: FormlyComponent
 
-The `TableComponent` lets you easily display tabular data in your Angular application.
+The `FormlyComponent` is a powerful Angular component that allows you to create dynamic forms with various input types, including textboxes, dropdowns, datepickers, and chips. It supports reactive programming with Angular's `WritableSignal` for options management.
 
-### 1. Define Table Constants
+### 1. Define Form Constants
 
-Create a constants file to define your table configuration, for example at `/shared/const/table/user/table.ts`:
+Create a constants file to define your form configuration and buttons. This helps in maintaining a clean structure and reusability across your application.:
 
 ```typescript
 import { FormlyModel } from '@abudygold/angular-ui-lib';
@@ -249,11 +249,11 @@ export const SUBMIT_BUTTON_CONST = (
 });
 ```
 
-This file centralizes your table's column definitions and initial configuration for easy reuse.
+This file centralizes your form's configuration and constants for easy reuse.
 
 ### 2. Prepare Your Data
 
-Define your table data and columns in your component:
+Define your form data and configuration in your component:
 
 ```typescript
 import { Component } from '@angular/core';
