@@ -1,7 +1,5 @@
 import {
 	ApiService,
-	BreadcrumbModel,
-	BreadcrumbsComponent,
 	ButtonComponent,
 	TableComponent,
 	TableModel,
@@ -15,19 +13,11 @@ import { MatCheckboxModule } from '@angular/material/checkbox';
 import { MatIconModule } from '@angular/material/icon';
 import { API_URL } from '../../../../app.const';
 import { IViewList, VIEW_LIST_FORM } from '../../../../shared/const/search';
-import { USERS_LIST_BREADCRUMB } from '../../../../shared/const/breadcrumbs';
 import { USERS_TABLE } from '../../../../shared/const/table/user';
 
 @Component({
 	selector: 'app-users-list',
-	imports: [
-		MatCheckboxModule,
-		MatIconModule,
-		TextboxComponent,
-		ButtonComponent,
-		TableComponent,
-		BreadcrumbsComponent,
-	],
+	imports: [MatCheckboxModule, MatIconModule, TextboxComponent, ButtonComponent, TableComponent],
 	templateUrl: './users-list.component.html',
 	styleUrl: './users-list.component.scss',
 })
@@ -37,7 +27,6 @@ export class UsersListComponent {
 	#apiService = inject(ApiService);
 
 	serverSide: TableModel = USERS_TABLE;
-	breadcrumbs: BreadcrumbModel[] = USERS_LIST_BREADCRUMB;
 	formList: IViewList = VIEW_LIST_FORM('Search by username', 'Add New User');
 	searchControl: FormControl = new FormControl('');
 	params: Record<string, any> = {};

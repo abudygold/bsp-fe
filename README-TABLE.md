@@ -29,7 +29,17 @@ EXAMPLE_TABLE.columns = [
 	{
 		key: 'email',
 		label: 'Email',
-		sortable: false,
+		sortable: true,
+	},
+	{
+		key: 'total',
+		label: 'Total',
+		sortable: true,
+	},
+	{
+		key: 'createdDate',
+		label: 'Created Date',
+		sortable: true,
 	},
 	{
 		key: 'actions',
@@ -75,6 +85,17 @@ export class ExampleComponent {
 					...this.tableConfig.dataType,
 					selection: {
 						type: 'custom',
+					},
+					total: {
+						type: 'currency',
+						currency: 'USD',
+						locale: 'en-US',
+						minimumFractionDigits: 0,
+						maximumFractionDigits: 0,
+					},
+					createdDate: {
+						type: 'date',
+						format: 'M/d/yyyy hh:mma',
 					},
 					actions: {
 						type: 'custom',

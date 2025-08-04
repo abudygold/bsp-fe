@@ -25,7 +25,7 @@
 		}
 	</mat-chip-set>
 } @else if (config().chip?.chipType === 'input') {
-	<mat-form-field appearance="outline" floatLabel="auto" class="chip-field">
+	<mat-form-field appearance="outline" floatLabel="auto" class="tw-w-full">
 		<mat-chip-grid #chipGrid aria-label="Enter tag">
 			@for (tag of control().value; track tag) {
 				<mat-chip-row
@@ -59,7 +59,7 @@
 		</mat-chip-grid>
 	</mat-form-field>
 } @else if (config().chip?.chipType === 'autocomplete') {
-	<mat-form-field appearance="outline" floatLabel="auto" class="chip-field">
+	<mat-form-field appearance="outline" floatLabel="auto" class="tw-w-full">
 		<mat-chip-grid #chipGrid aria-label="Tag selection">
 			@for (tag of control().value; track $index) {
 				<mat-chip-row (removed)="remove(tag)">
@@ -76,8 +76,10 @@
 			}
 		</mat-chip-grid>
 		<input
+			name="currentTag"
 			[placeholder]="config().placeholder! || ''"
 			#tagInput
+			[(ngModel)]="currentTag"
 			[matChipInputFor]="chipGrid"
 			[matAutocomplete]="auto"
 			[matChipInputSeparatorKeyCodes]="separatorKeysCodes"

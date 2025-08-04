@@ -1,11 +1,12 @@
 import { BreadcrumbModel } from '@abudygold/angular-ui-lib';
 
-export const USERS_LIST_BREADCRUMB: BreadcrumbModel[] = [
+export const USER_LIST_BREADCRUMB: BreadcrumbModel[] = [
 	{ label: 'Dashboard', icon: 'home', url: '/dashboard' },
 	{ label: 'Users', icon: 'groups' },
 ];
 
-export const EXAMPLE_LIST_BREADCRUMB: BreadcrumbModel[] = [
+export const USER_ADD_BREADCRUMB: BreadcrumbModel[] = [
 	{ label: 'Dashboard', icon: 'home', url: '/dashboard' },
-	{ label: 'Example', icon: 'settings' },
+	{ label: 'Users List', icon: 'lists', url: '/secure/users' },
+	{ label: 'Users Add', icon: 'add' },
 ];

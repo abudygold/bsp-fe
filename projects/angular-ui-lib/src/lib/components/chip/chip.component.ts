@@ -1,4 +1,4 @@
-import { Component, computed, inject, input, output, signal } from '@angular/core';
+import { Component, computed, inject, input, model, output, signal } from '@angular/core';
 import { MatChipEditedEvent, MatChipInputEvent, MatChipsModule } from '@angular/material/chips';
 import { CdkDrag, CdkDragDrop, CdkDropList, moveItemInArray } from '@angular/cdk/drag-drop';
 import { MatFormFieldModule } from '@angular/material/form-field';
@@ -9,7 +9,7 @@ import {
 	MatAutocompleteModule,
 	MatAutocompleteSelectedEvent,
 } from '@angular/material/autocomplete';
-import { FormControl } from '@angular/forms';
+import { FormControl, FormsModule } from '@angular/forms';
 import { ConfigFieldModel } from '../../shared/model';
 
 @Component({
@@ -17,6 +17,7 @@ import { ConfigFieldModel } from '../../shared/model';
 	imports: [
 		CdkDropList,
 		CdkDrag,
+		FormsModule,
 		MatFormFieldModule,
 		MatChipsModule,
 		MatAutocompleteModule,
@@ -30,24 +31,30 @@ export class ChipComponent {
 
 	onSelection = output<any>();
 
-	#reloadOptions = signal<boolean>(false);
-
 	config = input.required<ConfigFieldModel>();
 	control = input.required<FormControl>();
 	options = input.required<any[]>();
 
+	readonly currentTag = model('');
 	readonly separatorKeysCodes = [ENTER, COMMA] as const;
 	readonly filteredOptions = computed(() => {
 		if (this.config().chip?.chipType !== 'autocomplete') return [];
 
-		const reload = this.#reloadOptions();
+		const currentTag = this.currentTag().toLowerCase();
 		const key = this.config().chip?.optionLabel || '';
 		const tags = this.control().value;
-		const options = this.options() || [];
+		let options = [...(this.options() || [])];
 
-		return tags && typeof tags.at(0) === 'object'
-			? options.filter(option => !tags.some((tag: any) => tag[key] === option[key]))
-			: options.filter(option => !tags.some((tag: any) => tag === option));
+		options =
+			tags && typeof tags.at(0) === 'object'
+				? options.filter(option => !tags.some((tag: any) => tag[key] === option[key]))
+				: options.filter(option => !tags.some((tag: any) => tag === option));
+
+		return currentTag
+			? typeof tags.at(0) === 'object'
+				? options.filter(option => option[key].toLowerCase().includes(currentTag))
+				: options.filter(option => option.toLowerCase().includes(currentTag))
+			: options.slice();
 	});
 
 	drop(event: CdkDragDrop<any[]>) {
@@ -65,9 +72,9 @@ export class ChipComponent {
 				this.config().chip?.optionLabel ? { [this.config().chip?.optionLabel!]: value } : value,
 			]);
 			this.onSelection.emit(this.control().value);
-			this.#reloadOptions.set(!this.#reloadOptions());
 		}
 
+		this.currentTag.set('');
 		event.chipInput!.clear();
 	}
 
@@ -88,7 +95,6 @@ export class ChipComponent {
 
 		this.control().setValue(tags);
 		this.onSelection.emit(tags);
-		this.#reloadOptions.set(!this.#reloadOptions());
 	}
 
 	edit(_tag: any, event: MatChipEditedEvent) {
@@ -113,7 +119,6 @@ export class ChipComponent {
 
 		this.control().setValue(tags);
 		this.onSelection.emit(tags);
-		this.#reloadOptions.set(!this.#reloadOptions());
 	}
 
 	selected(event: MatAutocompleteSelectedEvent): void {
@@ -126,7 +131,7 @@ export class ChipComponent {
 
 		this.control().setValue(tags);
 		this.onSelection.emit(tags);
-		this.#reloadOptions.set(!this.#reloadOptions());
+		this.currentTag.set('');
 
 		event.option.deselect();
 	}

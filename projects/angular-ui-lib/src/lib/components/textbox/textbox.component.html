@@ -3,7 +3,7 @@
 		matInput
 		appEmptySpace
 		appOnlyNumber
-		[isNumberType]="config().textbox?.textboxType === 'number'"
+		[isNumberType]="config().textbox?.isOnlyNumber"
 		[type]="config().textbox?.textboxType || 'text'"
 		[formControl]="control()"
 		[placeholder]="config().placeholder || ''"

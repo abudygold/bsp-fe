@@ -1,6 +1,4 @@
 import {
-	BreadcrumbModel,
-	BreadcrumbsComponent,
 	ButtonComponent,
 	TableComponent,
 	TableModel,
@@ -13,19 +11,11 @@ import { Sort } from '@angular/material/sort';
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import { MatIconModule } from '@angular/material/icon';
 import { IViewList, VIEW_LIST_FORM } from '../../../../shared/const/search';
-import { EXAMPLE_LIST_BREADCRUMB } from '../../../../shared/const/breadcrumbs';
 import { EXAMPLE_DUMMY_DATA, EXAMPLES_TABLE } from '../../../../shared/const/table/example';
 
 @Component({
 	selector: 'app-example-list',
-	imports: [
-		MatCheckboxModule,
-		MatIconModule,
-		TextboxComponent,
-		ButtonComponent,
-		TableComponent,
-		BreadcrumbsComponent,
-	],
+	imports: [MatCheckboxModule, MatIconModule, TextboxComponent, ButtonComponent, TableComponent],
 	templateUrl: './example-list.component.html',
 	styleUrl: './example-list.component.scss',
 })
@@ -34,7 +24,6 @@ export class ExampleListComponent {
 	#activatedRoute = inject(ActivatedRoute);
 
 	clientSide: TableModel = EXAMPLES_TABLE;
-	breadcrumbs: BreadcrumbModel[] = EXAMPLE_LIST_BREADCRUMB;
 	formList: IViewList = VIEW_LIST_FORM('Search by name');
 	searchControl: FormControl = new FormControl('');
 

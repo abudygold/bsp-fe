@@ -21,6 +21,8 @@ export class ExampleAddComponent {
 	submitButton: ISubmitButton = SUBMIT_BUTTON_CONST();
 	form: FormGroup = new FormGroup({
 		name: new FormControl('', Validators.required),
+		onlyNumber: new FormControl('', Validators.required),
+		password: new FormControl('', Validators.required),
 		description: new FormControl('', Validators.required),
 		gender: new FormControl('', Validators.required),
 		birthOfDate: new FormControl('', Validators.required),

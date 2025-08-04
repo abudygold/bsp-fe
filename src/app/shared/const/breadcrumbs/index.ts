@@ -1,1 +1,2 @@
-export * from './breadcrumbs.const';
+export * from './example.const';
+export * from './user.const';

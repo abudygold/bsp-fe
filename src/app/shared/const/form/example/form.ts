@@ -2,20 +2,43 @@ import { FormlyModel } from '@abudygold/angular-ui-lib';
 import { signal } from '@angular/core';
 import moment from 'moment';
 
-/* TODO */
-/* Filter autocomplete tag */
-
 export const EXAMPLE_FORM: FormlyModel = {
 	formClass: 'tw-grid tw-grid-cols-12 tw-gap-4',
 	fields: [
 		{
 			type: 'textbox',
 			control: 'name',
-			fieldClass: 'tw-col-span-12',
+			fieldClass: 'tw-col-span-6',
 			config: {
 				label: 'Name',
 				placeholder: 'Enter name',
 				required: true,
+			},
+		},
+		{
+			type: 'textbox',
+			control: 'onlyNumber',
+			fieldClass: 'tw-col-span-6',
+			config: {
+				label: 'Input Number',
+				placeholder: 'Enter number',
+				required: true,
+				textbox: {
+					textboxType: 'number',
+				},
+			},
+		},
+		{
+			type: 'textbox',
+			control: 'password',
+			fieldClass: 'tw-col-span-6',
+			config: {
+				label: 'Input Password',
+				placeholder: 'Enter Password',
+				required: true,
+				textbox: {
+					textboxType: 'password',
+				},
 			},
 		},
 		{

@@ -56,10 +56,12 @@ export class ConfigFieldModel {
 
 class TextboxModel {
 	public textboxType: TextBoxType;
+	public isOnlyNumber?: boolean;
 	public limit?: number;
 
 	constructor() {
 		this.textboxType = 'text';
+		this.isOnlyNumber = false;
 		this.limit = 0;
 	}
 }
