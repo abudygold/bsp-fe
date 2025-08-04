@@ -1,10 +1,10 @@
 ## Usage: BreadcrumbsComponent
 
-The `FormlyComponent` is a powerful Angular component that allows you to create dynamic forms with various input types, including textboxes, dropdowns, datepickers, and chips. It supports reactive programming with Angular's `WritableSignal` for options management.
+The `BreadcrumbsComponent` is designed to enhance navigation within your Angular application by providing a breadcrumb trail that reflects the current route. This component is particularly useful for applications with complex routing structures, allowing users to easily navigate back to previous pages.
 
-### 1. Define Form Constants
+### 1. Define Breadcrumb Constants
 
-Create a constants file to define your form configuration and buttons. This helps in maintaining a clean structure and reusability across your application.:
+Create a constants file to define your breadcrumb configuration. This helps in maintaining a clean structure and reusability across your application.:
 
 ```typescript
 import { Routes } from '@angular/router';
@@ -35,11 +35,9 @@ export const EXAMPLE_ROUTES: Routes = [
 ];
 ```
 
-This file centralizes your form's configuration and constants for easy reuse.
-
 ### 2. Prepare Your Data
 
-Define your form data and configuration in your component:
+Define your breadcrumb data and configuration in your component:
 
 ```typescript
 import { Component, inject } from '@angular/core';
@@ -87,18 +85,16 @@ Add the component to your template and bind your data:
 
 ### 4. API
 
-| Input       | Type                                                                                                                                                       | Description                                                                         |
-| ----------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------- |
-| `formClass` | string                                                                                                                                                     | Custom CSS class for the form container.                                            |
-| `fields`    | Array<{ type: FormType; control: string; fieldClass?: string; optionKey?: string; messageValidation?: Record<string, string>; config: ConfigFieldModel; }> | An array of objects that define the form fields.                                    |
-| `options`   | Record<string, WritableSignal<any[]>>                                                                                                                      | An object to store and manage options for fields like dropdowns, radios, and chips. |
+| Input   | Type   | Description                                                                    |
+| ------- | ------ | ------------------------------------------------------------------------------ |
+| `label` | string | The text to be displayed for the breadcrumb item. Defaults to an empty string. |
+| `icon`  | string | Optional icon associated with the breadcrumb item.                             |
+| `url`   | string | Optional URL or route the breadcrumb item navigates to.                        |
 
 ---
 
 ## For more advanced usage:
 
-- **Dynamic Form Fields:** Use the <code>fields</code> property to dynamically generate various input types such as textboxes, dropdowns, datepickers, and chips within the form.
-- **Reactive Options:** The <code>options</code> property uses <code>WritableSignal<any[]></code> to provide reactive data for form fields like dropdowns, checkboxes, and chips.
-- **Custom Validation Messages:** The <code>messageValidation</code> property can be used to provide custom error messages for form validation.
-- **Layout and Styling:** Use <code>formClass</code> to apply custom CSS to the form layout and <code>fieldClass</code> to style individual form fields.
-- **Complex Checkboxes:** The <code>checkbox</code> field type supports nested options, defined by the <code>optionChildKey</code>, which allows for a parent-child relationship in the checkboxes.
+- **Navigation:** Use the <code>url</code> property to make a breadcrumb item clickable, directing the user to a specific page or route.
+- **Visual Enhancements:** The <code>icon</code> property can be used to add a visual cue or an icon next to the breadcrumb label.
+- **Dynamic Breadcrumbs:** By creating an array of <code>BreadcrumbModel</code> objects, you can dynamically build a navigation path based on the user's location in the application.
