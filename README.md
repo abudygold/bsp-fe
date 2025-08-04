@@ -46,7 +46,9 @@ import { TableComponent, TableModel } from '@abudygold/angular-ui-lib';
   - Directives
   - Model
   - Pipes
+    - [Currency](https://github.com/abudygold/angular-ui-lib/blob/main/README-CURRENCY.md)
   - Utils
+    - [User Agent](https://github.com/abudygold/angular-ui-lib/blob/main/README-USER-AGENT.md)
 
 ## Resources
 
