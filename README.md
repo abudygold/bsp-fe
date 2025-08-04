@@ -14,41 +14,41 @@ Welcome to the Angular UI Kit! This project provides reusable Angular components
 To use this library in your Angular project, install it via npm:
 
 ```bash
-npm install @abudygold/angular-ui-lib
+npm install @abudygold/angular-ui-kit
 ```
 
 Then, import the desired modules into your application:
 
 ```typescript
-import { TableComponent, TableModel } from '@abudygold/angular-ui-lib';
+import { TableComponent, TableModel } from '@abudygold/angular-ui-kit';
 ```
 
 ## Folder Structure
 
 - Components
-  - [Autocomplete](https://github.com/abudygold/angular-ui-lib/blob/main/README-FORM.md)
-  - [Breadcrumbs](https://github.com/abudygold/angular-ui-lib/blob/main/README-BREADCRUMB.md)
-  - [Button](https://github.com/abudygold/angular-ui-lib/blob/main/README-BUTTON.md)
-  - [Button Toggle](https://github.com/abudygold/angular-ui-lib/blob/main/README-FORM.md)
-  - [Checkbox](https://github.com/abudygold/angular-ui-lib/blob/main/README-FORM.md)
-  - [Chip](https://github.com/abudygold/angular-ui-lib/blob/main/README-FORM.md)
-  - [Datepicker](https://github.com/abudygold/angular-ui-lib/blob/main/README-FORM.md)
-  - [Dropdown](https://github.com/abudygold/angular-ui-lib/blob/main/README-FORM.md)
-  - [Formly](https://github.com/abudygold/angular-ui-lib/blob/main/README-FORM.md)
-  - [Modal](https://github.com/abudygold/angular-ui-lib/blob/main/README-MODAL.md)
-  - [Radio Button](https://github.com/abudygold/angular-ui-lib/blob/main/README-FORM.md)
-  - [Table](https://github.com/abudygold/angular-ui-lib/blob/main/README-TABLE.md)
-  - [Textarea](https://github.com/abudygold/angular-ui-lib/blob/main/README-FORM.md)
-  - [Textbox](https://github.com/abudygold/angular-ui-lib/blob/main/README-FORM.md)
+  - [Autocomplete](https://github.com/abudygold/angular-ui-kit/blob/main/README-FORM.md)
+  - [Breadcrumbs](https://github.com/abudygold/angular-ui-kit/blob/main/README-BREADCRUMB.md)
+  - [Button](https://github.com/abudygold/angular-ui-kit/blob/main/README-BUTTON.md)
+  - [Button Toggle](https://github.com/abudygold/angular-ui-kit/blob/main/README-FORM.md)
+  - [Checkbox](https://github.com/abudygold/angular-ui-kit/blob/main/README-FORM.md)
+  - [Chip](https://github.com/abudygold/angular-ui-kit/blob/main/README-FORM.md)
+  - [Datepicker](https://github.com/abudygold/angular-ui-kit/blob/main/README-FORM.md)
+  - [Dropdown](https://github.com/abudygold/angular-ui-kit/blob/main/README-FORM.md)
+  - [Formly](https://github.com/abudygold/angular-ui-kit/blob/main/README-FORM.md)
+  - [Modal](https://github.com/abudygold/angular-ui-kit/blob/main/README-MODAL.md)
+  - [Radio Button](https://github.com/abudygold/angular-ui-kit/blob/main/README-FORM.md)
+  - [Table](https://github.com/abudygold/angular-ui-kit/blob/main/README-TABLE.md)
+  - [Textarea](https://github.com/abudygold/angular-ui-kit/blob/main/README-FORM.md)
+  - [Textbox](https://github.com/abudygold/angular-ui-kit/blob/main/README-FORM.md)
 - Services
-  - [API](https://github.com/abudygold/angular-ui-lib/blob/main/README-API.md)
+  - [API](https://github.com/abudygold/angular-ui-kit/blob/main/README-API.md)
 - Shared
   - Directives
   - Model
   - Pipes
-    - [Currency](https://github.com/abudygold/angular-ui-lib/blob/main/README-CURRENCY.md)
+    - [Currency](https://github.com/abudygold/angular-ui-kit/blob/main/README-CURRENCY.md)
   - Utils
-    - [User Agent](https://github.com/abudygold/angular-ui-lib/blob/main/README-USER-AGENT.md)
+    - [User Agent](https://github.com/abudygold/angular-ui-kit/blob/main/README-USER-AGENT.md)
 
 ## Resources
 

@@ -1,5 +1,5 @@
 /*
- * Public API Surface of angular-ui-lib
+ * Public API Surface of angular-ui-kit
  */
 
 // Components

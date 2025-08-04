@@ -95,23 +95,23 @@
 				}
 			}
 		},
-		"angular-ui-lib": {
+		"angular-ui-kit": {
 			"projectType": "library",
-			"root": "projects/angular-ui-lib",
-			"sourceRoot": "projects/angular-ui-lib/src",
+			"root": "projects/angular-ui-kit",
+			"sourceRoot": "projects/angular-ui-kit/src",
 			"prefix": "lib",
 			"architect": {
 				"build": {
 					"builder": "@angular-devkit/build-angular:ng-packagr",
 					"options": {
-						"project": "projects/angular-ui-lib/ng-package.json"
+						"project": "projects/angular-ui-kit/ng-package.json"
 					},
 					"configurations": {
 						"production": {
-							"tsConfig": "projects/angular-ui-lib/tsconfig.lib.prod.json"
+							"tsConfig": "projects/angular-ui-kit/tsconfig.lib.prod.json"
 						},
 						"development": {
-							"tsConfig": "projects/angular-ui-lib/tsconfig.lib.json"
+							"tsConfig": "projects/angular-ui-kit/tsconfig.lib.json"
 						}
 					},
 					"defaultConfiguration": "production"
@@ -119,7 +119,7 @@
 				"test": {
 					"builder": "@angular-devkit/build-angular:karma",
 					"options": {
-						"tsConfig": "projects/angular-ui-lib/tsconfig.spec.json",
+						"tsConfig": "projects/angular-ui-kit/tsconfig.spec.json",
 						"polyfills": ["zone.js", "zone.js/testing"]
 					}
 				}

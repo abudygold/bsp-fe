@@ -7,7 +7,7 @@ The `TableComponent` lets you easily display tabular data in your Angular applic
 Create a constants file to define your table configuration, for example at `/shared/const/table/user/table.ts`:
 
 ```typescript
-import { TableModel } from '@abudygold/angular-ui-lib';
+import { TableModel } from '@abudygold/angular-ui-kit';
 
 export const EXAMPLE_TABLE: TableModel = new TableModel();
 EXAMPLE_TABLE.columns = [
@@ -49,7 +49,7 @@ This file centralizes your table's column definitions and initial configuration 
 Define your table data and columns in your component:
 
 ```typescript
-import { TableModel, TableComponent, ApiService } from '@abudygold/angular-ui-lib';
+import { TableModel, TableComponent, ApiService } from '@abudygold/angular-ui-kit';
 
 @Component({
 	imports: [TableComponent, TableModel, ApiService],

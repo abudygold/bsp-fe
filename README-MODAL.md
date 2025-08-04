@@ -9,7 +9,7 @@ Define your breadcrumb data and configuration in your component:
 ```typescript
 import { Component, inject } from '@angular/core';
 import { MatDialogModule, MatDialogRef } from '@angular/material/dialog';
-import { ButtonComponent, ButtonModel, ModalComponent } from '@abudygold/angular-ui-lib';
+import { ButtonComponent, ButtonModel, ModalComponent } from '@abudygold/angular-ui-kit';
 
 @Component({
 	selector: 'app-example-dialog',

@@ -15,7 +15,7 @@ There is no data preparation required for this function. It directly checks the 
 You can call the `isMobile` function in your components, services, or templates to conditionally render content or apply different logic based on the device type.
 
 ```typescript
-import { isMobile } from '@abudygold/angular-ui-lib';
+import { isMobile } from '@abudygold/angular-ui-kit';
 
 @Component({
 	selector: 'app-example',

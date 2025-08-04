@@ -7,7 +7,7 @@ The `FormlyComponent` is a powerful Angular component that allows you to create 
 Create a constants file to define your form configuration and buttons. This helps in maintaining a clean structure and reusability across your application.:
 
 ```typescript
-import { FormlyModel } from '@abudygold/angular-ui-lib';
+import { FormlyModel } from '@abudygold/angular-ui-kit';
 import { signal } from '@angular/core';
 
 export const EXAMPLE_FORM: FormlyModel = {
@@ -230,7 +230,7 @@ export const EXAMPLE_FORM: FormlyModel = {
 ```
 
 ```typescript
-import { ButtonModel } from '@abudygold/angular-ui-lib';
+import { ButtonModel } from '@abudygold/angular-ui-kit';
 
 export interface ISubmitButton {
 	submitButton: ButtonModel;
@@ -264,7 +264,7 @@ import {
 	ReactiveFormsModule,
 	Validators,
 } from '@angular/forms';
-import { ButtonComponent, FormlyComponent, FormlyModel } from '@abudygold/angular-ui-lib';
+import { ButtonComponent, FormlyComponent, FormlyModel } from '@abudygold/angular-ui-kit';
 import { ISubmitButton, SUBMIT_BUTTON_CONST } from '../const/button';
 import { EXAMPLE_FORM } from '../const/form/example';
 

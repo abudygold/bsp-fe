@@ -11,7 +11,7 @@ The `ApiService` is provided at the root level, making it available throughout t
 Inject the `ApiService` into your component or service and call the appropriate method.
 
 ```typescript
-import { TableModel, TableComponent, ApiService } from '@abudygold/angular-ui-lib';
+import { TableModel, TableComponent, ApiService } from '@abudygold/angular-ui-kit';
 import { inject } from '@angular/core';
 
 @Component({
