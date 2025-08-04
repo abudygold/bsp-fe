@@ -1,6 +1,6 @@
-# Angular UI Library
+# Angular UI Kit
 
-Welcome to the Angular UI Library! This project provides reusable Angular components to accelerate your development workflow.
+Welcome to the Angular UI Kit! This project provides reusable Angular components to accelerate your development workflow.
 
 ## Features
 
