@@ -1,5 +1,5 @@
-import { FormlyModel } from '@abudygold/angular-ui-lib';
 import { signal } from '@angular/core';
+import { FormlyModel } from '@devkitify/angular-ui-kit';
 import moment from 'moment';
 
 export const EXAMPLE_FORM: FormlyModel = {

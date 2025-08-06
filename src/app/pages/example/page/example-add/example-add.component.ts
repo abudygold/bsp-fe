@@ -6,7 +6,7 @@ import {
 	ReactiveFormsModule,
 	Validators,
 } from '@angular/forms';
-import { ButtonComponent, FormlyComponent, FormlyModel } from '@abudygold/angular-ui-lib';
+import { ButtonComponent, FormlyComponent, FormlyModel } from '@devkitify/angular-ui-kit';
 import { ISubmitButton, SUBMIT_BUTTON_CONST } from '../../../../shared/const/button';
 import { EXAMPLE_FORM } from '../../../../shared/const/form/example';
 

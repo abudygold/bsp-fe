@@ -42,7 +42,7 @@ Define your breadcrumb data and configuration in your component:
 ```typescript
 import { Component, inject } from '@angular/core';
 import { ActivatedRouteSnapshot, NavigationEnd, Router } from '@angular/router';
-import { BreadcrumbModel, BreadcrumbsComponent } from '@abudygold/angular-ui-kit';
+import { BreadcrumbModel, BreadcrumbsComponent } from '@devkitify/angular-ui-kit';
 import { filter } from 'rxjs';
 
 @Component({

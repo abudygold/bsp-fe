@@ -1,4 +1,4 @@
-import { BreadcrumbModel } from '@abudygold/angular-ui-lib';
+import { BreadcrumbModel } from '@devkitify/angular-ui-kit';
 
 export const EXAMPLE_LIST_BREADCRUMB: BreadcrumbModel[] = [
 	{ label: 'Dashboard', icon: 'home', url: '/dashboard' },

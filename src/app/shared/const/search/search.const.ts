@@ -1,4 +1,4 @@
-import { ButtonModel, ConfigFieldModel } from '@abudygold/angular-ui-lib';
+import { ButtonModel, ConfigFieldModel } from '@devkitify/angular-ui-kit';
 
 export interface IViewList {
 	searchTextbox: ConfigFieldModel;

@@ -1,4 +1,4 @@
-import { ButtonModel, FormlyModel } from '@abudygold/angular-ui-lib';
+import { ButtonModel, FormlyModel } from '@devkitify/angular-ui-kit';
 
 export const FORGOT_PASSWORD_FORM: FormlyModel = {
 	formClass: 'tw-grid tw-grid-cols-1 tw-gap-4',

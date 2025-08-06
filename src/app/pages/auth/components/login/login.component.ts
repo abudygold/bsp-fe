@@ -5,7 +5,7 @@ import {
 	ConfigFieldModel,
 	FormlyComponent,
 	FormlyModel,
-} from '@abudygold/angular-ui-lib';
+} from '@devkitify/angular-ui-kit';
 import { Component, inject, signal } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import {

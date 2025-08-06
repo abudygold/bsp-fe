@@ -1,4 +1,4 @@
-import { ButtonModel } from '@abudygold/angular-ui-lib';
+import { ButtonModel } from '@devkitify/angular-ui-kit';
 
 export interface ISubmitButton {
 	submitButton: ButtonModel;

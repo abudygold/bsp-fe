@@ -14,13 +14,13 @@ Welcome to the Angular UI Kit! This project provides reusable Angular components
 To use this library in your Angular project, install it via npm:
 
 ```bash
-npm install @abudygold/angular-ui-kit
+npm install @devkitify/angular-ui-kit
 ```
 
 Then, import the desired modules into your application:
 
 ```typescript
-import { TableComponent, TableModel } from '@abudygold/angular-ui-kit';
+import { TableComponent, TableModel } from '@devkitify/angular-ui-kit';
 ```
 
 ## Folder Structure

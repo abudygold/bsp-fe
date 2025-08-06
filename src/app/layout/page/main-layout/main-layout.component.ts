@@ -2,7 +2,7 @@ import { Component, inject } from '@angular/core';
 import { ActivatedRouteSnapshot, NavigationEnd, Router, RouterOutlet } from '@angular/router';
 import { MatSidenavModule } from '@angular/material/sidenav';
 import { HeaderComponent } from '../../components/header';
-import { BreadcrumbModel, BreadcrumbsComponent, isMobile } from '@abudygold/angular-ui-lib';
+import { BreadcrumbModel, BreadcrumbsComponent, isMobile } from '@devkitify/angular-ui-kit';
 import { FooterComponent } from '../../components/footer';
 import { SidebarComponent } from '../../components/sidebar';
 import { NAVIGATIONS } from '../../../app.const';

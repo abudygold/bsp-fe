@@ -12,7 +12,7 @@ import {
 	ButtonModel,
 	FormlyComponent,
 	FormlyModel,
-} from '@abudygold/angular-ui-lib';
+} from '@devkitify/angular-ui-kit';
 import { BACK_TO_LOGIN_CONST } from '../../../../shared/const/button';
 import { REGISTER_FORM, REGISTER_SEND_BUTTON } from '../../../../shared/const/form/auth';
 

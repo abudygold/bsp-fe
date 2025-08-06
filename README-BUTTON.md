@@ -7,7 +7,7 @@ The `ButtonComponent` is a powerful Angular component that allows you to create 
 Create a constants file to define your button configuration and styles. This helps in maintaining a clean structure and reusability across your application.:
 
 ```typescript
-import { ButtonModel } from '@abudygold/angular-ui-kit';
+import { ButtonModel } from '@devkitify/angular-ui-kit';
 
 export const EXAMPLE_BUTTON_CONST: ButtonModel = new ButtonModel(
 	'stroked',
@@ -28,7 +28,7 @@ This file centralizes your button's configuration and constants for easy reuse.
 Define your button data and configuration in your component:
 
 ```typescript
-import { ButtonComponent } from '@abudygold/angular-ui-kit';
+import { ButtonComponent } from '@devkitify/angular-ui-kit';
 import { Component, inject, signal } from '@angular/core';
 import { Router } from '@angular/router';
 import { EXAMPLE_BUTTON_CONST } from '../shared/const/button';

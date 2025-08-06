@@ -1,4 +1,4 @@
-import { ButtonModel, ConfigFieldModel, FormlyModel } from '@abudygold/angular-ui-lib';
+import { ButtonModel, ConfigFieldModel, FormlyModel } from '@devkitify/angular-ui-kit';
 
 export const LOGIN_FORM: FormlyModel = {
 	formClass: 'tw-grid tw-grid-cols-2 tw-gap-4',

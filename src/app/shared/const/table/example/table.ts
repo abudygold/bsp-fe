@@ -1,4 +1,4 @@
-import { TableModel } from '@abudygold/angular-ui-lib';
+import { TableModel } from '@devkitify/angular-ui-kit';
 
 export const EXAMPLE_DUMMY_DATA = [
 	{

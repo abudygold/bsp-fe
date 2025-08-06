@@ -13,7 +13,7 @@ The pipe can be used directly in your component's template. The primary method, 
 ```typescript
 // Example of how the pipe is used internally or in a component
 // This is not a typical use case for a pipe, but for demonstration of the methods.
-import { CurrencyIntlPipe } from '@abudygold/angular-ui-kit';
+import { CurrencyIntlPipe } from '@devkitify/angular-ui-kit';
 
 @Component({
 	template: `

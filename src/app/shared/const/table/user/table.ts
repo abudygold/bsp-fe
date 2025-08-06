@@ -1,4 +1,4 @@
-import { TableModel } from '@abudygold/angular-ui-lib';
+import { TableModel } from '@devkitify/angular-ui-kit';
 
 export const USERS_TABLE: TableModel = new TableModel();
 USERS_TABLE.columns = [

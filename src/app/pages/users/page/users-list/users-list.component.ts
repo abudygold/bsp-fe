@@ -4,7 +4,7 @@ import {
 	TableComponent,
 	TableModel,
 	TextboxComponent,
-} from '@abudygold/angular-ui-lib';
+} from '@devkitify/angular-ui-kit';
 import { Component, inject } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { FormControl } from '@angular/forms';

@@ -3,7 +3,7 @@ import {
 	ButtonModel,
 	FormlyComponent,
 	FormlyModel,
-} from '@abudygold/angular-ui-lib';
+} from '@devkitify/angular-ui-kit';
 import { Component, inject, signal } from '@angular/core';
 import { Router } from '@angular/router';
 import {

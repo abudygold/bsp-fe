@@ -1,5 +1,5 @@
-import { FormlyModel } from '@abudygold/angular-ui-lib';
 import { signal } from '@angular/core';
+import { FormlyModel } from '@devkitify/angular-ui-kit';
 
 export const USERS_FORM: FormlyModel = {
 	formClass: 'tw-grid tw-grid-cols-2 tw-gap-4',
