@@ -16,8 +16,8 @@ import {
 import {
 	FORGOT_PASSWORD_FORM,
 	FORGOT_PASSWORD_SEND_BUTTON,
-} from '../../../../shared/const/form/auth';
-import { BACK_TO_LOGIN_CONST } from '../../../../shared/const/button';
+} from '../../../../shared/form-builder/form/auth';
+import { BACK_TO_LOGIN_CONST } from '../../../../shared/form-builder/button';
 
 @Component({
 	selector: 'app-forgot',

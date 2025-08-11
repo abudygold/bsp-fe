@@ -2,6 +2,7 @@ import { ChangeDetectionStrategy, Component, inject, model, OnInit } from '@angu
 import { MatIconModule } from '@angular/material/icon';
 import { MatListModule } from '@angular/material/list';
 import { Router } from '@angular/router';
+import { INavigation, NAVIGATIONS } from '../../../core/navigation';
 
 @Component({
 	selector: 'app-sidebar',
@@ -13,50 +14,29 @@ import { Router } from '@angular/router';
 export class SidebarComponent implements OnInit {
 	#router = inject(Router);
 
-	navigation = model.required<any[]>();
+	navigation = model<INavigation[]>(NAVIGATIONS);
 
 	ngOnInit(): void {
-		this.navigation.update(menus => this.#changeActivateMenu(menus, this.#router.url));
+		this.#collapseMenu({
+			link: this.#router.url,
+		} as INavigation);
 	}
 
-	#onExpandMenu(_menu: any): void {
-		if (!_menu?.isParent) {
-			_menu.isOpened = !_menu.isOpened;
-			return;
-		}
+	onClickMenu(menu: INavigation): void {
+		this.#collapseMenu(menu);
 
-		this.navigation.update(menus =>
-			menus.map(menu => {
-				if (menu?.subMenu?.length) menu.subMenu = this.#collapseMenu(menu.subMenu);
+		if (!menu?.link) return;
 
-				return { ...menu, isOpened: _menu.label === menu.label };
-			}),
-		);
-	}
-
-	onClickMenu(menu: any): void {
-		if (!menu?.link) {
-			this.#onExpandMenu(menu);
-			return;
-		}
-
-		this.navigation.update(menus => this.#changeActivateMenu(menus, menu.link));
 		this.#router.navigate([menu.link]);
 	}
 
-	#collapseMenu(menus: any[]): any[] {
-		return menus.map(menu => {
-			if (menu?.subMenu?.length) this.#collapseMenu(menu.subMenu);
-
-			return { ...menu, isOpened: false };
-		});
-	}
-
-	#changeActivateMenu(menus: any[], link: string): any[] {
-		return menus.map(menu => {
-			if (menu?.subMenu?.length) this.#collapseMenu(menu.subMenu);
-
-			return { ...menu, isActive: menu.link === link };
-		});
+	#collapseMenu(_menu: INavigation): void {
+		return this.navigation.update(menus =>
+			menus.map((menu: INavigation) => ({
+				...menu,
+				isOpened: _menu.label === menu.label && (_menu?.subMenu || [])?.length > 0,
+				isActive: menu.link === _menu.link,
+			})),
+		);
 	}
 }

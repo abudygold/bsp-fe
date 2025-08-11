@@ -1,0 +1,22 @@
+<div
+	class="tw-flex tw-justify-between tw-items-center tw-flex-col md:lg:tw-flex-row tw-gap-4 tw-mb-4"
+>
+	<div class="md:lg:tw-w-1/3 tw-w-full">
+		<lib-textbox
+			[config]="formConfig.search().searchTextbox"
+			[control]="searchControl"
+			class="search-field"
+		>
+			<ng-template #matSuffixRef>
+				<mat-icon class="tw-cursor-pointer" (click)="onInputChange()">search</mat-icon>
+			</ng-template>
+		</lib-textbox>
+	</div>
+</div>
+
+<lib-table
+	[config]="tableConfig"
+	(sortChange)="sortChange($event)"
+	(pageChange)="pageChange($event)"
+>
+</lib-table>

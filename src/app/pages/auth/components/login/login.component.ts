@@ -21,7 +21,7 @@ import {
 	LOGIN_FORM,
 	LOGIN_SUBMIT_BUTTON,
 	REMEMBER_ME,
-} from '../../../../shared/const/form/auth';
+} from '../../../../shared/form-builder/form/auth';
 
 @Component({
 	selector: 'app-login',

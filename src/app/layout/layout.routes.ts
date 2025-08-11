@@ -1,6 +1,8 @@
 import { Routes } from '@angular/router';
-import { EXAMPLE_ROUTES } from '../pages/example/example.routes';
-import { USERS_ROUTES } from '../pages/users/users.routes';
+import { CUSTOMER_ROUTES } from '../pages/customer/customer.routes';
+import { DASHBOARD_ROUTES } from '../pages/dashboard/dashboard.routes';
+import { LEADERBOARD_ROUTES } from '../pages/leaderboard/leaderboard.routes';
+import { VOUCHER_ROUTES } from '../pages/voucher/voucher.routes';
 
 export const LAYOUT_ROUTES: Routes = [
 	{
@@ -10,11 +12,13 @@ export const LAYOUT_ROUTES: Routes = [
 		children: [
 			{
 				path: '',
+				redirectTo: 'dashboard',
 				pathMatch: 'full',
-				redirectTo: 'example',
 			},
-			...EXAMPLE_ROUTES,
-			...USERS_ROUTES,
+			...DASHBOARD_ROUTES,
+			...LEADERBOARD_ROUTES,
+			...VOUCHER_ROUTES,
+			...CUSTOMER_ROUTES,
 		],
 	},
 ];

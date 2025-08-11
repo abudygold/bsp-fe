@@ -13,8 +13,8 @@ import {
 	FormlyComponent,
 	FormlyModel,
 } from '@devkitify/angular-ui-kit';
-import { BACK_TO_LOGIN_CONST } from '../../../../shared/const/button';
-import { REGISTER_FORM, REGISTER_SEND_BUTTON } from '../../../../shared/const/form/auth';
+import { BACK_TO_LOGIN_CONST } from '../../../../shared/form-builder/button';
+import { REGISTER_FORM, REGISTER_SEND_BUTTON } from '../../../../shared/form-builder/form/auth';
 
 @Component({
 	selector: 'app-register',

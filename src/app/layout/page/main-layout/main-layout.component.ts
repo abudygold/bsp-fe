@@ -1,12 +1,11 @@
 import { Component, inject } from '@angular/core';
 import { ActivatedRouteSnapshot, NavigationEnd, Router, RouterOutlet } from '@angular/router';
 import { MatSidenavModule } from '@angular/material/sidenav';
-import { HeaderComponent } from '../../components/header';
+import { filter } from 'rxjs';
 import { BreadcrumbModel, BreadcrumbsComponent, isMobile } from '@devkitify/angular-ui-kit';
+import { HeaderComponent } from '../../components/header';
 import { FooterComponent } from '../../components/footer';
 import { SidebarComponent } from '../../components/sidebar';
-import { NAVIGATIONS } from '../../../app.const';
-import { filter } from 'rxjs';
 
 @Component({
 	selector: 'app-main-layout',
@@ -24,7 +23,6 @@ import { filter } from 'rxjs';
 export class MainLayoutComponent {
 	#router = inject(Router);
 
-	navigation: any[] = NAVIGATIONS;
 	breadcrumbs: BreadcrumbModel[] = [];
 	drawerMode: 'side' | 'over';
 	drawerOpened: boolean;
