@@ -2,12 +2,12 @@ import { signal } from '@angular/core';
 import { FormlyModel } from '@devkitify/angular-ui-kit';
 
 export const GENERATE_VOUCHER_FORM: FormlyModel = {
-	formClass: 'tw-grid tw-grid-cols-2 tw-gap-4',
+	formClass: 'tw-grid tw-gap-4 md:lg:tw-grid-cols-2',
 	fields: [
 		{
 			type: 'textbox',
 			control: 'campaignName',
-			fieldClass: 'tw-col-span-1',
+			fieldClass: 'md:lg:tw-col-span-1',
 			config: {
 				label: 'Campaign Name',
 				placeholder: 'Enter campaign name',
@@ -17,7 +17,7 @@ export const GENERATE_VOUCHER_FORM: FormlyModel = {
 		{
 			type: 'textbox',
 			control: 'campaignDuration',
-			fieldClass: 'tw-col-span-1',
+			fieldClass: 'md:lg:tw-col-span-1',
 			config: {
 				label: 'Campaign Duration',
 				placeholder: 'Enter campaign duration',
@@ -27,7 +27,7 @@ export const GENERATE_VOUCHER_FORM: FormlyModel = {
 		{
 			type: 'textbox',
 			control: 'voucherName',
-			fieldClass: 'tw-col-span-1',
+			fieldClass: 'md:lg:tw-col-span-1',
 			config: {
 				label: 'Voucher Name',
 				placeholder: 'Enter voucher name',
@@ -37,7 +37,7 @@ export const GENERATE_VOUCHER_FORM: FormlyModel = {
 		{
 			type: 'textbox',
 			control: 'voucherValue',
-			fieldClass: 'tw-col-span-1',
+			fieldClass: 'md:lg:tw-col-span-1',
 			config: {
 				label: 'Voucher Value',
 				placeholder: 'Enter voucher value',
@@ -47,7 +47,7 @@ export const GENERATE_VOUCHER_FORM: FormlyModel = {
 		{
 			type: 'radio',
 			control: 'voucherType',
-			fieldClass: 'tw-col-span-1',
+			fieldClass: 'md:lg:tw-col-span-1',
 			optionKey: 'voucherTypeOptions',
 			config: {
 				label: 'Voucher Type',
@@ -61,7 +61,7 @@ export const GENERATE_VOUCHER_FORM: FormlyModel = {
 		{
 			type: 'textbox',
 			control: 'voucherQuantity',
-			fieldClass: 'tw-col-span-1',
+			fieldClass: 'md:lg:tw-col-span-1',
 			config: {
 				label: 'Voucher Quantity',
 				placeholder: 'Enter voucher quantity',

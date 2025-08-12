@@ -4,6 +4,7 @@ import { MatDialog } from '@angular/material/dialog';
 import {
 	ApiService,
 	ButtonComponent,
+	isMobile,
 	TableComponent,
 	TableModel,
 	TextboxComponent,
@@ -30,6 +31,8 @@ export class CustomerComponent {
 	formConfig = {
 		search: signal<IViewList>(VIEW_LIST_FORM('Search by customer name', 'Add Customer')),
 	};
+
+	isMobile = signal<boolean>(isMobile());
 
 	constructor() {
 		this.#fetchData();
@@ -78,8 +81,10 @@ export class CustomerComponent {
 	}
 
 	openFormDialog(rowData: any = null): void {
+		const dialogConfig = isMobile() ? DIALOG_CONFIG.lgDialog : DIALOG_CONFIG.default;
+
 		this.#dialog.open(CustomerFormComponent, {
-			...DIALOG_CONFIG.default,
+			...dialogConfig,
 			data: {
 				rowData,
 			},

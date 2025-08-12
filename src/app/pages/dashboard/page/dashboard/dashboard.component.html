@@ -1,12 +1,12 @@
-<div class="tw-grid tw-grid-cols-4 tw-gap-5">
+<div class="tw-grid tw-gap-5 md:lg:tw-grid-cols-4">
 	@for (item of [0, 1, 2, 3]; track $index) {
-		<div class="tw-col-span-1">
+		<div class="md:lg:tw-col-span-1">
 			<app-widget-card />
 		</div>
 	}
 </div>
 
-<div class="tw-grid tw-grid-cols-2 tw-gap-5 tw-my-6">
+<div class="tw-grid tw-gap-5 tw-my-6 md:lg:tw-grid-cols-2">
 	<mat-card appearance="outlined">
 		<mat-card-header class="!tw-px-4 !tw-py-3 tw-border-b tw-border-solid">
 			<mat-card-title class="tw-text-lg !tw-font-medium">
