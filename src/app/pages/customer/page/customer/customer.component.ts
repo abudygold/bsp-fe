@@ -12,7 +12,7 @@ import { Sort } from '@angular/material/sort';
 import { MatIconModule } from '@angular/material/icon';
 import { IViewList, VIEW_LIST_FORM } from '../../../../shared/form-builder/search';
 import { CUSTOMER_TABLE } from '../../../../shared/form-builder/table/customer';
-import { CUSTOMER_LIST_PATH } from '../../../../shared/const';
+import { CUSTOMER_LIST_PATH, DIALOG_CONFIG } from '../../../../shared/const';
 import { CustomerFormComponent } from '../../dialog/customer-form';
 
 @Component({
@@ -79,6 +79,7 @@ export class CustomerComponent {
 
 	openFormDialog(rowData: any = null): void {
 		this.#dialog.open(CustomerFormComponent, {
+			...DIALOG_CONFIG.default,
 			data: {
 				rowData,
 			},

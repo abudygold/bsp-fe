@@ -1,1 +1,42 @@
-<p>customer-form works!</p>
+<lib-modal [title]="title()">
+	<ng-container content>
+		<mat-tab-group class="!tw-my-3" (selectedIndexChange)="onSelectedIndexChange($event)">
+			<mat-tab label="Manual Input">
+				<div class="tw-p-3">
+					<lib-formly [form]="form" [formConfig]="formConfig.manualInput()" />
+				</div>
+			</mat-tab>
+			<mat-tab label="Upload">
+				<div class="tw-p-3">
+					<mat-label
+						class="tw-block tw-text-sm md:lg:tw-text-base tw-font-medium tw-mb-1 tw-text-[var(rgb(254, 235, 236))]"
+					>
+						Upload file
+					</mat-label>
+
+					<mat-form-field appearance="outline" class="tw-w-full">
+						<input type="file" #fileInput (change)="onFileSelected($event)" hidden />
+
+						<input matInput [value]="file?.name" readonly placeholder="Choose a file" />
+
+						<button
+							type="button"
+							class="tw-pr-2"
+							mat-icon-button
+							matSuffix
+							(click)="fileInput.click()"
+						>
+							<mat-icon>upload_file</mat-icon>
+						</button>
+					</mat-form-field>
+				</div>
+			</mat-tab>
+		</mat-tab-group>
+	</ng-container>
+	<ng-container actions>
+		<div class="tw-flex tw-justify-between tw-gap-3">
+			<lib-button [config]="formConfig.actions().cancelButton" mat-dialog-close />
+			<lib-button [config]="formConfig.actions().submitButton" (onClick)="onSubmit()" />
+		</div>
+	</ng-container>
+</lib-modal>

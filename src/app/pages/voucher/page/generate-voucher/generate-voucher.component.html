@@ -1,1 +1,6 @@
-<p>generate-voucher works!</p>
+<lib-formly [form]="form" [formConfig]="formConfig.form()" />
+
+<div class="tw-flex tw-justify-end tw-gap-3 tw-py-4">
+	<lib-button [config]="formConfig.submitButton().cancelButton" />
+	<lib-button [config]="formConfig.submitButton().submitButton" (onClick)="onSubmit()" />
+</div>
